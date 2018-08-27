@@ -5,7 +5,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 //less
 import '@/less/index.less';
-import 'element-ui/lib/theme-chalk/index.css';
+// import 'element-ui/lib/theme-chalk/index.css';
 import '@/../static/css/iconfont.css'
 
 //js
