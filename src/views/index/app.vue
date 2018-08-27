@@ -1,10 +1,13 @@
 <template>
     <section>
-        <!-- 导航栏 -->
+        <!-- 导航栏 start -->
         <b-navbar toggleable="md" type="dark" variant="dark" class="jumboshade">
             <div class="container">
                 <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
-                <b-navbar-brand class="navbar-brand" href="#">CHANCE3D</b-navbar-brand>
+                <b-navbar-brand class="navbar-brand" href="#">
+                    FOMO<br/>
+                    222
+                </b-navbar-brand>
                 <b-collapse is-nav id="nav_collapse">
                     <b-navbar-nav class="ml-auto">
                         <ul class="header-list clearfix">
@@ -20,24 +23,18 @@
                 </b-collapse>
             </div>
         </b-navbar>
+        <!-- 导航栏 end -->
         <div class="blurryboy"> </div>
         <div class="jumbotron rounded-0 text-center text-light teaser-cover l-second-floor">
             <div class="container">
                 <br/>
                 <br/>
-                <!-- <h4 class="display-4 scammed" style="font-style: italic;">当前奖池</h4> -->
                 <h3 class="display-1 scammed no-mobile">
-                    <a target="_blank" :href="this.stat.winner_link">{{ this.stat.winner? this.stat.winner.substr(0, 18):this.stat.winner }}...</a>
-                </h3>
-                <h3 class="display-1 scammed no-mobile">
-                    {{$t('index.and')}}
-                    <!-- <i class="iconfont icon-caidan l-icon-caidan2"></i> -->
-                    <!-- <object :data="eggsSrc" width="70" height="110" type="image/svg+xml" codebase="http://www.adobe.com/svg/viewer/imstall/"  style="position: relative;top: 14px;"/> -->
-                    <embed src="http://dnf.sdcslog.com/img/egg2.svg" width="70" height="110" type="image/svg+xml" pluginspage="http://www.adobe.com/svg/viewer/install/" style="position: relative;top: 14px;" />&nbsp;{{$t('index.willGo')}}
+                    一个独享！超级大奖等你赢取！
                 </h3>
                 <h2 class="display-3">
                     <span class="ethglitch titleglow l-info">
-                        {{ this.stat.pool.toFixed(8) }}
+                        {{ this.stat.pool|numFormat }}
                         <eth-icon :svg-class="'l-svg-eth ethglow'"></eth-icon>
                     </span>
                     <span class="headtimer">

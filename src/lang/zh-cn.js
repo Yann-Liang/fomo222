@@ -1,5 +1,4 @@
 export default {
-    msg: '模版',
     index: {
         round:`轮次`,
         rounds: `第 {n} 轮`,
