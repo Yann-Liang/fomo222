@@ -1,0 +1,79 @@
+html,body{
+	margin: 0;
+	/*height: 100%;*/
+    width: 100%;
+    /* min-width: 1366px; */
+	font-family: Poppins,"微软雅黑","PingFangSC-Regular","PingFang SC","Helvetica Neue",Helvetica,"Hiragino Sans GB",Arial,sans-serif;
+	/* font-size: 14px; */
+	/* color: #FFF; */
+}
+
+p,ul,li,h1,h2,h3,h4,h5,h6{
+	margin: 0;
+	font-weight: normal;
+}
+
+ul,li{
+    padding: 0;
+    list-style: none;
+}
+img{
+	display: block;
+}
+
+a {
+    text-decoration: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/*左浮动*/
+.fl {
+    float: left;
+}
+/*右浮动*/
+.fr {
+    float: right;
+}
+/*清除浮动*/
+.clearfix:after {
+    content: ".";
+    display: block;
+    width: 100%;
+    height: 0;
+    font-size: 0;
+    clear: both;
+    overflow: hidden;
+    visibility: hidden;
+}
+
+/* 输入框input类型为number时，去掉上下箭头方式 */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+input[type="number"]{
+    -moz-appearance: textfield;
+}
+
+.blurryboy {
+	position: fixed;
+	display: block;
+	z-index: -1;
+	left:-0.75%;
+	top:-0.5%;
+	width: 102%;
+	height: 102%;
+	background-image: url('../images/purple_bg.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	-webkit-filter: blur(5px);
+  	-moz-filter: blur(5px);
+  	-o-filter: blur(5px);
+  	-ms-filter: blur(5px);
+  	filter: blur(5px);
+}
