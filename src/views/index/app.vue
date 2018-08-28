@@ -34,7 +34,7 @@
                 </h3>
                 <h2 class="display-3">
                     <span class="ethglitch titleglow l-info">
-                        {{ this.stat.pool|numFormat }}
+                        {{ this.stat.pool|numFormat(4) }}
                         <eth-icon :svg-class="'l-svg-eth ethglow'"></eth-icon>
                     </span>
                     <span class="headtimer">
@@ -44,23 +44,90 @@
                 </h2>
                 <button :disabled="disabled" @click="buyOneKey" class="buyOneTicket btn btn-lg btn-block btn-purp pulse marginb">
                     <div class="row">
-                        <div class="col-sm-1.5 no-mobile" style="padding-left: 10px"> 1x
-                            <!-- <i class="iconfont icon-caidan l-icon-caidan"></i> -->
+                        <div class="col-sm-1.5 no-mobile" style="padding-left: 10px">
                             <embed src="http://dnf.sdcslog.com/img/egg2.svg" width="25" height="25" type="image/svg+xml" pluginspage="http://www.adobe.com/svg/viewer/install/" style="margin: 0 0 -5px -5px;" />
-                            <!-- <object :data="eggsSrc" width="25" height="25" type="image/svg+xml" codebase="http://www.adobe.com/svg/viewer/imstall/" style="margin: 0 0 -5px -5px;"/> -->
+                            1x
                         </div>
                         <div class="col-sm-11">
-                            <span style="margin-right: 0rem;margin-left: -1rem" class="only-mobile mobile-text">1x
-                                <!-- <i class="iconfont icon-caidan l-icon-caidan"></i> -->
+                            <span style="margin-right: 0rem;margin-left: -1rem" class="only-mobile mobile-text">
                                 <embed src="http://dnf.sdcslog.com/img/egg2.svg" width="25" height="25" type="image/svg+xml" pluginspage="http://www.adobe.com/svg/viewer/install/" style="margin: 0 0 -5px -5px;" />
-                                <!-- <object :data="eggsSrc" width="25" height="25" type="image/svg+xml" codebase="http://www.adobe.com/svg/viewer/imstall/" style="margin: 0 0 -5px -5px;"/> -->
-                                <!-- <key-icon :svg-class="'l-svg-key1'"></key-icon> -->
+                                1x
                             </span>{{slogan}}
                         </div>
                     </div>
                 </button>
             </div>
         </div>
+
+        <b-container>
+            <b-row>
+                <b-col class="text-center" cols="12" sm="6" align-self="center">
+                    <p>总彩池</p>
+                    <p>{{888888.88|numFormat}}</p>
+                </b-col>
+                <b-col class="text-center" cols="12" sm="6" align-self="center">
+                    <p>总投入</p>
+                    <p>{{12888888.88|numFormat}}</p>
+                </b-col>
+            </b-row>
+            <b-row>
+                <b-col class="text-center" cols="6" sm="4" xl="4" align-self="center">
+                    <p>总彩池</p>
+                    <p>{{888888.88|numFormat}}</p>
+                </b-col>
+                <b-col class="text-center" cols="6" sm="4" xl="4" align-self="center">
+                    <p>总投入</p>
+                    <p>{{12888888.88|numFormat}}</p>
+                </b-col>
+                <b-col class="text-center" cols="8" sm="4" xl="4" align-self="center">
+                    <p>总投入</p>
+                    <p>{{12888888.88|numFormat}}</p>
+                </b-col>
+            </b-row>
+            <b-row>
+                <b-col class="text-center" cols="12" sm="6" xl="6" align-self="center">
+                    <p>25彩池</p>
+                    <p>{{888888.88|numFormat}}</p>
+                </b-col>
+                <b-col class="text-center" cols="12" sm="6" xl="6" align-self="center">
+                    <p>总投入</p>
+                    <p>{{12888888.88|numFormat}}</p>
+                </b-col>
+            </b-row>
+            <b-row>
+                <b-col class="text-center" cols="1" sm="1" xl="1" align-self="center">
+                    <i>这是图标</i>
+                </b-col>
+                <b-col class="text-center" cols="11" sm="5" xl="5" align-self="center">
+                    <p>25彩池榜单</p>
+                    <table>
+                        <thead>
+                            <th>
+                                <td></td>
+                                <td>玩家</td>
+                                <td>奖金（ETH）</td>
+                            </th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1.</td>
+                                <td>0x.....</td>
+                                <td>1222</td>
+                            </tr>
+                            <tr>
+                                <td>2.</td>
+                                <td>0x.....</td>
+                                <td>1</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </b-col>
+            </b-row>
+        </b-container>
+
+
+
+
         <!-- 移动端 start -->
         <div class="only-mobile container">
             <b-row>
