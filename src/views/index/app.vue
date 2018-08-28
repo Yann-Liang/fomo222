@@ -4,23 +4,18 @@
         <b-navbar toggleable="md" type="dark" variant="dark" class="jumboshade">
             <div class="container">
                 <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
-                <b-navbar-brand class="navbar-brand" href="#">
-                    FOMO<br/>
-                    222
+                <b-navbar-brand class="navbar-brand text-center" href="#">
+                    FOMO<br/>222
                 </b-navbar-brand>
-                <b-collapse is-nav id="nav_collapse">
-                    <b-navbar-nav class="ml-auto">
-                        <ul class="header-list clearfix">
-                            <li class="nav-link-purp-on nav-link-purp">{{$t('index.rounds',{n:this.stat.currentRound})}}</li>
-                            <li class="nav-link-purp-on nav-link-purp">{{$t('index.sellNEgg',{n:this.stat.round_keys})}}</li>
-                            <li class="nav-link-purp-on nav-link-purp">{{$t('index.haveEggNum')}} {{ this.stat.player_keys }}</li>
-                        </ul>
-                    </b-navbar-nav>
-                    <b-nav-item-dropdown :text="$t('index.aboutChanceEgg')" right class="nav-link nav-link-purp">
-                        <b-dropdown-item href="javacript:void(0);" v-b-modal="'operationModal'">{{$t('index.gameRule')}}</b-dropdown-item>
-                        <b-dropdown-item target="_blank" :href="this.contract_url">{{$t('index.lookContract')}}</b-dropdown-item>
-                    </b-nav-item-dropdown>
-                </b-collapse>
+                <b-navbar-nav>
+                    <b-nav-item class="nav-link-purp-on nav-link-purp" href="#">首页</b-nav-item>
+                    <b-nav-item class="nav-link-purp-on nav-link-purp" href="#" disabled>公告</b-nav-item>
+                    <b-nav-item class="nav-link-purp-on nav-link-purp" href="#" disabled>智能合约</b-nav-item>
+                </b-navbar-nav>
+                <b-navbar-nav class="ml-auto">
+                    <b-nav-item class="nav-link-purp-on nav-link-purp" href="#">邀请链接</b-nav-item>
+                    <b-nav-item class="nav-link-purp-on nav-link-purp" href="#">个人中心</b-nav-item>
+                </b-navbar-nav>
             </div>
         </b-navbar>
         <!-- 导航栏 end -->
@@ -29,7 +24,7 @@
             <div class="container">
                 <br/>
                 <br/>
-                <h3 class="display-1 scammed no-mobile">
+                <h3 class="display-3 scammed no-mobile">
                     一个独享！超级大奖等你赢取！
                 </h3>
                 <h2 class="display-3">
@@ -45,13 +40,11 @@
                 <button :disabled="disabled" @click="buyOneKey" class="buyOneTicket btn btn-lg btn-block btn-purp pulse marginb">
                     <div class="row">
                         <div class="col-sm-1.5 no-mobile" style="padding-left: 10px">
-                            <embed src="http://dnf.sdcslog.com/img/egg2.svg" width="25" height="25" type="image/svg+xml" pluginspage="http://www.adobe.com/svg/viewer/install/" style="margin: 0 0 -5px -5px;" />
-                            1x
+                            <embed src="http://dnf.sdcslog.com/img/egg2.svg" width="25" height="25" type="image/svg+xml" pluginspage="http://www.adobe.com/svg/viewer/install/" style="margin: 0 0 -5px -5px;" /> 1x
                         </div>
                         <div class="col-sm-11">
                             <span style="margin-right: 0rem;margin-left: -1rem" class="only-mobile mobile-text">
-                                <embed src="http://dnf.sdcslog.com/img/egg2.svg" width="25" height="25" type="image/svg+xml" pluginspage="http://www.adobe.com/svg/viewer/install/" style="margin: 0 0 -5px -5px;" />
-                                1x
+                                <embed src="http://dnf.sdcslog.com/img/egg2.svg" width="25" height="25" type="image/svg+xml" pluginspage="http://www.adobe.com/svg/viewer/install/" style="margin: 0 0 -5px -5px;" /> 1x
                             </span>{{slogan}}
                         </div>
                     </div>
@@ -62,71 +55,131 @@
         <b-container>
             <b-row>
                 <b-col class="text-center" cols="12" sm="6" align-self="center">
-                    <p>总彩池</p>
-                    <p>{{888888.88|numFormat}}</p>
+                    <div class="jumbotron jumbotron-adjust teamscore">
+                        <p>总彩池</p>
+                        <hr/>
+                        <p class="h2 glow ethglitch">{{888888.88|numFormat}}
+                            <eth-icon :svg-class="'l-tag-svg ethglow'"></eth-icon>
+                        </p>
+                    </div>
+
                 </b-col>
                 <b-col class="text-center" cols="12" sm="6" align-self="center">
-                    <p>总投入</p>
-                    <p>{{12888888.88|numFormat}}</p>
+                    <div class="jumbotron jumbotron-adjust teamscore">
+                        <p>总投入</p>
+                        <hr/>
+                        <p class="h2 glow ethglitch">{{12888888.88|numFormat}}
+                            <eth-icon :svg-class="'l-tag-svg ethglow'"></eth-icon>
+                        </p>
+                    </div>
                 </b-col>
             </b-row>
             <b-row>
-                <b-col class="text-center" cols="6" sm="4" xl="4" align-self="center">
-                    <p>总彩池</p>
-                    <p>{{888888.88|numFormat}}</p>
+                <b-col class="text-center buy-item" cols="6" sm="4" xl="4" align-self="center">
+                    <b-form-input class="buy-keys" v-model="buy_keys" @change="cal_buy"></b-form-input>
+                    <!-- <b-input-group size="lg" :append="'@ '+this.buy_cost+' ETH'" class="key-input1">
+
+                    </b-input-group> -->
                 </b-col>
-                <b-col class="text-center" cols="6" sm="4" xl="4" align-self="center">
-                    <p>总投入</p>
-                    <p>{{12888888.88|numFormat}}</p>
+                <b-col class="text-center buy-item" cols="6" sm="4" xl="4" align-self="center">
+                    <div class="jumbotron teamscore unit-price">
+                        <span>当前单价：{{buy_cost}}</span>
+                        <eth-icon :svg-class="'l-svg-eth1'"></eth-icon>
+                    </div>
                 </b-col>
-                <b-col class="text-center" cols="8" sm="4" xl="4" align-self="center">
-                    <p>总投入</p>
-                    <p>{{12888888.88|numFormat}}</p>
+                <b-col class="text-center buy-item" cols="9" sm="4" xl="4" align-self="center">
+                    <b-row>
+                        <b-col cols="6" sm="6" xl="6">
+                            <button type="button" id="tixBuy" @click="buy" class="btn btn-block btn-purp ticketProcess">
+                                {{$t('index.doIt')}}
+                            </button>
+                        </b-col>
+                        <b-col cols="6" sm="6" xl="6">
+                            <button type="button" id="tixReinvest" @click="reload" class="btn btn-block btn-outline-purp ticketProcess">
+                                {{$t('index.buy1')}}
+                            </button>
+                        </b-col>
+                    </b-row>
+
                 </b-col>
             </b-row>
             <b-row>
                 <b-col class="text-center" cols="12" sm="6" xl="6" align-self="center">
-                    <p>25彩池</p>
-                    <p>{{888888.88|numFormat}}</p>
+                    <div class="jumbotron jumbotron-adjust teamscore">
+                        <p class="h4">25彩池</p>
+                        <hr/>
+                        <p class="h2 glow ethglitch">{{888888.88|numFormat}}</p>
+                        <p class="h5">次数倒数：12/25</p>
+                    </div>
                 </b-col>
                 <b-col class="text-center" cols="12" sm="6" xl="6" align-self="center">
-                    <p>总投入</p>
-                    <p>{{12888888.88|numFormat}}</p>
+                    <div class="jumbotron jumbotron-adjust teamscore">
+                        <div class="row nomarginb">
+                            <div class="col-auto">
+                                <!-- 幸运大奖 -->
+                                <p class="h4">{{$t('index.currentPrizePool')}}</p>
+                            </div>
+                            <div class="col">
+                                <p class="h2 text-right glow ethglitch"> {{ this.stat.pool.toFixed(8) }}
+                                    <eth-icon :svg-class="'l-tag-svg ethglow'"></eth-icon>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row nomarginb">
+                            <div class="col-auto">
+                                <p class="h4">{{$t('index.haveEgg')}}</p>
+                            </div>
+                            <div class="col">
+                                <p class="h2 text-right"> {{ this.stat.player_keys.toFixed(8) }}
+                                    <embed src="http://dnf.sdcslog.com/img/egg2.svg" width="25" height="25" type="image/svg+xml" pluginspage="http://www.adobe.com/svg/viewer/install/" />
+                                </p>
+                            </div>
+                        </div>
+                        <!-- <div class="row marginb">
+                            <div class="col text-right">{{$t('index.total')}}&nbsp;{{ this.stat.round_keys.toFixed(8) }}
+                                <embed src="http://dnf.sdcslog.com/img/egg2.svg" width="25" height="25" type="image/svg+xml" pluginspage="http://www.adobe.com/svg/viewer/install/" />
+                            </div>
+                        </div> -->
+                        <div class="row nomarginb">
+                            <div class="col-auto">
+                                <!-- 当前收入 -->
+                                <p class="h4">{{$t('index.currentIncome')}}</p>
+                            </div>
+                            <div class="col">
+                                <p class="h2 text-right"> {{ this.stat.profit.toFixed(8) }}
+                                    <eth-icon :svg-class="'l-tag-svg ethglow'"></eth-icon>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </b-col>
             </b-row>
             <b-row>
                 <b-col class="text-center" cols="1" sm="1" xl="1" align-self="center">
                     <i>这是图标</i>
                 </b-col>
-                <b-col class="text-center" cols="11" sm="5" xl="5" align-self="center">
+                <b-col class="text-center jumbotron jumbotron-adjust teamscore" cols="11" sm="5" xl="5" align-self="center">
                     <p>25彩池榜单</p>
-                    <table>
+                    <hr/>
+                    <table class="table">
                         <thead>
-                            <th>
-                                <td></td>
-                                <td>玩家</td>
-                                <td>奖金（ETH）</td>
-                            </th>
+                            <tr>
+                                <th scope="col" class="borderchange">{{$t('index.round')}}</th>
+                                <th scope="col" class="borderchange text-center">{{$t('index.winner')}}</th>
+                                <th scope="col" class="borderchange tright">{{$t('index.prizePool')}}</th>
+                            </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1.</td>
-                                <td>0x.....</td>
-                                <td>1222</td>
-                            </tr>
-                            <tr>
-                                <td>2.</td>
-                                <td>0x.....</td>
-                                <td>1</td>
+                            <tr v-for="(data,index) in winners" :key="index">
+                                <th scope="row" class="playername truncate"> {{ data.round }}.</th>
+                                <td class="text-center">{{ data.winner.substr(0, 15) + '...' }}</td>
+                                <td class="tright">{{ data.amount.toFixed(8) }} ETH</td>
                             </tr>
                         </tbody>
                     </table>
                 </b-col>
             </b-row>
         </b-container>
-
-
-
 
         <!-- 移动端 start -->
         <div class="only-mobile container">
@@ -178,7 +231,7 @@
                                     <div class="col">
                                         <button type="button" id="tixReinvest" @click="reload" class="btn btn-block btn-outline-purp btn-lg ticketProcess">
                                             <piggy-icon class="l-svg-piggy"></piggy-icon>
-                                        {{$t('index.buy1')}}
+                                            {{$t('index.buy1')}}
                                         </button>
                                     </div>
                                 </div>
@@ -631,7 +684,7 @@ export default {
                     class: 'w-30',
                 },
             ],
-            winners: [],
+            winners: [{round: 0, winner: '0x11111111111', amount: 0.777777777}],
             disabled: false,
             loadingMsg: '加载中...',
             contract_url:
@@ -672,7 +725,11 @@ export default {
         loopSlogan() {
             setInterval(() => {
                 if (this.diff > 0) {
-                    this.slogan= this.$t(`slogans[${Math.floor(Math.random() * this.$t('slogans').length)}]`)
+                    this.slogan = this.$t(
+                        `slogans[${Math.floor(
+                            Math.random() * this.$t('slogans').length,
+                        )}]`,
+                    );
                 }
             }, 4000);
         },
@@ -887,7 +944,7 @@ export default {
             })
             .catch(err => {
                 this.loadingFlag = false;
-                alert(utils.zh(err))
+                alert(utils.zh(err));
                 // this.$alert(utils.zh(err));
                 console.log(err);
             });
@@ -903,8 +960,20 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.buy-item {
+    margin-bottom: 2rem;
+}
+.buy-keys {
+    //  padding: 0.688rem 0.75rem;
+}
+.unit-price {
+    margin-bottom: 0;
+    padding: 0.438rem 0;
+}
+
+// ------------- old
 .navbar-brand {
-    font-size: 2.2rem;
+    font-size: 1.1rem;
     font-weight: bold;
 }
 .header-list {
