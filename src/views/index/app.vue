@@ -14,7 +14,7 @@
                 </b-navbar-nav>
                 <b-navbar-nav class="ml-auto">
                     <b-nav-item class="nav-link-purp-on nav-link-purp" href="#">邀请链接</b-nav-item>
-                    <b-nav-item class="nav-link-purp-on nav-link-purp" href="#">个人中心</b-nav-item>
+                    <b-nav-item class="nav-link-purp-on nav-link-purp" href="./personal.html">个人中心</b-nav-item>
                 </b-navbar-nav>
             </div>
         </b-navbar>
