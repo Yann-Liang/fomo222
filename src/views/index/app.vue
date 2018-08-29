@@ -31,7 +31,7 @@
                         <div class="col-sm-11">
                             <span style="margin-right: 0rem;margin-left: -1rem" class="only-mobile mobile-text">
                                 <!-- <embed src="http://dnf.sdcslog.com/img/egg2.svg" width="25" height="25" type="image/svg+xml" pluginspage="http://www.adobe.com/svg/viewer/install/" style="margin: 0 0 -5px -5px;" /> -->
-                                <eth-icon :svg-class="'l-svg-key ethglow'"></eth-icon>
+                                <eth-icon :svg-class="'l-svg-keym ethglow'"></eth-icon>
                                  1x
                             </span>{{slogan}}
                         </div>
@@ -64,7 +64,7 @@
             </b-row>
             <b-row>
                 <b-col class="text-center buy-item" cols="6" sm="4" xl="4" align-self="center">
-                    <b-form-input class="buy-keys" v-model="buy_keys" @change="cal_buy"></b-form-input>
+                    <b-form-input class="buy-keys" v-model="buy_keys" @change="cal_buy" placeholder="输入数量"></b-form-input>
                     <!-- <b-input-group size="lg" :append="'@ '+this.buy_cost+' ETH'" class="key-input1">
 
                     </b-input-group> -->

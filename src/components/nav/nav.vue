@@ -2,11 +2,11 @@
     <b-navbar toggleable="md" type="dark" variant="dark" class="jumboshade">
         <div class="container">
             <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
-            <b-navbar-brand class="navbar-brand text-center" href="#">
+            <b-navbar-brand class="navbar-brand text-center" href="./index.html">
                 FOMO<br/>222
             </b-navbar-brand>
             <b-navbar-nav>
-                <b-nav-item class="nav-link-purp-on nav-link-purp" href="#">首页</b-nav-item>
+                <b-nav-item class="nav-link-purp-on nav-link-purp" href="./index.html">首页</b-nav-item>
                 <b-nav-item class="nav-link-purp-on nav-link-purp" href="#" disabled>公告</b-nav-item>
                 <b-nav-item class="nav-link-purp-on nav-link-purp" href="#" disabled>智能合约</b-nav-item>
             </b-navbar-nav>

@@ -7,9 +7,36 @@
         <b-container>
             <b-row>
                 <b-col class="no-mobile" cols="0" sm="2" xl="2">
+                    <b-nav vertical>
+                        <b-nav-item :active="active==1" @click="changeTab(1)">邀请好友</b-nav-item>
+                        <b-nav-item :active="active==2" @click="changeTab(2)">钱包管理</b-nav-item>
+                        <b-nav-item :active="active==3" @click="changeTab(3)">资金历史</b-nav-item>
+                        <b-nav-item :active="active==4" @click="changeTab(4)">社群</b-nav-item>
+                    </b-nav>
                 </b-col>
                 <b-col cols="12" sm="10" xl="10">
-                    <div class="jumbotron jumbotron-adjust teamscore">
+                    <div v-if="active==1" class="jumbotron jumbotron-adjust teamscore">
+                        <div v-if="stat.id !== -1">
+                            <p>
+                                {{$t('index.promotionLink')}}
+                            </p>
+                            <a target="_blank" :href="stat.ref_url">{{ this.stat.ref_url }}</a>
+                        </div>
+
+                        <div v-if="stat.id === -1">
+                            <p class="text-center">
+                                {{$t('index.buyPromotionLinkInfo')}}
+                            </p>
+                            <b-button size="lg" class="btn btn-outline-purp btn-block buyceo" @click="register">
+                                {{$t('index.createPromotionLink')}}
+                            </b-button>
+                        </div>
+                    </div>
+                    <div v-if="active==2" class="jumbotron jumbotron-adjust teamscore">
+                        钱包管理
+
+                    </div>
+                    <div v-if="active==3" class="jumbotron jumbotron-adjust teamscore">
                         <div class="row nomarginb">
                             <div class="col-auto">
                                 <!-- 幸运大奖 -->
@@ -27,7 +54,8 @@
                             </div>
                             <div class="col">
                                 <p class="h2 text-right"> {{ stat.player_keys.toFixed(8) }}
-                                    <embed src="http://dnf.sdcslog.com/img/egg2.svg" width="25" height="25" type="image/svg+xml" pluginspage="http://www.adobe.com/svg/viewer/install/" />
+                                    <key-icon :svg-class="'l-svg-key1 ethglow'"></key-icon>
+                                    <!-- <embed src="http://dnf.sdcslog.com/img/egg2.svg" width="25" height="25" type="image/svg+xml" pluginspage="http://www.adobe.com/svg/viewer/install/" /> -->
                                 </p>
                             </div>
                         </div>
@@ -47,6 +75,38 @@
                                 </p>
                             </div>
                         </div>
+                        <div class="row nomarginb">
+                            <div class="col-auto">
+                                <!-- 推广奖励 -->
+                                <p class="h4">推广奖励</p>
+                            </div>
+                            <div class="col">
+                                <p class="h2 text-right"> {{ stat.profit.toFixed(8) }}
+                                    <eth-icon :svg-class="'l-tag-svg ethglow'"></eth-icon>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div v-if="active==4" class="jumbotron jumbotron-adjust teamscore">
+                        <p>25彩池榜单</p>
+                        <hr/>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="borderchange"></th>
+                                    <th scope="col" class="borderchange text-center">第一代</th>
+                                    <th scope="col" class="borderchange tright">购买数额(ETH)</th>
+                                </tr>
+                            </thead>
+                            <tr>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                            </tr>
+                            <tbody>
+
+                            </tbody>
+                        </table>
                     </div>
                 </b-col>
             </b-row>
@@ -66,6 +126,18 @@ export default {
     //实例的数据对象
     data() {
         return {
+            active: 1,
+            //html: '<i class="iconfont icon-caidan l-icon-loading"></i>',
+            loadingFlag: true,
+            show: true,
+            //timer: '00:00:00',
+            diff: -1,
+            soldKeys: 0,
+            buy_keys: 1,
+            buy_cost: 0,
+            ref_url: null,
+            win_gain: 0,
+            referer: 0,
             stat: {
                 currentRound: 1,
                 owner: null,
@@ -84,6 +156,53 @@ export default {
                 wallet: 0,
                 affiliate: 0,
             },
+            params: {
+                ta: 37.5,
+                tb: 38.5,
+                tc: 15.0,
+                td: 5.0,
+                te: 4.0,
+                wa: 50.0,
+                wb: 16.6,
+                wc: 0.5,
+                wd: 2.6,
+                we: 30.3,
+                maxTimeRemain: 4,
+                timeGap: 30,
+            },
+            slogan: '看个蛋，赶紧买个蛋',
+            /*addKeyList: [
+                {
+                    value: 1,
+                    label: '+ 1 egg',
+                    class: 'w-100',
+                },
+                {
+                    value: 2,
+                    label: '+ 2 eggs',
+                    class: 'w-40',
+                },
+                {
+                    value: 5,
+                    label: '+ 5',
+                    class: 'w-30',
+                },
+                {
+                    value: 10,
+                    label: '+ 10',
+                    class: 'w-30',
+                },
+                {
+                    value: 100,
+                    label: '+ 100',
+                    class: 'w-30',
+                },
+            ],*/
+            winners: [{round: 0, winner: '0x11111111111', amount: 0.777777777}],
+            disabled: false,
+            loadingMsg: '加载中...',
+            contract_url:
+                'https://etherscan.io/address/0x46990b06EB818C33c776FAf3bB6a85Dd7C38a161',
         };
     },
     //数组或对象，用于接收来自父组件的数据
@@ -91,7 +210,11 @@ export default {
     //计算
     computed: {},
     //方法
-    methods: {},
+    methods: {
+        changeTab(index) {
+            this.active = index;
+        },
+    },
     //生命周期函数 请求写在created中
     created() {},
     beforeMount() {},
@@ -111,6 +234,13 @@ export default {
 };
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
+.table {
+    text-align: center;
+    th {
+    }
+}
+</style>
 
+<style lang="less">
 </style>
