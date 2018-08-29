@@ -88,8 +88,25 @@
                         </div>
                     </div>
                     <div v-if="active==4" class="jumbotron jumbotron-adjust teamscore">
-                        <p>25彩池榜单</p>
+                        <p  class="text-center">25彩池榜单</p>
                         <hr/>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="borderchange"></th>
+                                    <th scope="col" class="borderchange text-center">第一代</th>
+                                    <th scope="col" class="borderchange tright">购买数额(ETH)</th>
+                                </tr>
+                            </thead>
+                            <tr>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                            </tr>
+                            <tbody>
+
+                            </tbody>
+                        </table>
                         <table class="table">
                             <thead>
                                 <tr>
@@ -238,6 +255,7 @@ export default {
 .table {
     text-align: center;
     th {
+        text-align: center;
     }
 }
 </style>
