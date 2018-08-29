@@ -57,6 +57,8 @@
 <script>
 import apiService from '@/services/API-service';
 import conNav from '@/components/nav/nav.vue';
+import keyIcon from '@/components/icon/key-icon';
+import ethIcon from '@/components/icon/eth-icon';
 
 export default {
     //组件名
@@ -97,6 +99,8 @@ export default {
     //组件
     components: {
         conNav,
+        ethIcon,
+        keyIcon,
     },
     //监视
     watch: {},
@@ -108,6 +112,5 @@ export default {
 </script>
 
 <style lang="less">
-.container {
-}
+
 </style>

@@ -24,11 +24,15 @@
                 <button :disabled="disabled" @click="buyOneKey" class="buyOneTicket btn btn-lg btn-block btn-purp pulse marginb">
                     <div class="row">
                         <div class="col-sm-1.5 no-mobile" style="padding-left: 10px">
-                            <embed src="http://dnf.sdcslog.com/img/egg2.svg" width="25" height="25" type="image/svg+xml" pluginspage="http://www.adobe.com/svg/viewer/install/" style="margin: 0 0 -5px -5px;" /> 1x
+                            <!-- <embed src="http://dnf.sdcslog.com/img/egg2.svg" width="25" height="25" type="image/svg+xml" pluginspage="http://www.adobe.com/svg/viewer/install/" style="margin: 0 0 -5px -5px;" /> -->
+                            <key-icon :svg-class="'l-svg-key ethglow'"></key-icon>
+                             1x
                         </div>
                         <div class="col-sm-11">
                             <span style="margin-right: 0rem;margin-left: -1rem" class="only-mobile mobile-text">
-                                <embed src="http://dnf.sdcslog.com/img/egg2.svg" width="25" height="25" type="image/svg+xml" pluginspage="http://www.adobe.com/svg/viewer/install/" style="margin: 0 0 -5px -5px;" /> 1x
+                                <!-- <embed src="http://dnf.sdcslog.com/img/egg2.svg" width="25" height="25" type="image/svg+xml" pluginspage="http://www.adobe.com/svg/viewer/install/" style="margin: 0 0 -5px -5px;" /> -->
+                                <eth-icon :svg-class="'l-svg-key ethglow'"></eth-icon>
+                                 1x
                             </span>{{slogan}}
                         </div>
                     </div>
@@ -115,7 +119,8 @@
                             </div>
                             <div class="col">
                                 <p class="h2 text-right"> {{ this.stat.player_keys.toFixed(8) }}
-                                    <embed src="http://dnf.sdcslog.com/img/egg2.svg" width="25" height="25" type="image/svg+xml" pluginspage="http://www.adobe.com/svg/viewer/install/" />
+                                    <key-icon :svg-class="'l-svg-key1 ethglow'"></key-icon>
+                                    <!-- <embed src="http://dnf.sdcslog.com/img/egg2.svg" width="25" height="25" type="image/svg+xml" pluginspage="http://www.adobe.com/svg/viewer/install/" /> -->
                                 </p>
                             </div>
                         </div>

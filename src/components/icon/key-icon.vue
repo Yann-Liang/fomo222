@@ -44,7 +44,8 @@ svg.l-svg-key{
     width: 1em;
 }
 svg.l-svg-key1{
-    margin: 0;
-    width: 1em;
+    margin:  0 0 4px;
+    width: 0.7em;
+
 }
 </style>
