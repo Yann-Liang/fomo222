@@ -31,7 +31,7 @@
                         <div class="col-sm-11">
                             <span style="margin-right: 0rem;margin-left: -1rem" class="only-mobile mobile-text">
                                 <!-- <embed src="http://dnf.sdcslog.com/img/egg2.svg" width="25" height="25" type="image/svg+xml" pluginspage="http://www.adobe.com/svg/viewer/install/" style="margin: 0 0 -5px -5px;" /> -->
-                                <eth-icon :svg-class="'l-svg-keym ethglow'"></eth-icon>
+                                <key-icon :svg-class="'l-svg-key ethglow'"></key-icon>
                                  1x
                             </span>{{slogan}}
                         </div>
