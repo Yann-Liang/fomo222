@@ -1,23 +1,7 @@
 <template>
     <section>
         <!-- 导航栏 start -->
-        <b-navbar toggleable="md" type="dark" variant="dark" class="jumboshade">
-            <div class="container">
-                <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
-                <b-navbar-brand class="navbar-brand text-center" href="#">
-                    FOMO<br/>222
-                </b-navbar-brand>
-                <b-navbar-nav>
-                    <b-nav-item class="nav-link-purp-on nav-link-purp" href="#">首页</b-nav-item>
-                    <b-nav-item class="nav-link-purp-on nav-link-purp" href="#" disabled>公告</b-nav-item>
-                    <b-nav-item class="nav-link-purp-on nav-link-purp" href="#" disabled>智能合约</b-nav-item>
-                </b-navbar-nav>
-                <b-navbar-nav class="ml-auto">
-                    <b-nav-item class="nav-link-purp-on nav-link-purp" href="#">邀请链接</b-nav-item>
-                    <b-nav-item class="nav-link-purp-on nav-link-purp" href="./personal.html">个人中心</b-nav-item>
-                </b-navbar-nav>
-            </div>
-        </b-navbar>
+        <con-nav></con-nav>
         <!-- 导航栏 end -->
         <div class="blurryboy"> </div>
         <div class="jumbotron rounded-0 text-center text-light teaser-cover l-second-floor">
@@ -607,6 +591,7 @@ import keyIcon from '@/components/icon/key-icon';
 import piggyIcon from '@/components/icon/piggy-icon';
 import tabHeader from '@/components/tab-header/index.vue';
 import operationModal from '@/components/modal/operation-modal.vue';
+import conNav from '@/components/nav/nav.vue';
 
 export default {
     //组件名
@@ -955,6 +940,7 @@ export default {
         piggyIcon,
         tabHeader,
         operationModal,
+        conNav,
     },
 };
 </script>
@@ -972,21 +958,18 @@ export default {
 }
 
 // ------------- old
-.navbar-brand {
-    font-size: 1.1rem;
-    font-weight: bold;
-}
-.header-list {
-    > li {
-        padding: 0 15px;
-        float: right;
-        color: #f8f9fa;
-        font-family: Poppins;
-    }
-    margin: 0 30px;
-    line-height: 66px;
-    font-size: 12px;
-}
+
+// .header-list {
+//     > li {
+//         padding: 0 15px;
+//         float: right;
+//         color: #f8f9fa;
+//         font-family: Poppins;
+//     }
+//     margin: 0 30px;
+//     line-height: 66px;
+//     font-size: 12px;
+// }
 
 //覆盖样式
 .l-second-floor {
