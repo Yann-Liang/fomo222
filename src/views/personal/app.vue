@@ -4,7 +4,7 @@
         <con-nav></con-nav>
         <!-- 导航栏 end -->
         <div class="blurryboy"> </div>
-        <b-container>
+        <b-container class="jumbotron rounded-0 text-center text-light teaser-cover ">
             <b-row>
                 <b-col class="no-mobile" cols="0" sm="2" xl="2">
                     <b-nav vertical>
@@ -88,7 +88,7 @@
                         </div>
                     </div>
                     <div v-if="active==4" class="jumbotron jumbotron-adjust teamscore">
-                        <p  class="text-center">25彩池榜单</p>
+                        <p class="h4 text-center">组织图</p>
                         <hr/>
                         <table class="table">
                             <thead>
