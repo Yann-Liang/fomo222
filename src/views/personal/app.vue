@@ -231,6 +231,7 @@ export default {
         changeTab(index) {
             this.active = index;
         },
+        register(){}
     },
     //生命周期函数 请求写在created中
     created() {},

@@ -5,15 +5,23 @@
             <b-navbar-brand class="navbar-brand text-center" href="./index.html">
                 FOMO<br/>222
             </b-navbar-brand>
-            <b-navbar-nav>
-                <b-nav-item class="nav-link-purp-on nav-link-purp" href="./index.html">首页</b-nav-item>
-                <b-nav-item class="nav-link-purp-on nav-link-purp" href="#" disabled>公告</b-nav-item>
-                <b-nav-item class="nav-link-purp-on nav-link-purp" href="#" disabled>智能合约</b-nav-item>
-            </b-navbar-nav>
-            <b-navbar-nav class="ml-auto">
-                <b-nav-item class="nav-link-purp-on nav-link-purp" href="#">邀请链接</b-nav-item>
-                <b-nav-item class="nav-link-purp-on nav-link-purp" href="./personal.html">个人中心</b-nav-item>
-            </b-navbar-nav>
+            <b-collapse is-nav id="nav_collapse">
+                <b-navbar-nav>
+                    <b-nav-item class="nav-link-purp-on nav-link-purp" href="./index.html">首页</b-nav-item>
+                    <b-nav-item class="nav-link-purp-on nav-link-purp" href="#" disabled>公告</b-nav-item>
+                    <b-nav-item class="nav-link-purp-on nav-link-purp" href="#" disabled>智能合约</b-nav-item>
+                </b-navbar-nav>
+                <b-navbar-nav class="ml-auto">
+                    <b-nav-item class="nav-link-purp-on nav-link-purp" href="#">邀请链接</b-nav-item>
+                    <b-nav-item class="nav-link-purp-on nav-link-purp no-mobile" href="./personal.html">个人中心</b-nav-item>
+                    <b-nav-item-dropdown class="nav-link-purp-on nav-link-purp only-mobile" text="个人中心" extra-toggle-classes="nav-link-custom">
+                        <b-dropdown-item @click="changeTab(1)">邀请好友</b-dropdown-item>
+                        <b-dropdown-item @click="changeTab(2)">钱包管理</b-dropdown-item>
+                        <b-dropdown-item @click="changeTab(3)">资金历史</b-dropdown-item>
+                        <b-dropdown-item @click="changeTab(4)">社群</b-dropdown-item>
+                    </b-nav-item-dropdown>
+                </b-navbar-nav>
+            </b-collapse>
         </div>
     </b-navbar>
 </template>
@@ -21,7 +29,7 @@
 <script>
 export default {
     //组件名
-    name: 'template',
+    name: 'component-nav',
     //实例的数据对象
     data() {
         return {};
@@ -31,7 +39,11 @@ export default {
     //计算
     computed: {},
     //方法
-    methods: {},
+    methods: {
+        changeTab(index){
+            console.log('nav change',index);
+        }
+    },
     //生命周期函数 请求写在created中
     created() {},
     beforeMount() {},
