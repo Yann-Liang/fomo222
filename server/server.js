@@ -9,7 +9,7 @@ const RopstenWeb3 = new Web3()
 const koaBody = require('koa-body')
 const cors = require('@koa/cors')
 const errors = require('../src/lib/errors')
-const Fp3d = require('../src/lib/fp3d2')
+const fomo222 = require('../src/lib/fomo222')
 const utils = require('./utils')
 
 const networkMap = {
@@ -25,8 +25,8 @@ web3.setProvider(new web3.providers.HttpProvider(`https://${networkMap[current]}
 
 
 
-Fp3d.getFp3d(web3)
-    .then(_fp3c => {
+fomo222.getFp222(web3)
+    .then(_fomo222 => {
         utils.initFp3d(_fp3c)
     })
     .catch(err => {

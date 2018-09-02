@@ -10,6 +10,7 @@ router.get('/fp3d/timestamp', (ctx, next) => {
   return
 })
 
+/*
 router.get('/fp3d/winners', (ctx, next) => {
   ctx.response.type = 'json'
   ctx.response.body = {
@@ -17,7 +18,8 @@ router.get('/fp3d/winners', (ctx, next) => {
     data: utils.getWinnerData()
   }
   return
-})
+})*/
+
 
 module.exports = router
 

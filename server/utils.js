@@ -11,8 +11,9 @@ exports.initFp3d = function(fp3d) {
     .then(_time => {
       fp3dTimestamp = _time.toNumber()
       console.log(`reinit fp3d timeout ${fp3dTimestamp}`)
-      return fp3d.maxTimeRemain()
+      return
     })
+    /*
     .then(_maxRoundSeconds => {
       fp3d.loadWinners()
         .then(_winners => {
@@ -28,7 +29,7 @@ exports.initFp3d = function(fp3d) {
           })
         },
         10 * 60 * 1000)
-    })
+    })*/
     
 
   setInterval(() => {

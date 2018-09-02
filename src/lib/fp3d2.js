@@ -29,11 +29,11 @@ Fp3d.prototype.remainSeconds = function() {
 
 Fp3d.prototype.price = function(n) {
   const self = this
-  return self.c.Price(n)
+  return self.c.priceForKeys(n, 0)
 }
 
 Fp3d.prototype.round = function() {
-  return this.c.currentRound()
+  return Promise.resolve(0)
 }
 
 Fp3d.prototype.buy = function(value, ref) {

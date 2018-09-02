@@ -36,3 +36,23 @@ exports.fp3d2 = {
   // '1': '0x7dc97bd3cc27157e7e415d48b41f31428e0dc383',
   '3': '0x7dc97bd3cc27157e7e415d48b41f31428e0dc383'
 }
+
+exports.fp3dM = {
+  '1': '0xD027db5dE86495321b3a84f57969b9E979B807f5',
+  '3': '0x955f26f0b7cafba458c570b46a6a4b57b1b58bdd'
+}
+
+exports.fp3dM_deploy = {
+  '1': 6143841,
+  '3': 	3818379
+}
+
+exports.fomo222 = {
+  '1': '..',
+  '3': '..'
+}
+
+exports.fomo222_deploy = {
+  '1': 123,
+  '3': 234
+}

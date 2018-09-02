@@ -347,7 +347,7 @@ export default {
             } else if (this.diff === 0) {
                 this.disabled = false;
                 this.timer = `00:00:00`;
-                this.slogan = '我来揭标,领取0.5%分红!!';
+                this.slogan = '结束本局';
             } else {
                 this.disabled = false;
                 const seconds = ('' + this.diff % 60).padStart(2, '0');
@@ -416,36 +416,13 @@ export default {
             if (keys <= 0) {
                 alert(`购买数量错误`);
                 // this.$alert(`购买数量错误`);
+                return Promise.reject(`购买数量错误`)
             } else {
-                /*
-                let sum = new this.context.web3.BigNumber(0);
-                for (let i = 0; i < this.buy_keys; i++) {
-                    sum = sum.add(this.context.fp3d.price(i + this.stat.round_keys + 1));
-                }
-                this.buy_cost = sum.toNumber();*/
-                // 更换计算方法
-                let round_keys = this.stat.round_keys;
-                let c_key = Math.ceil(round_keys);
-                let price = this._p(c_key);
-                let remain = c_key - round_keys;
-                if (remain >= keys) {
-                    this.buy_cost = price * keys;
-                    return;
-                }
-
-                let buy_cost = price * remain;
-                keys = keys - remain;
-
-                while (keys > 1) {
-                    c_key = c_key + 1;
-                    price = this._p(c_key);
-                    buy_cost = buy_cost + price;
-                    keys = keys - 1;
-                }
-                c_key = c_key + 1;
-                price = this._p(c_key);
-                buy_cost = buy_cost + price * keys;
-                this.buy_cost = buy_cost.toFixed(10);
+                return this.priceForKeys(keys * (10 ** 18))
+                    .then(_price => {
+                        this.buy_cost = _price
+                        return _price
+                    })
             }
         },
         _p(n) {
@@ -457,10 +434,11 @@ export default {
         },
         buy() {
             this.$refs.myModal.show();
-            this.cal_buy();
-            let cost = new this.context.web3.BigNumber(this.buy_cost);
-            return this.context.fp3d
-                .buy(cost, this.referer)
+            return 
+                this.cal_buy()
+                .then(_price => {
+                    return this.context.fp3d.buy(_price, this.referer)
+                })
                 .then(tx => {
                     this.$refs.myModal.hide();
                 })
@@ -512,10 +490,16 @@ export default {
             this.buy_keys += parseFloat(val);
             this.cal_buy();
         },
+        priceForKeys(keysCount) {
+            return this.context.fp3d.priceForKeys(
+                keysCount * (10 ** 18),
+                0
+            )
+        }
     },
     created() {
         ethEnv
-            .Init(window.web3)
+            .Init(null)
             .then(cxt => {
                 this.context = cxt;
 

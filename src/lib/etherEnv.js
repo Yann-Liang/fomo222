@@ -1,3 +1,5 @@
+const Web3 = require("web3")
+
 const ethState = {
   frontEnd: true,
   web3Connect: false
@@ -5,14 +7,60 @@ const ethState = {
 
 const ERR_CODES = require('./errors')
 let inited = false
-function initEnv(web3) {
-  if (inited) {
-    return Promise.resolve(ethState)
+
+function initEnv(web3, timeout) {
+  let returned = false
+
+  if (!timeout) {
+    timeout = 120
+    console.log(`use timeout ${timeout}`)
   }
 
-  if (typeof web3 === 'undefined') {
-    return Promise.reject(ERR_CODES.WEB3_MISS)
+  let _r, _j
+  let ret = new Promise((r, j) => {
+    _r = function() {
+      if(returned) {
+        return
+      } else {
+        returned = true
+        return r.apply(this, arguments)
+      }
+    }
+
+    _j = function() {
+      if(returned) {
+        return
+      } else {
+        returned = true
+        return j.apply(this, arguments)
+      }
+    }
+
+    setTimeout(() => {
+      if (!returned) {
+        returned = true
+        return j(ERR_CODES.NETWORK_UNCONNECTED)
+      }
+    }, timeout * 1000)
+  })
+  
+  if (inited) {
+    return _r(ethState)
   }
+
+  if (!web3) {
+    // return Promise.reject(ERR_CODES.WEB3_MISS)
+    // initial a cumston web3
+    if (typeof Web3 == 'undefined') {
+      return _j(ERR_CODES.WEB3_MISS)
+    } else {
+      web3 = new Web3()
+      //create a in page web3, only for main net
+      //don't know if it will working yet
+      web3.setProvider(new web3.providers.HttpProvider(`https://ropsten.infura.io/vAugb8H4cG1bOuFMZj3y`))
+    }
+  }
+
   if (typeof window !== 'undefined') {
     ethState.frontEnd = true
   } else {
@@ -27,14 +75,14 @@ function initEnv(web3) {
 
   ethState.web3 = web3
 
-  return new Promise((r, j) => {
+  let tmp = new Promise((r, j) => {
     web3.version.getNetwork((err, net) => {
       if (err) {
         console.log(`fail to get network ${err}`)
-        return j(ERR_CODES.NETWORK_UNCONNECTED)
+        return _j(ERR_CODES.NETWORK_UNCONNECTED)
       } else {
         ethState.network = net
-        return r(ethState)
+        return _r(ethState)
       }
     })
   })
@@ -43,15 +91,22 @@ function initEnv(web3) {
       console.log(`account ${address}`)
       if (web3.isAddress(address)) {
         ethState.address = address
+        ethState.BigNumber = ethState.web3.BigNumber
         return ethState
       } else {
-        return Promise.reject(ERR_CODES.ACCOUNT_LOCKED)
+        return ethState
+        // we don't fail if no account found
+        // return _j(ERR_CODES.ACCOUNT_LOCKED)
       }
     })
     .then(state => {
       inited = true
-      return state
+      return _r(state)
     })
+    .catch(err => {
+      return _j(err)
+    })
+  return ret
 }
 
 function getEthBalance() {
