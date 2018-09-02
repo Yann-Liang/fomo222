@@ -387,12 +387,13 @@ export default {
                     });
             } else {
                 this.buy_keys = 1;
-                this.cal_buy();
-                return this.context.fp3d
-                    .buy(
-                        new this.context.web3.BigNumber(this.buy_cost),
-                        this.referer,
-                    )
+                return this.cal_buy()
+                    .then(_cost => {
+                        return this.context.fp3d.buy(
+                            _cost,
+                            this.referer
+                        )
+                    })
                     .then(tx => {
                         this.$refs.myModal.hide();
                     })
@@ -420,7 +421,7 @@ export default {
             } else {
                 return this.priceForKeys(keys * (10 ** 18))
                     .then(_price => {
-                        this.buy_cost = _price
+                        this.buy_cost = _price.dividedBy(10 ** 18).toNumber()
                         return _price
                     })
             }
@@ -452,7 +453,7 @@ export default {
                     ? this.buy_cost
                     : this.stat.profit;
             cost = new this.context.web3.BigNumber(cost);
-            cost = cost.mul(Math.pow(10, 18)).sub(1000);
+            cost = cost.mul(Math.pow(10, 18))
             this.$refs.myModal.show();
             return this.context.fp3d
                 .reloadKeys(cost, this.referer)
@@ -550,9 +551,10 @@ export default {
                 }, 10 * 1000);
             })
             .then(() => {
-                this.cal_buy();
+                return this.cal_buy()
             })
             .then(() => {
+                /*
                 api.winnerData().then(_data => {
                     this.winners = _data;
                     console.log(_data);
@@ -563,6 +565,7 @@ export default {
                         console.log(_data);
                     });
                 }, this.context.fp3d.params.maxTimeRemain.toNumber() * 1000);
+                */
             })
             .then(() => {
                 this.loadingFlag = false;

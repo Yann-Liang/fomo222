@@ -96,6 +96,7 @@ Fomo222.prototype.ethForKey = function(keys, round) {
   return self.c.priceForKeys(keys, round)
 }
 
+/*
 Fomo222.prototype.buy = function(round, value, ref) {
   const self = this
   return self.c.BuyKeys(ref, round, { value })
@@ -105,6 +106,7 @@ Fomo222.prototype.reload = function(round, value, ref) {
   const self = this
   return self.c.ReloadKeys(ref, round, value)
 }
+*/
 
 Fomo222.prototype.start1stRound = function() {
   return this.c.start1stRound()
@@ -112,6 +114,66 @@ Fomo222.prototype.start1stRound = function() {
 
 Fomo222.prototype.userReferId = function(addr) {
   return this.c.playerIds(addr)
+}
+
+Fomo222.prototype.stat = function(address) {
+  const stat = {}
+  const self = this
+
+  return self.c.currentRound()
+    .then(_currentRound => {
+      stat.currentRound = _currentRound.toNumber()
+      return self.c.owner()
+    })
+    .then(_owner => {
+      stat.owner = _owner
+      return self.c.decimals()
+    })
+    .then(_decimals => {
+      stat.decimals = _decimals.toNumber()
+      return self.c.gameRound()
+    })
+    .then(_round => {
+      stat.round_eth = _round[0].dividedBy(Math.pow(10, 18)).toNumber()
+      stat.round_keys = _round[1].dividedBy(stat.decimals).toNumber()
+      stat.mask = _round[2]
+      stat.winner = _round[3]
+      stat.pool = _round[4].dividedBy(Math.pow(10, 18)).toNumber()
+      stat.nextLucky = _round[6].toNumber()
+      stat.luckCounter = _round[7].toNumber()
+
+      if (address) {
+        return self.c.playerIds(address)
+      } else {
+        return -1
+      }
+    })
+    .then(_id => {
+      if (_id.eq(0) && address !== stat.owner) {
+        stat.id = -1
+      } else {
+        stat.id = _id.toNumber()
+        return self.c.players(_id)
+          .then(_player => {
+            // stat.wallet = _player[1].dividedBy(Math.pow(10, 18)).toNumber()
+            stat.affiliate = _player[2].dividedBy(Math.pow(10, 18)).toNumber()
+            stat.win = _player[3].dividedBy(Math.pow(10, 18)).toNumber()
+            return self.c.playerRoundData(stat.id, stat.currentRound)
+          })
+          .then(_playerRound => {
+            stat.player_eth = _playerRound[0].dividedBy(Math.pow(10, 18)).toNumber()
+            stat.player_keys = _playerRound[1].dividedBy(stat.decimals).toNumber()
+            return self.c.profit({from: address})
+          })
+          .then(_profit => {
+            stat.profit = _profit.dividedBy(Math.pow(10, 18)).toNumber()
+            stat.wallet = stat.profit - stat.affiliate - stat.win
+          })
+      }
+    })
+    .then(() => {
+      return stat
+    })
 }
 
 exports.getFp222 = function(web3) {
