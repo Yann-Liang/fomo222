@@ -1,7 +1,7 @@
 <template>
     <section>
         <!-- 导航栏 start -->
-        <con-nav></con-nav>
+        <con-nav @changeTab="changeTab"></con-nav>
         <!-- 导航栏 end -->
         <div class="blurryboy"> </div>
         <b-container class="jumbotron rounded-0 text-center text-light teaser-cover ">
@@ -136,6 +136,7 @@ import apiService from '@/services/API-service';
 import conNav from '@/components/nav/nav.vue';
 import keyIcon from '@/components/icon/key-icon';
 import ethIcon from '@/components/icon/eth-icon';
+const {getCurrentUrl, getUrlParms} = require('@/lib/tools');
 
 export default {
     //组件名
@@ -231,10 +232,16 @@ export default {
         changeTab(index) {
             this.active = index;
         },
-        register(){}
+        register() {},
     },
     //生命周期函数 请求写在created中
-    created() {},
+    created() {
+        const tab = getUrlParms('tab');
+        console.log('tab', tab);
+        if (tab&&tab<5) {
+            this.active=tab;
+        }
+    },
     beforeMount() {},
     mounted() {},
     //组件
@@ -257,6 +264,9 @@ export default {
     text-align: center;
     th {
         text-align: center;
+    }
+    td {
+        // padding: 0;
     }
 }
 </style>

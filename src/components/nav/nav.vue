@@ -9,7 +9,7 @@
                 <b-navbar-nav>
                     <b-nav-item class="nav-link-purp-on nav-link-purp" href="./index.html">首页</b-nav-item>
                     <b-nav-item class="nav-link-purp-on nav-link-purp" href="#" disabled>公告</b-nav-item>
-                    <b-nav-item class="nav-link-purp-on nav-link-purp" href="#" disabled>智能合约</b-nav-item>
+                    <b-nav-item class="nav-link-purp-on nav-link-purp" :href="contract" disabled>智能合约</b-nav-item>
                 </b-navbar-nav>
                 <b-navbar-nav class="ml-auto">
                     <b-nav-item class="nav-link-purp-on nav-link-purp" href="#">邀请链接</b-nav-item>
@@ -32,7 +32,9 @@ export default {
     name: 'component-nav',
     //实例的数据对象
     data() {
-        return {};
+        return {
+            contract:`https://www.baidu.com`//智能合约的跳转地址
+        };
     },
     //数组或对象，用于接收来自父组件的数据
     props: {},
@@ -42,6 +44,7 @@ export default {
     methods: {
         changeTab(index){
             console.log('nav change',index);
+            this.$emit('changeTab',index);
         }
     },
     //生命周期函数 请求写在created中

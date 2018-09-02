@@ -160,7 +160,7 @@
                         </thead>
                         <tbody>
                             <tr v-for="(data,index) in winners" :key="index">
-                                <th scope="row" class="playername truncate"> {{ data.round }}.</th>
+                                <td scope="row" class="playername truncate"> {{ data.round }}.</td>
                                 <td class="text-center">{{ data.winner.substr(0, 15) + '...' }}</td>
                                 <td class="tright">{{ data.amount.toFixed(8) }} ETH</td>
                             </tr>
@@ -761,6 +761,12 @@ button.buyOneTicket {
 .game-rule-body {
     background: #ccc;
     border-radius: 5px;
+}
+table.table {
+    td{
+        padding-left: 0;
+        padding-right: 0;
+    }
 }
 </style>
 
