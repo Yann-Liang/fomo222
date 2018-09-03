@@ -71,7 +71,7 @@
                 </b-col>
                 <b-col class="text-center buy-item" cols="6" sm="4" xl="4" align-self="center">
                     <div class="jumbotron teamscore unit-price">
-                        <span>当前单价：{{buy_cost}}</span>
+                        <span>花费: {{buy_cost}}</span>
                         <eth-icon :svg-class="'l-svg-eth1'"></eth-icon>
                     </div>
                 </b-col>
