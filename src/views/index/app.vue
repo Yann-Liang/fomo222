@@ -46,7 +46,7 @@
                     <div class="jumbotron jumbotron-adjust teamscore">
                         <p>总彩池</p>
                         <hr/>
-                        <p class="h2 glow ethglitch">{{888888.88|numFormat}}
+                        <p class="h2 glow ethglitch">{{stat.pool}}
                             <eth-icon :svg-class="'l-tag-svg ethglow'"></eth-icon>
                         </p>
                     </div>
@@ -56,7 +56,7 @@
                     <div class="jumbotron jumbotron-adjust teamscore">
                         <p>总投入</p>
                         <hr/>
-                        <p class="h2 glow ethglitch">{{12888888.88|numFormat}}
+                        <p class="h2 glow ethglitch">{{stat.round_eth}}
                             <eth-icon :svg-class="'l-tag-svg ethglow'"></eth-icon>
                         </p>
                     </div>
@@ -71,7 +71,7 @@
                 </b-col>
                 <b-col class="text-center buy-item" cols="6" sm="4" xl="4" align-self="center">
                     <div class="jumbotron teamscore unit-price">
-                        <span>当前单价：{{buy_cost}}</span>
+                        <span>当前单价：{{stat.price}}</span>
                         <eth-icon :svg-class="'l-svg-eth1'"></eth-icon>
                     </div>
                 </b-col>
@@ -96,8 +96,8 @@
                     <div class="jumbotron jumbotron-adjust teamscore">
                         <p class="h4">25彩池</p>
                         <hr/>
-                        <p class="h2 glow ethglitch">{{888888.88|numFormat}}</p>
-                        <p class="h5">次数倒数：12/25</p>
+                        <p class="h2 glow ethglitch">{{stat.luckPool}}</p>
+                        <p class="h5">次数倒数：{{stat.luckCounter}}/{{stat.nextLucky}}</p>
                     </div>
                 </b-col>
                 <b-col class="text-center" cols="12" sm="6" xl="6" align-self="center">

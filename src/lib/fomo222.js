@@ -44,6 +44,7 @@ Fomo222.prototype.remainSeconds = function() {
 }
 
 Fomo222.prototype.priceForKeys = function(n) {
+  n = n * (Math.pow(10, 18))
   return this.c.priceForKeys(n, 0)
 }
 
@@ -143,7 +144,7 @@ Fomo222.prototype.stat = function(address) {
       stat.pool = _round[4].dividedBy(Math.pow(10, 18)).toNumber()
       stat.nextLucky = _round[6].toNumber()
       stat.luckCounter = _round[7].toNumber()
-
+      stat.luckPool = _round[8].toNumber()
       if (address) {
         return self.c.playerIds(address)
       } else {
@@ -174,6 +175,10 @@ Fomo222.prototype.stat = function(address) {
       }
     })
     .then(() => {
+      return self.priceForKeys(1)
+    })
+    .then(_price => {
+      stat.price = _price.dividedBy(Math.pow(10, 18)).toNumber()
       return stat
     })
 }
