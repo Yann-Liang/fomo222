@@ -1,9 +1,13 @@
 const etherUtil = require('ethereumjs-util')
+const deployed = require('../src/lib/deployed')
+const abis = require('../src/lib/abi')
+const NETWORK = process.env.NETWORK
+
 const prefix = new Buffer('\x19Ethereum Signed Message:\n')
 const delay = 30 * 1000
 const errors = require('../src/lib/errors')
 
-let fp3dTimestamp = 0
+let fp3dTimestamp
 let winnerData = [];
 
 exports.initFp3d = function(fp3d) {
@@ -47,4 +51,13 @@ exports.getFp3dFinTimestamp = function() {
 
 exports.getWinnerData = function() {
   return winnerData
+}
+
+exports.getFp3d = function(web3) {
+  if (deployed.fomo222.hasOwnProperty(NETWORK)) {
+    const fp3d = new web3.eth.Contract(abis.fomo222, deployed.fomo222[NETWORK])
+    return Promise.resolve(fp3d)
+  } else {
+    return Promise.reject(errors.UNSUPPORTED_NETWORK)
+  }
 }
