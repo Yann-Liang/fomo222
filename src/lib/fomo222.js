@@ -57,7 +57,6 @@ Fomo222.prototype.round = function() {
 }
 
 Fomo222.prototype.buy = function(value, ref) {
-  value = value.mul(Math.pow(10, 18))
   if(!ref) {
     ref = 0
   }
@@ -144,7 +143,7 @@ Fomo222.prototype.stat = function(address) {
       stat.pool = _round[4].dividedBy(Math.pow(10, 18)).toNumber()
       stat.nextLucky = _round[6].toNumber()
       stat.luckCounter = _round[7].toNumber()
-      stat.luckPool = _round[8].toNumber()
+      stat.luckPool = _round[8].dividedBy(Math.pow(10, 18)).toNumber()
       if (address) {
         return self.c.playerIds(address)
       } else {
@@ -168,12 +167,12 @@ Fomo222.prototype.stat = function(address) {
             // stat.wallet = _player[1].dividedBy(Math.pow(10, 18)).toNumber()
             stat.affiliate = _player[3].dividedBy(Math.pow(10, 18)).toNumber()
             stat.win = _player[5].dividedBy(Math.pow(10, 18)).toNumber()
-            return self.c.playerRoundData(stat.id, stat.currentRound)
+            return self.c.playerRoundData(address, stat.currentRound)
           })
           .then(_playerRound => {
             stat.player_eth = _playerRound[0].dividedBy(Math.pow(10, 18)).toNumber()
             stat.player_keys = _playerRound[1].dividedBy(stat.decimals).toNumber()
-            return self.c.profit({from: address})
+            return self.c.profit(address)
           })
           .then(_profit => {
             stat.profit = _profit.dividedBy(Math.pow(10, 18)).toNumber()

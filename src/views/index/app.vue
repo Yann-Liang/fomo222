@@ -13,7 +13,7 @@
                 </h3>
                 <h2 class="display-3">
                     <span class="ethglitch titleglow l-info">
-                        {{ this.stat.pool|numFormat(4) }}
+                        {{stat.pool + stat.luckPool}}
                         <eth-icon :svg-class="'l-svg-eth ethglow'"></eth-icon>
                     </span>
                     <span class="headtimer">
@@ -435,8 +435,7 @@ export default {
         },
         buy() {
             this.$refs.myModal.show();
-            return 
-                this.cal_buy()
+            return this.cal_buy()
                 .then(_price => {
                     return this.context.fp3d.buy(_price, this.referer)
                 })

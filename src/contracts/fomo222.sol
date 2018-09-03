@@ -416,8 +416,8 @@ contract F3d is F3Devents {
           //lv1
           address _referer = id2Players[players[_pAddr].referer];
           assert(_referer != address(0));
-          players[_referer].affiliate = (_eth.mul(60) / 1000).add(players[_referer].affiliate);
-          playerRoundData[_referer][_round].affiliate = (_eth.mul(60) / 1000).add(playerRoundData[_referer][_round].affiliate);
+          players[_referer].affiliate = (_eth.mul(40) / 1000).add(players[_referer].affiliate);
+          playerRoundData[_referer][_round].affiliate = (_eth.mul(40) / 1000).add(playerRoundData[_referer][_round].affiliate);
           
           
           //lv2
@@ -429,14 +429,14 @@ contract F3d is F3Devents {
             //lv3
             _referer = id2Players[players[_referer].referer];
             if(_referer == address(0)) {
-                players[_referer].affiliate = (_eth.mul(40) / 1000).add(players[_referer].affiliate);
-                playerRoundData[_referer][_round].affiliate = (_eth.mul(40) / 1000).add(playerRoundData[_referer][_round].affiliate);
+                players[_referer].affiliate = (_eth.mul(60) / 1000).add(players[_referer].affiliate);
+                playerRoundData[_referer][_round].affiliate = (_eth.mul(60) / 1000).add(playerRoundData[_referer][_round].affiliate);
     
             } else {
-                ownerPool = ownerPool.add(_eth.mul(40) / 1000);
+                ownerPool = ownerPool.add(_eth.mul(60) / 1000);
             }
           } else {
-            ownerPool = ownerPool.add(_eth.mul(90) / 1000);  
+            ownerPool = ownerPool.add(_eth.mul(110) / 1000);  
           }
       }
 

@@ -79,10 +79,10 @@ function initEnv(web3, timeout) {
     web3.version.getNetwork((err, net) => {
       if (err) {
         console.log(`fail to get network ${err}`)
-        return _j(ERR_CODES.NETWORK_UNCONNECTED)
+        return j(ERR_CODES.NETWORK_UNCONNECTED)
       } else {
         ethState.network = net
-        return _r(ethState)
+        return r(ethState)
       }
     })
   })
