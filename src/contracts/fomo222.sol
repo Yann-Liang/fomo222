@@ -37,7 +37,7 @@ contract F3d is F3Devents {
   uint256 public registerFee;                           //fee for register                          0 ether
   uint256 public withdrawFee;                           //                                          30
   uint256 public minimumWithdraw;
-  
+  uint256 public roundTime; 
   uint256 public playersCount;                          //number of registerted players
   
   uint256 public decimals = 10 ** 18;
@@ -179,7 +179,7 @@ contract F3d is F3Devents {
     withdrawFee = _withdrawFee;
     
     // split less than 100%
-    assert(toSpread.add(toOwner)/*.add(toNext)*/.add(toRefer).add(toPool) == 1000);
+    assert(toSpread.add(toOwner)/*.add(toNext)*/.add(toRefer).add(toPool).add(toLucky) == 1000);
 
     // owner1 = _owner1;
     // owner2 = _owner2;
@@ -206,6 +206,7 @@ contract F3d is F3Devents {
           false                               //activated
           // 0                                   //players
     );
+    roundTime = _roundTime;
     admin = msg.sender;
   }
 

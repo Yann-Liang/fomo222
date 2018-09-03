@@ -22,7 +22,8 @@ function Fomo222(address, web3, callback) {
     'registerFee',
     'withdrawFee',
     'minimumWithdraw',
-    'roundTime'    
+    'roundTime',
+    'timeIncrease'    
   ]
 
   async.each(
@@ -40,6 +41,10 @@ function Fomo222(address, web3, callback) {
 
 Fomo222.prototype.remainSeconds = function() {
   return this.c.remainTime(0)
+}
+
+Fomo222.prototype.priceForKeys = function(n) {
+  return this.c.priceForKeys(n, 0)
 }
 
 Fomo222.prototype.price = function(n) {
@@ -120,12 +125,8 @@ Fomo222.prototype.userReferId = function(addr) {
 Fomo222.prototype.stat = function(address) {
   const stat = {}
   const self = this
-
-  return self.c.currentRound()
-    .then(_currentRound => {
-      stat.currentRound = _currentRound.toNumber()
-      return self.c.owner()
-    })
+  stat.currentRound = 0
+  return self.c.admin()
     .then(_owner => {
       stat.owner = _owner
       return self.c.decimals()
@@ -150,7 +151,7 @@ Fomo222.prototype.stat = function(address) {
       }
     })
     .then(_id => {
-      if (_id.eq(0) && address !== stat.owner) {
+      if (_id == -1 || (_id.eq(0) && address !== stat.owner)) {
         stat.id = -1
       } else {
         stat.id = _id.toNumber()
