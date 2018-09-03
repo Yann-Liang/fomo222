@@ -71,7 +71,7 @@
                 </b-col>
                 <b-col class="text-center buy-item" cols="6" sm="4" xl="4" align-self="center">
                     <div class="jumbotron teamscore unit-price">
-                        <span>当前单价：{{stat.price}}</span>
+                        <span>当前单价：{{buy_cost}}</span>
                         <eth-icon :svg-class="'l-svg-eth1'"></eth-icon>
                     </div>
                 </b-col>
@@ -419,7 +419,7 @@ export default {
                 // this.$alert(`购买数量错误`);
                 return Promise.reject(`购买数量错误`)
             } else {
-                return this.priceForKeys(keys * (10 ** 18))
+                return this.priceForKeys(keys)
                     .then(_price => {
                         this.buy_cost = _price.dividedBy(10 ** 18).toNumber()
                         return _price
@@ -493,7 +493,7 @@ export default {
         },
         priceForKeys(keysCount) {
             return this.context.fp3d.priceForKeys(
-                keysCount * (10 ** 18),
+                keysCount,
                 0
             )
         }
@@ -563,6 +563,7 @@ export default {
                 }, 10 * 1000);
             })
             .then(() => {
+                this.buy_keys = 1
                 return this.cal_buy()
             })
             .then(() => {
