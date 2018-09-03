@@ -49,10 +49,10 @@ exports.fp3dM_deploy = {
 
 exports.fomo222 = {
   '1': '..',
-  '3': '..'
+  '3': '0xcda9e2c7fb5412b89eb49de68a8417546b1795af'
 }
 
 exports.fomo222_deploy = {
   '1': 123,
-  '3': 234
+  '3': 3963677
 }

@@ -1,7 +1,7 @@
 const deployed = require('./deployed')
 const abi = require('./abi')
 const async = require('async')
-
+const Contract = require('./contract')
 function Fomo222(address, web3, callback) {
   const self = this
   self.web3 = web3
@@ -21,7 +21,8 @@ function Fomo222(address, web3, callback) {
     'timeIncrease',
     'registerFee',
     'withdrawFee',
-    'minimumWithdraw'    
+    'minimumWithdraw',
+    'roundTime'    
   ]
 
   async.each(

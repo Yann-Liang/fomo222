@@ -238,7 +238,7 @@ const ethEnv = require('@/lib/etherEnv');
 const utils = require('@/lib/utils');
 // const deployed = require('@/lib/deployed')
 // const errors = require('@/lib/errors')
-const fp3d = require('@/lib/fp3d2');
+const fp3d = require('@/lib/fomo222');
 const api = require('@/api/backend');
 const {getCurrentUrl, getUrlParms} = require('@/lib/tools');
 
@@ -500,17 +500,20 @@ export default {
     },
     created() {
         ethEnv
-            .Init(null)
+            .Init(window.web3)
             .then(cxt => {
                 this.context = cxt;
-
-                api.fp3dTimestamp().then(_timestamp => {
+                return fp3d.getFp222(this.context.web3)
+            })
+            .then(fomo222 => {
+                this.context.fp3d = fomo222
+                this.context.fp3d.remainSeconds().then(_timestamp => {
                     this.diff = _timestamp;
                     this.diffToTime();
                 });
 
                 setInterval(() => {
-                    api.fp3dTimestamp().then(_timestamp => {
+                    this.context.fp3d.remainSeconds().then(_timestamp => {
                         console.log(`load time ${_timestamp}`);
                         this.diff = _timestamp;
                         this.diffToTime();
@@ -523,25 +526,34 @@ export default {
                         this.diffToTime();
                     }
                 }, 1000);
-                return fp3d.getFp3d(this.context.web3);
             })
-            .then(_fp3d => {
-                this.context.fp3d = _fp3d;
+            .then(() => {
+                // this.context.fp3d = _fp3d;
                 this.contract_url = ethEnv.contractOnEtherscan(
                     this.context.fp3d.c.instance.address,
                 );
                 let r = getUrlParms('r');
                 r && (this.referer = Number(r));
 
-                ['ta', 'tb', 'tc', 'td', 'wa', 'wb', 'wc', 'we'].forEach(
+                [
+                    'luckyNumber',
+                    'toSpread',
+                    'toOwner',
+                    'toRefer',
+                    'toPool',
+                    'toLucky',
+                    'timeIncrease',
+                    'registerFee',
+                    'withdrawFee',
+                    'minimumWithdraw',
+                    'roundTime',
+                    'timeIncrease' 
+                ].forEach(
                     prop => {
                         this.params[prop] =
                             this.context.fp3d.params[prop].toNumber() / 10;
                     },
                 );
-                this.params.maxTimeRemain =
-                    this.context.fp3d.params.maxTimeRemain.toNumber() / 3600;
-                this.params.timeGap = this.context.fp3d.params.timeGap.toNumber();
                 return this.fp3dStat(this.context.address);
             })
             .then(() => {
