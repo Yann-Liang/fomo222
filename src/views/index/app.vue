@@ -46,7 +46,7 @@
                     <div class="jumbotron jumbotron-adjust teamscore">
                         <p>总彩池</p>
                         <hr/>
-                        <p class="h2 glow ethglitch">{{stat.pool}}
+                        <p class="h2 glow ethglitch">{{stat.pool + stat.luckPool}}
                             <eth-icon :svg-class="'l-tag-svg ethglow'"></eth-icon>
                         </p>
                     </div>

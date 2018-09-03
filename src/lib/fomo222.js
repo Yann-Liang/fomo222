@@ -154,11 +154,18 @@ Fomo222.prototype.stat = function(address) {
     .then(_id => {
       if (_id == -1) {
         stat.id = -1
+        stat.wallet = 0
+        stat.affiliate = 0
+        stat.win = 0
+        stat.player_eth = 0
+        stat.player_keys = 0
+        stat.profit = 0
+
       } else {
         stat.id = _id.toNumber()
         return self.c.players(address)
           .then(_player => {
-            stat.wallet = _player[1].dividedBy(Math.pow(10, 18)).toNumber()
+            // stat.wallet = _player[1].dividedBy(Math.pow(10, 18)).toNumber()
             stat.affiliate = _player[3].dividedBy(Math.pow(10, 18)).toNumber()
             stat.win = _player[5].dividedBy(Math.pow(10, 18)).toNumber()
             return self.c.playerRoundData(stat.id, stat.currentRound)
