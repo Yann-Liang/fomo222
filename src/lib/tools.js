@@ -9,3 +9,7 @@ exports.getUrlParms = name => {
 exports.getCurrentUrl = () => {
     return location.protocol + '//' + location.host + location.pathname
 }
+
+exports.getBaseUrl = () => {
+    return location.protocol + '//' + location.host
+}

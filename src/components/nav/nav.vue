@@ -9,7 +9,7 @@
                 <b-navbar-nav>
                     <b-nav-item class="nav-link-purp-on nav-link-purp" href="./index.html">首页</b-nav-item>
                     <b-nav-item class="nav-link-purp-on nav-link-purp" href="#" disabled>公告</b-nav-item>
-                    <b-nav-item class="nav-link-purp-on nav-link-purp" :href="contract" disabled>智能合约</b-nav-item>
+                    <b-nav-item class="nav-link-purp-on nav-link-purp" :href="contract" target="_blank">智能合约</b-nav-item>
                 </b-navbar-nav>
                 <b-navbar-nav class="ml-auto">
                     <b-nav-item class="nav-link-purp-on nav-link-purp" href="javascript:void;" @click="navClick('invite')">邀请链接</b-nav-item>
@@ -27,13 +27,16 @@
 </template>
 
 <script>
+
+const deployed = require('@/lib/deployed')
+const ethEnv = require('@/lib/etherEnv')
 export default {
     //组件名
     name: 'component-nav',
     //实例的数据对象
     data() {
         return {
-            contract:`https://www.baidu.com`//智能合约的跳转地址
+            contract:``//智能合约的跳转地址
         };
     },
     //数组或对象，用于接收来自父组件的数据
@@ -51,7 +54,14 @@ export default {
         }
     },
     //生命周期函数 请求写在created中
-    created() {},
+    created() {
+        ethEnv.Init(window.web3)
+            .then(cxt => {
+                if(deployed.fomo222.hasOwnProperty(cxt.network)) {
+                    this.contract = ethEnv.contractOnEtherscan(deployed.fomo222[cxt.network])
+                }
+            })
+    },
     beforeMount() {},
     mounted() {},
     //组件

@@ -1,4 +1,4 @@
-const Web3 = require("web3")
+// const Web3 = require("./web3.0.20")
 
 const ethState = {
   frontEnd: true,

@@ -247,6 +247,7 @@ import piggyIcon from '@/components/icon/piggy-icon';
 import tabHeader from '@/components/tab-header/index.vue';
 import operationModal from '@/components/modal/operation-modal.vue';
 import conNav from '@/components/nav/nav.vue';
+import { error } from 'util';
 
 export default {
     //组件名
@@ -446,21 +447,29 @@ export default {
                 });
         },
         reload() {
-            let cost =
-                this.buy_cost < this.stat.profit
-                    ? this.buy_cost
-                    : this.stat.profit;
-            cost = new this.context.web3.BigNumber(cost);
-            cost = cost.mul(Math.pow(10, 18))
             this.$refs.myModal.show();
-            return this.context.fp3d
-                .reloadKeys(cost, this.referer)
+            return this.context.fp3d.totalProfit(this.context.address)
+                .then(_profit => {
+                    return this.cal_buy()
+                        .then(_cost => {
+                            if (_cost.gt(_profit)) {
+                                return Promise.reject(`不够`)
+                            } else {
+                                return _cost
+                            }
+                        })
+                })
+                .then(_cost => {
+                    return this.context.fp3d.reloadKeys(_cost, this.referer)
+                })
                 .then(tx => {
-                    this.$refs.myModal.hide();
+                    console.log(`reload tx hash ${tx}`)
+                    this.$refs.myModal.hide()
                 })
                 .catch(err => {
-                    this.$refs.myModal.hide();
-                });
+                    console.log(`reload fail`, err)
+                    this.$refs.myModal.hide()
+                })
         },
         withdrawal() {
             this.$refs.myModal.show();

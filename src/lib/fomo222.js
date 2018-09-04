@@ -64,7 +64,6 @@ Fomo222.prototype.buy = function(value, ref) {
 }
 
 Fomo222.prototype.reloadKeys = function(value, ref) {
-  value = value.mul(Math.pow(10, 18))
   return this.c.ReloadKeys(ref, 0, value)
 }
 

@@ -43,7 +43,7 @@
                                 <p class="h4">{{$t('index.currentPrizePool')}}</p>
                             </div>
                             <div class="col">
-                                <p class="h2 text-right glow ethglitch"> {{ stat.pool.toFixed(8) }}
+                                <p class="h2 text-right glow ethglitch"> {{ stat.win.toFixed(8) }}
                                     <eth-icon :svg-class="'l-tag-svg ethglow'"></eth-icon>
                                 </p>
                             </div>
@@ -70,7 +70,7 @@
                                 <p class="h4">{{$t('index.currentIncome')}}</p>
                             </div>
                             <div class="col">
-                                <p class="h2 text-right"> {{ stat.profit.toFixed(8) }}
+                                <p class="h2 text-right"> {{ stat.wallet.toFixed(8) }}
                                     <eth-icon :svg-class="'l-tag-svg ethglow'"></eth-icon>
                                 </p>
                             </div>
@@ -81,7 +81,7 @@
                                 <p class="h4">推广奖励</p>
                             </div>
                             <div class="col">
-                                <p class="h2 text-right"> {{ stat.profit.toFixed(8) }}
+                                <p class="h2 text-right"> {{ stat.affiliate.toFixed(8) }}
                                     <eth-icon :svg-class="'l-tag-svg ethglow'"></eth-icon>
                                 </p>
                             </div>
@@ -136,7 +136,9 @@ import apiService from '@/services/API-service';
 import conNav from '@/components/nav/nav.vue';
 import keyIcon from '@/components/icon/key-icon';
 import ethIcon from '@/components/icon/eth-icon';
-const {getCurrentUrl, getUrlParms} = require('@/lib/tools');
+const {getBaseUrl, getUrlParms} = require('@/lib/tools');
+const ethEnv = require('@/lib/etherEnv');
+const fp3d = require('@/lib/fomo222');
 
 export default {
     //组件名
@@ -236,11 +238,32 @@ export default {
     },
     //生命周期函数 请求写在created中
     created() {
+        console.log('start personal')
         const tab = getUrlParms('tab');
         console.log('tab', tab);
         if (tab&&tab<5) {
             this.active=tab;
         }
+        ethEnv.Init(window.web3)
+            .then(cxt => {
+                this.context = cxt
+                return fp3d.getFp222(this.context.web3)
+            })
+            .then(fomo222 => {
+                this.context.fp3d = fomo222
+                let r = getUrlParms('r')
+                r && (this.referer = Number(r))
+                return this.context.fp3d.stat(this.context.address)
+            })
+            .then(_stat => {
+                this.stat = Object.assign(this.stat, _stat)
+
+                if ((this.stat.id >0) || (this.stat.id == 0 && this.context.address == this.stat.owner)) {
+                    this.stat.ref_url = `${getBaseUrl()}?r=${this.stat.id}`    
+                } else {
+                    this.stat.id = -1
+                }
+            })
     },
     beforeMount() {},
     mounted() {},
