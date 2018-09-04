@@ -27,7 +27,8 @@ const browserLanguage = (navigator.language || navigator.browserLanguage)
   .toLowerCase (),
   i18n = new VueI18n ({
     //定义默认语言
-    locale: browserLanguage,
+    // locale: browserLanguage,
+    locale:'zh-cn',
     messages,
   });
 
