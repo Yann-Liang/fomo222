@@ -158,10 +158,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="(data,index) in winners" :key="index">
-                                <td scope="row" class="playername truncate"> {{ data.round }}.</td>
-                                <td class="text-center">{{ data.winner.substr(0, 15) + '...' }}</td>
-                                <td class="tright">{{ data.amount.toFixed(8) }} ETH</td>
+                            <tr v-for="(data,index) in luckies" :key="index">
+                                <td scope="row" class="playername truncate"> {{ data.lucky }}.</td>
+                                <td class="text-center">{{ data.player.substr(0, 15) + '...' }}</td>
+                                <td class="tright">{{ data.value.toFixed(8) }} ETH</td>
                             </tr>
                         </tbody>
                     </table>
@@ -239,6 +239,7 @@ const utils = require('@/lib/utils');
 // const errors = require('@/lib/errors')
 const fp3d = require('@/lib/fomo222');
 const api = require('@/api/backend');
+const backend = require('@/api/backend')
 const {getCurrentUrl, getUrlParms} = require('@/lib/tools');
 
 import ethIcon from '@/components/icon/eth-icon';
@@ -325,7 +326,10 @@ export default {
                     class: 'w-30',
                 },
             ],
-            winners: [{round: 0, winner: '0x11111111111', amount: 0.777777777}],
+            winners: [
+                {round: 0, winner: '0x11111111111', amount: 0.777777777}
+                ],
+            luckies: [],
             disabled: false,
             loadingMsg: '加载中...',
             contract_url:
@@ -409,8 +413,17 @@ export default {
                 this.stat.ref_url = `${getCurrentUrl()}?r=${this.stat.id}`;
                 this.stat.winner_link = ethEnv.contractOnEtherscan(
                     this.stat.winner,
-                );
-            });
+                )
+                return backend.luckies()
+            }).then(_luckies => {
+                this.luckies = _luckies.map(l => {
+                    return {
+                        lucky: l.lucky,
+                        value: l.amount / Math.pow(10, 18),
+                        player: l.buyer
+                    }
+                })
+            })
         },
         cal_buy() {
             let keys = this.buy_keys;

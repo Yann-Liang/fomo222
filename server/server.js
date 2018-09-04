@@ -22,9 +22,7 @@ const current = process.env.NETWORK
 web3.setProvider(new web3.providers.HttpProvider(`https://${networkMap[current]}.infura.io/vAugb8H4cG1bOuFMZj3y`))
 
 // RopstenWeb3.setProvider(new RopstenWeb3.providers.HttpProvider(`https://ropsten.infura.io/vAugb8H4cG1bOuFMZj3y`))
-
-
-
+/*
 fomo222.getFp222(web3)
     .then(_fomo222 => {
         utils.initFp3d(_fp3c)
@@ -33,7 +31,7 @@ fomo222.getFp222(web3)
         console.log(`init fp3d failed`, err)
         process.exit(-1)
     })
-
+*/
 app.use(cors())
 app.use(koaBody())
 
