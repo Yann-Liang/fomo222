@@ -415,6 +415,9 @@ export default {
                     this.stat.winner,
                 )
                 return backend.luckies()
+                .catch(err => {
+                    return []
+                })
             }).then(_luckies => {
                 this.luckies = _luckies.map(l => {
                     return {

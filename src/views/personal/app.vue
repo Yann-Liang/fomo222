@@ -25,7 +25,7 @@
 
                         <div v-if="stat.id === -1">
                             <p class="text-center">
-                                {{$t('index.buyPromotionLinkInfo')}}
+                                
                             </p>
                             <b-button size="lg" class="btn btn-outline-purp btn-block buyceo" @click="register">
                                 {{$t('index.createPromotionLink')}}
@@ -234,7 +234,9 @@ export default {
         changeTab(index) {
             this.active = index;
         },
-        register() {},
+        register() {
+            return this.context.fp3d.register(this.referer)
+        },
     },
     //生命周期函数 请求写在created中
     created() {
