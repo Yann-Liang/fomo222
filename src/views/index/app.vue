@@ -11,8 +11,14 @@
                 <h3 class="display-3 scammed no-mobile">
                     一个独享！超级大奖等你赢取！
                 </h3>
-                <h2 class="display-3">                    <span class="ethglitch titleglow l-info">
-                        {{stat.pool + stat.luckPool}}
+                <h2 class="display-3">
+                    <span class="ethglitch titleglow l-info">
+                        <span class="no-mobile">
+                            {{stat.pool + stat.luckPool}}
+                        </span>
+                        <span class="only-mobile">
+                            {{stat.pool + stat.luckPool|numFormat(8)}}
+                        </span>
                         <eth-icon :svg-class="'l-svg-eth ethglow'"></eth-icon>
                     </span>
                     <span class="headtimer">
@@ -45,7 +51,13 @@
                     <div class="jumbotron jumbotron-adjust teamscore">
                         <p>总彩池</p>
                         <hr/>
-                        <p class="h2 glow ethglitch">{{stat.pool + stat.luckPool}}
+                        <p class="h2 glow ethglitch">
+                            <span class="no-mobile">
+                                {{stat.pool + stat.luckPool}}
+                            </span>
+                            <span class="only-mobile">
+                                {{stat.pool + stat.luckPool|numFormat(8)}}
+                            </span>
                             <eth-icon :svg-class="'l-tag-svg ethglow'"></eth-icon>
                         </p>
                     </div>
@@ -55,7 +67,13 @@
                     <div class="jumbotron jumbotron-adjust teamscore">
                         <p>总投入</p>
                         <hr/>
-                        <p class="h2 glow ethglitch">{{stat.round_eth}}
+                        <p class="h2 glow ethglitch">
+                            <span class="no-mobile">
+                                {{stat.round_eth}}
+                            </span>
+                            <span class="only-mobile">
+                                {{stat.round_eth|numFormat(8)}}
+                            </span>
                             <eth-icon :svg-class="'l-tag-svg ethglow'"></eth-icon>
                         </p>
                     </div>
@@ -95,7 +113,14 @@
                     <div class="jumbotron jumbotron-adjust teamscore">
                         <p class="h4">25彩池</p>
                         <hr/>
-                        <p class="h2 glow ethglitch">{{stat.luckPool}}</p>
+                        <p class="h2 glow ethglitch">
+                            <span class="no-mobile">
+                                {{stat.luckPool}}
+                            </span>
+                            <span class="only-mobile">
+                                {{stat.luckPool|numFormat(8)}}
+                            </span>
+                        </p>
                         <p class="h5">次数倒数：{{stat.luckCounter}}/{{stat.nextLucky}}</p>
                     </div>
                 </b-col>
