@@ -1,7 +1,7 @@
 <template>
     <section>
         <!-- 导航栏 start -->
-        <con-nav></con-nav>
+        <con-nav @navClick="navClick"></con-nav>
         <!-- 导航栏 end -->
         <div class="blurryboy"> </div>
         <div class="jumbotron rounded-0 text-center text-light teaser-cover l-second-floor">
@@ -11,8 +11,7 @@
                 <h3 class="display-3 scammed no-mobile">
                     一个独享！超级大奖等你赢取！
                 </h3>
-                <h2 class="display-3">
-                    <span class="ethglitch titleglow l-info">
+                <h2 class="display-3">                    <span class="ethglitch titleglow l-info">
                         {{stat.pool + stat.luckPool}}
                         <eth-icon :svg-class="'l-svg-eth ethglow'"></eth-icon>
                     </span>
@@ -495,6 +494,10 @@ export default {
                 keysCount,
                 0
             )
+        },navClick(type){
+            if(type=='invite'){
+                this.refere='-1'?alert('弹出提示他注册邀请链接'):alert('显示他当前的链接');
+            }
         }
     },
     created() {
@@ -546,7 +549,7 @@ export default {
                     'withdrawFee',
                     'minimumWithdraw',
                     'roundTime',
-                    'timeIncrease' 
+                    'timeIncrease'
                 ].forEach(
                     prop => {
                         this.params[prop] =

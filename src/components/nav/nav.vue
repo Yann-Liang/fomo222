@@ -12,7 +12,7 @@
                     <b-nav-item class="nav-link-purp-on nav-link-purp" :href="contract" disabled>智能合约</b-nav-item>
                 </b-navbar-nav>
                 <b-navbar-nav class="ml-auto">
-                    <b-nav-item class="nav-link-purp-on nav-link-purp" href="#">邀请链接</b-nav-item>
+                    <b-nav-item class="nav-link-purp-on nav-link-purp" href="javascript:void;" @click="navClick('invite')">邀请链接</b-nav-item>
                     <b-nav-item class="nav-link-purp-on nav-link-purp no-mobile" href="./personal.html">个人中心</b-nav-item>
                     <b-nav-item-dropdown class="nav-link-purp-on nav-link-purp only-mobile" text="个人中心" extra-toggle-classes="nav-link-custom">
                         <b-dropdown-item @click="changeTab(1)">邀请好友</b-dropdown-item>
@@ -45,6 +45,9 @@ export default {
         changeTab(index){
             console.log('nav change',index);
             this.$emit('changeTab',index);
+        },
+        navClick(type){
+            this.$emit('navClick',type);
         }
     },
     //生命周期函数 请求写在created中
