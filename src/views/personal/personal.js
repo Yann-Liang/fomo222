@@ -16,7 +16,8 @@ import messages from '@/lang/index';
 import apiService from '@/services/API-service';
 // import ElementUI from 'element-ui';
 import BootstrapVue from 'bootstrap-vue';
-import BlockUI from 'vue-blockui'
+import BlockUI from 'vue-blockui';
+
 
 Vue.use(BlockUI)
 Vue.use(VueI18n);

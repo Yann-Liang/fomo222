@@ -50,15 +50,15 @@ export default {
     methods: {
         changeTab(index){
             console.log('nav change',index);
-            this.$emit('changeTab',index);
+            if(location.pathname=='personal.html'){
+                this.$emit('changeTab',index);
+            }else{
+                location.href=`personal.html?tab=${index}&r=${this.refId}`
+            }
         },
         navClick(type){
             this.$emit('navClick',type);
-            if(location.pathname=='personal.html'){
-                this.changeTab(1)
-            }else{
-                location.href=`personal.html?tab=1&r=${this.refId}`
-            }
+            this.changeTab(1)
         }
     },
     //生命周期函数 请求写在created中

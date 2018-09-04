@@ -87,6 +87,11 @@
                                 </p>
                             </div>
                         </div>
+                        <!-- 一键提现 -->
+                        <b-button size="lg" class="btn-purp btn-block btn-lg ticketProcess" @click="withdrawal">
+                            {{$t('index.oneClickCash')}}&nbsp;{{ this.stat.profit.toFixed(8) }}
+                            <eth-icon :svg-class="'l-svg-ethbtn'"></eth-icon>
+                        </b-button>
 
                     </div>
                     <div v-if="active==4" class="jumbotron jumbotron-adjust teamscore">
@@ -239,6 +244,9 @@ export default {
         register() {
             return this.context.fp3d.register(this.referer)
         },
+        withdrawal(){
+
+        }
     },
     //生命周期函数 请求写在created中
     created() {
