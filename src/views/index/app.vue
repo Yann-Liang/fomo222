@@ -159,7 +159,7 @@
                         </thead>
                         <tbody>
                             <tr v-for="(data,index) in luckies" :key="index">
-                                <td scope="row" class="playername truncate"> {{ data.lucky }}.</td>
+                                <td scope="row" class="playername truncate"> {{ data.lucky }}</td>
                                 <td class="text-center">{{ data.player.substr(0, 15) + '...' }}</td>
                                 <td class="tright">{{ data.value.toFixed(8) }} ETH</td>
                             </tr>
