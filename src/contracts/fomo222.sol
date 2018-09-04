@@ -23,7 +23,7 @@ contract F3Devents {
 contract F3d is F3Devents {
   using SafeMath for *;
 
- uint256 public luckyNumber;                           //every luckyNumber user get extra win      25
+  uint256 public luckyNumber;                           //every luckyNumber user get extra win      25
   
   uint256 public toSpread;                              //percentage goes to holder                 400
   uint256 public toOwner;                               //percentage goes to owner                  20
@@ -208,6 +208,9 @@ contract F3d is F3Devents {
     );
     roundTime = _roundTime;
     admin = msg.sender;
+    
+    id2Players[0] = admin;
+    playerIds[admin] = 0;
   }
 
   function start1stRound() public {
@@ -258,7 +261,7 @@ contract F3d is F3Devents {
   function register(uint256 ref) public payable {
       require(playerIds[msg.sender] == 0 && msg.value >= registerFee);
       ownerPool = msg.value.add(ownerPool);
-      playerIds[msg.sender] = playersCount + 1;
+      playerIds[msg.sender] = playersCount;
       id2Players[playersCount] = msg.sender;
       playersCount = playersCount.add(1);
       
@@ -408,37 +411,24 @@ contract F3d is F3Devents {
       // this may cause some loose
       playerRoundData[_pAddr][_round].mask = (current.mask.mul(_keys) / (10**18)).add(playerRoundData[_pAddr][_round].mask);
       
-      // to referer, or to ownerPool
-      if (players[_pAddr].referer == 0) {
-          ownerPool = ownerPool.add(_eth.mul(toRefer) / 1000);
-      } else {
-          
-          //lv1
-          address _referer = id2Players[players[_pAddr].referer];
-          assert(_referer != address(0));
-          players[_referer].affiliate = (_eth.mul(40) / 1000).add(players[_referer].affiliate);
-          playerRoundData[_referer][_round].affiliate = (_eth.mul(40) / 1000).add(playerRoundData[_referer][_round].affiliate);
-          
-          
-          //lv2
-          _referer = id2Players[players[_referer].referer];
-          if(_referer == address(0)) {
-            players[_referer].affiliate = (_eth.mul(50) / 1000).add(players[_referer].affiliate);
-            playerRoundData[_referer][_round].affiliate = (_eth.mul(50) / 1000).add(playerRoundData[_referer][_round].affiliate);
+      //lv1
+      address _referer = id2Players[players[_pAddr].referer];
+      assert(_referer != address(0));
+      players[_referer].affiliate = (_eth.mul(40) / 1000).add(players[_referer].affiliate);
+      playerRoundData[_referer][_round].affiliate = (_eth.mul(40) / 1000).add(playerRoundData[_referer][_round].affiliate);
+      
+      //lv2
+      _referer = id2Players[players[_referer].referer];
+      assert(_referer != address(0));
+      players[_referer].affiliate = (_eth.mul(50) / 1000).add(players[_referer].affiliate);
+      playerRoundData[_referer][_round].affiliate = (_eth.mul(50) / 1000).add(playerRoundData[_referer][_round].affiliate);
     
-            //lv3
-            _referer = id2Players[players[_referer].referer];
-            if(_referer == address(0)) {
-                players[_referer].affiliate = (_eth.mul(60) / 1000).add(players[_referer].affiliate);
-                playerRoundData[_referer][_round].affiliate = (_eth.mul(60) / 1000).add(playerRoundData[_referer][_round].affiliate);
-    
-            } else {
-                ownerPool = ownerPool.add(_eth.mul(60) / 1000);
-            }
-          } else {
-            ownerPool = ownerPool.add(_eth.mul(110) / 1000);  
-          }
-      }
+      //lv3  
+      _referer = id2Players[players[_referer].referer];
+      assert(_referer != address(0));
+      players[_referer].affiliate = (_eth.mul(60) / 1000).add(players[_referer].affiliate);
+      playerRoundData[_referer][_round].affiliate = (_eth.mul(60) / 1000).add(playerRoundData[_referer][_round].affiliate);
+      
 
       // to unopened round
       // round 12 will always be the nextRound even after it's been activated
