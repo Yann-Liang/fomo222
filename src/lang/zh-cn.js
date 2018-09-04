@@ -1,6 +1,6 @@
 export default {
     index: {
-        round:`轮次`,
+        round:`幸运数`,//轮次
         rounds: `第 {n} 轮`,
         sellNEgg: `已售出 {n} 个egg`,
         haveEgg:`拥有Key数`,

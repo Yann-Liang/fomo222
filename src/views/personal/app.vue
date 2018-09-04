@@ -25,7 +25,7 @@
 
                         <div v-if="stat.id === -1">
                             <p class="text-center">
-                                
+
                             </p>
                             <b-button size="lg" class="btn btn-outline-purp btn-block buyceo" @click="register">
                                 {{$t('index.createPromotionLink')}}
@@ -39,17 +39,6 @@
                     <div v-if="active==3" class="jumbotron jumbotron-adjust teamscore">
                         <div class="row nomarginb">
                             <div class="col-auto">
-                                <!-- 幸运大奖 -->
-                                <p class="h4">{{$t('index.currentPrizePool')}}</p>
-                            </div>
-                            <div class="col">
-                                <p class="h2 text-right glow ethglitch"> {{ stat.win.toFixed(8) }}
-                                    <eth-icon :svg-class="'l-tag-svg ethglow'"></eth-icon>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="row nomarginb">
-                            <div class="col-auto">
                                 <p class="h4">{{$t('index.haveEgg')}}</p>
                             </div>
                             <div class="col">
@@ -59,22 +48,23 @@
                                 </p>
                             </div>
                         </div>
+                        <div class="row nomarginb">
+                            <div class="col-auto">
+                                <!-- 幸运大奖 -->
+                                <p class="h4">{{$t('index.currentPrizePool')}}</p>
+                            </div>
+                            <div class="col">
+                                <p class="h2 text-right glow ethglitch"> {{ stat.win.toFixed(8) }}
+                                    <eth-icon :svg-class="'l-tag-svg ethglow'"></eth-icon>
+                                </p>
+                            </div>
+                        </div>
+
                         <!-- <div class="row marginb">
                             <div class="col text-right">{{$t('index.total')}}&nbsp;{{ this.stat.round_keys.toFixed(8) }}
                                 <embed src="http://dnf.sdcslog.com/img/egg2.svg" width="25" height="25" type="image/svg+xml" pluginspage="http://www.adobe.com/svg/viewer/install/" />
                             </div>
                         </div> -->
-                        <div class="row nomarginb">
-                            <div class="col-auto">
-                                <!-- 当前收入 -->
-                                <p class="h4">{{$t('index.currentIncome')}}</p>
-                            </div>
-                            <div class="col">
-                                <p class="h2 text-right"> {{ stat.wallet.toFixed(8) }}
-                                    <eth-icon :svg-class="'l-tag-svg ethglow'"></eth-icon>
-                                </p>
-                            </div>
-                        </div>
                         <div class="row nomarginb">
                             <div class="col-auto">
                                 <!-- 推广奖励 -->
@@ -86,6 +76,18 @@
                                 </p>
                             </div>
                         </div>
+                        <div class="row nomarginb">
+                            <div class="col-auto">
+                                <!-- 当前收入 -->
+                                <p class="h4">{{$t('index.currentIncome')}}</p>
+                            </div>
+                            <div class="col">
+                                <p class="h2 text-right"> {{ stat.wallet.toFixed(8) }}
+                                    <eth-icon :svg-class="'l-tag-svg ethglow'"></eth-icon>
+                                </p>
+                            </div>
+                        </div>
+
                     </div>
                     <div v-if="active==4" class="jumbotron jumbotron-adjust teamscore">
                         <p class="h4 text-center">组织图</p>
@@ -261,7 +263,7 @@ export default {
                 this.stat = Object.assign(this.stat, _stat)
 
                 if ((this.stat.id >0) || (this.stat.id == 0 && this.context.address == this.stat.owner)) {
-                    this.stat.ref_url = `${getBaseUrl()}?r=${this.stat.id}`    
+                    this.stat.ref_url = `${getBaseUrl()}?r=${this.stat.id}`
                 } else {
                     this.stat.id = -1
                 }
