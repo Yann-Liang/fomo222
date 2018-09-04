@@ -519,10 +519,11 @@ export default {
                 keysCount,
                 0
             )
-        },navClick(type){
-            if(type=='invite'){
-                this.refere='-1'?alert('弹出提示他注册邀请链接'):alert('显示他当前的链接');
-            }
+        },
+        navClick(type){
+            // if(type=='invite'){
+            //     this.refere='-1'?alert('弹出提示他注册邀请链接'):alert('显示他当前的链接');
+            // }
         }
     },
     created() {
