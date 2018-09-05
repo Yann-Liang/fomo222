@@ -11,7 +11,7 @@
                         <b-nav-item :active="active==1" @click="changeTab(1)">邀请好友</b-nav-item>
                         <b-nav-item :active="active==2" @click="changeTab(2)">钱包管理</b-nav-item>
                         <b-nav-item :active="active==3" @click="changeTab(3)">资金历史</b-nav-item>
-                        <b-nav-item :active="active==4" @click="changeTab(4)">社群</b-nav-item>
+                        <b-nav-item :active="active==4" @click="changeTab(4)">团长统计</b-nav-item>
                     </b-nav>
                 </b-col>
                 <b-col cols="12" sm="10" xl="10">
@@ -96,7 +96,7 @@
                     <div v-if="active==4" class="jumbotron jumbotron-adjust teamscore">
                         <div class="row nomarginb">
                             <div class="col-auto">
-                                <p class="h4">社群人数</p>
+                                <p class="h4">团员统计</p>
                             </div>
                             <div class="col">
                                 <p class="h2 text-right glow ethglitch"> {{ stat.player_keys.toFixed(8) }}
@@ -107,7 +107,7 @@
                         <div class="row nomarginb">
                             <div class="col-auto">
                                 <!-- 社群入金 -->
-                                <p class="h4">社群入金</p>
+                                <p class="h4">团员入金</p>
                             </div>
                             <div class="col">
                                 <p class="h2 text-right glow ethglitch"> {{ stat.win.toFixed(8) }}
@@ -118,7 +118,7 @@
                         <div class="row nomarginb">
                             <div class="col-auto">
                                 <!-- 社群出金 -->
-                                <p class="h4">社群出金</p>
+                                <p class="h4">团员出金</p>
                             </div>
                             <div class="col">
                                 <p class="h2 text-right glow ethglitch"> {{ stat.affiliate.toFixed(8) }}
