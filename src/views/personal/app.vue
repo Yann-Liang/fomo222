@@ -96,19 +96,18 @@
                     <div v-if="active==4" class="jumbotron jumbotron-adjust teamscore">
                         <div class="row nomarginb">
                             <div class="col-auto">
-                                <p class="h4">{{$t('index.haveEgg')}}</p>
+                                <p class="h4">社群人数</p>
                             </div>
                             <div class="col">
-                                <p class="h2 text-right"> {{ stat.player_keys.toFixed(8) }}
-                                    <key-icon :svg-class="'l-svg-key1 ethglow'"></key-icon>
-                                    <!-- <embed src="http://dnf.sdcslog.com/img/egg2.svg" width="25" height="25" type="image/svg+xml" pluginspage="http://www.adobe.com/svg/viewer/install/" /> -->
+                                <p class="h2 text-right glow ethglitch"> {{ stat.player_keys.toFixed(8) }}
+                                    <i class="iconfont icon-renqun" style="font-size:1.6rem;"></i>
                                 </p>
                             </div>
                         </div>
                         <div class="row nomarginb">
                             <div class="col-auto">
-                                <!-- 幸运大奖 -->
-                                <p class="h4">{{$t('index.currentPrizePool')}}</p>
+                                <!-- 社群入金 -->
+                                <p class="h4">社群入金</p>
                             </div>
                             <div class="col">
                                 <p class="h2 text-right glow ethglitch"> {{ stat.win.toFixed(8) }}
@@ -118,22 +117,11 @@
                         </div>
                         <div class="row nomarginb">
                             <div class="col-auto">
-                                <!-- 推广奖励 -->
-                                <p class="h4">推广奖励</p>
+                                <!-- 社群出金 -->
+                                <p class="h4">社群出金</p>
                             </div>
                             <div class="col">
-                                <p class="h2 text-right"> {{ stat.affiliate.toFixed(8) }}
-                                    <eth-icon :svg-class="'l-tag-svg ethglow'"></eth-icon>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="row nomarginb">
-                            <div class="col-auto">
-                                <!-- 当前收入 -->
-                                <p class="h4">{{$t('index.currentIncome')}}</p>
-                            </div>
-                            <div class="col">
-                                <p class="h2 text-right"> {{ stat.wallet.toFixed(8) }}
+                                <p class="h2 text-right glow ethglitch"> {{ stat.affiliate.toFixed(8) }}
                                     <eth-icon :svg-class="'l-tag-svg ethglow'"></eth-icon>
                                 </p>
                             </div>
