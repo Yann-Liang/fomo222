@@ -94,42 +94,50 @@
                         </b-button>
                     </div>
                     <div v-if="active==4" class="jumbotron jumbotron-adjust teamscore">
-                        <p class="h4 text-center">组织图</p>
-                        <hr/>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col" class="borderchange"></th>
-                                    <th scope="col" class="borderchange text-center">第一代</th>
-                                    <th scope="col" class="borderchange tright">购买数额(ETH)</th>
-                                </tr>
-                            </thead>
-                            <tr>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                            </tr>
-                            <tbody>
-
-                            </tbody>
-                        </table>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col" class="borderchange"></th>
-                                    <th scope="col" class="borderchange text-center">第一代</th>
-                                    <th scope="col" class="borderchange tright">购买数额(ETH)</th>
-                                </tr>
-                            </thead>
-                            <tr>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                            </tr>
-                            <tbody>
-
-                            </tbody>
-                        </table>
+                        <div class="row nomarginb">
+                            <div class="col-auto">
+                                <p class="h4">{{$t('index.haveEgg')}}</p>
+                            </div>
+                            <div class="col">
+                                <p class="h2 text-right"> {{ stat.player_keys.toFixed(8) }}
+                                    <key-icon :svg-class="'l-svg-key1 ethglow'"></key-icon>
+                                    <!-- <embed src="http://dnf.sdcslog.com/img/egg2.svg" width="25" height="25" type="image/svg+xml" pluginspage="http://www.adobe.com/svg/viewer/install/" /> -->
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row nomarginb">
+                            <div class="col-auto">
+                                <!-- 幸运大奖 -->
+                                <p class="h4">{{$t('index.currentPrizePool')}}</p>
+                            </div>
+                            <div class="col">
+                                <p class="h2 text-right glow ethglitch"> {{ stat.win.toFixed(8) }}
+                                    <eth-icon :svg-class="'l-tag-svg ethglow'"></eth-icon>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row nomarginb">
+                            <div class="col-auto">
+                                <!-- 推广奖励 -->
+                                <p class="h4">推广奖励</p>
+                            </div>
+                            <div class="col">
+                                <p class="h2 text-right"> {{ stat.affiliate.toFixed(8) }}
+                                    <eth-icon :svg-class="'l-tag-svg ethglow'"></eth-icon>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row nomarginb">
+                            <div class="col-auto">
+                                <!-- 当前收入 -->
+                                <p class="h4">{{$t('index.currentIncome')}}</p>
+                            </div>
+                            <div class="col">
+                                <p class="h2 text-right"> {{ stat.wallet.toFixed(8) }}
+                                    <eth-icon :svg-class="'l-tag-svg ethglow'"></eth-icon>
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </b-col>
             </b-row>

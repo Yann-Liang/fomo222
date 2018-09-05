@@ -31,13 +31,13 @@
                         <div class="col-sm-1.5 no-mobile" style="padding-left: 10px">
                             <!-- <embed src="http://dnf.sdcslog.com/img/egg2.svg" width="25" height="25" type="image/svg+xml" pluginspage="http://www.adobe.com/svg/viewer/install/" style="margin: 0 0 -5px -5px;" /> -->
                             <key-icon :svg-class="'l-svg-key ethglow'"></key-icon>
-                             1x
+                            1x
                         </div>
                         <div class="col-sm-11">
                             <span style="margin-right: 0rem;margin-left: -1rem" class="only-mobile mobile-text">
                                 <!-- <embed src="http://dnf.sdcslog.com/img/egg2.svg" width="25" height="25" type="image/svg+xml" pluginspage="http://www.adobe.com/svg/viewer/install/" style="margin: 0 0 -5px -5px;" /> -->
                                 <key-icon :svg-class="'l-svg-key ethglow'"></key-icon>
-                                 1x
+                                1x
                             </span>{{slogan}}
                         </div>
                     </div>
@@ -122,9 +122,31 @@
                             </span>
                         </p>
                         <p class="h5">次数倒数：{{stat.luckCounter}}/{{stat.nextLucky}}</p>
+                        <p class="h4 clearfix" @click="showOrHide">
+                            <i class="iconfont fl icon-show" :class="show?'icon-up':'icon-down'"></i>
+                            25彩池榜单</p>
+                        <div v-if="show">
+                            <hr/>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="borderchange">{{$t('index.round')}}</th>
+                                        <th scope="col" class="borderchange text-center">{{$t('index.winner')}}</th>
+                                        <th scope="col" class="borderchange tright">{{$t('index.prizePool')}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="(data,index) in luckies" :key="index">
+                                        <td scope="row" class="playername truncate"> {{ data.lucky }}</td>
+                                        <td class="text-center">{{ data.player.substr(0, 15) + '...' }}</td>
+                                        <td class="tright">{{ data.value.toFixed(8) }} ETH</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </b-col>
-                <b-col class="text-center" cols="12" sm="6" xl="6" align-self="center">
+                <b-col class="text-center" cols="12" sm="6" xl="6" align-self="top">
                     <div class="jumbotron jumbotron-adjust teamscore">
                         <div class="row nomarginb">
                             <div class="col-auto">
@@ -167,7 +189,7 @@
                     </div>
                 </b-col>
             </b-row>
-            <b-row>
+            <!-- <b-row>
                 <b-col class="text-center" cols="1" sm="1" xl="1" align-self="top">
                     <i>图标</i>
                 </b-col>
@@ -191,7 +213,7 @@
                         </tbody>
                     </table>
                 </b-col>
-            </b-row>
+            </b-row> -->
         </b-container>
 
         <b-modal ref="myModal" hide-footer>
@@ -264,7 +286,7 @@ const utils = require('@/lib/utils');
 // const errors = require('@/lib/errors')
 const fp3d = require('@/lib/fomo222');
 const api = require('@/api/backend');
-const backend = require('@/api/backend')
+const backend = require('@/api/backend');
 const {getCurrentUrl, getUrlParms} = require('@/lib/tools');
 
 import ethIcon from '@/components/icon/eth-icon';
@@ -273,7 +295,7 @@ import piggyIcon from '@/components/icon/piggy-icon';
 import tabHeader from '@/components/tab-header/index.vue';
 import operationModal from '@/components/modal/operation-modal.vue';
 import conNav from '@/components/nav/nav.vue';
-import { error } from 'util';
+import {error} from 'util';
 
 export default {
     //组件名
@@ -351,14 +373,13 @@ export default {
                     class: 'w-30',
                 },
             ],
-            winners: [
-                {round: 0, winner: '0x11111111111', amount: 0.777777777}
-                ],
+            winners: [{round: 0, winner: '0x11111111111', amount: 0.777777777}],
             luckies: [],
             disabled: false,
             loadingMsg: '加载中...',
             contract_url:
                 'https://etherscan.io/address/0x46990b06EB818C33c776FAf3bB6a85Dd7C38a161',
+                show:false,
         };
     },
     computed: {
@@ -418,10 +439,7 @@ export default {
                 this.buy_keys = 1;
                 return this.cal_buy()
                     .then(_cost => {
-                        return this.context.fp3d.buy(
-                            _cost,
-                            this.referer
-                        )
+                        return this.context.fp3d.buy(_cost, this.referer);
                     })
                     .then(tx => {
                         this.$refs.myModal.hide();
@@ -433,38 +451,39 @@ export default {
         },
         fp3dStat(address) {
             // 重新获取round，keyTh，bonus，wallet等信息
-            return this.context.fp3d.stat(address).then(_stat => {
-                this.stat = Object.assign(this.stat, _stat);
-                this.stat.ref_url = `${getCurrentUrl()}?r=${this.stat.id}`;
-                this.stat.winner_link = ethEnv.contractOnEtherscan(
-                    this.stat.winner,
-                )
-                return backend.luckies()
-                .catch(err => {
-                    return []
+            return this.context.fp3d
+                .stat(address)
+                .then(_stat => {
+                    this.stat = Object.assign(this.stat, _stat);
+                    this.stat.ref_url = `${getCurrentUrl()}?r=${this.stat.id}`;
+                    this.stat.winner_link = ethEnv.contractOnEtherscan(
+                        this.stat.winner,
+                    );
+                    return backend.luckies().catch(err => {
+                        return [];
+                    });
                 })
-            }).then(_luckies => {
-                this.luckies = _luckies.map(l => {
-                    return {
-                        lucky: l.lucky,
-                        value: l.amount / Math.pow(10, 18),
-                        player: l.buyer
-                    }
-                })
-            })
+                .then(_luckies => {
+                    this.luckies = _luckies.map(l => {
+                        return {
+                            lucky: l.lucky,
+                            value: l.amount / Math.pow(10, 18),
+                            player: l.buyer,
+                        };
+                    });
+                });
         },
         cal_buy() {
             let keys = this.buy_keys;
             if (keys <= 0) {
                 alert(`购买数量错误`);
                 // this.$alert(`购买数量错误`);
-                return Promise.reject(`购买数量错误`)
+                return Promise.reject(`购买数量错误`);
             } else {
-                return this.priceForKeys(keys)
-                    .then(_price => {
-                        this.buy_cost = _price.dividedBy(10 ** 18).toNumber()
-                        return _price
-                    })
+                return this.priceForKeys(keys).then(_price => {
+                    this.buy_cost = _price.dividedBy(10 ** 18).toNumber();
+                    return _price;
+                });
             }
         },
         _p(n) {
@@ -478,7 +497,7 @@ export default {
             this.$refs.myModal.show();
             return this.cal_buy()
                 .then(_price => {
-                    return this.context.fp3d.buy(_price, this.referer)
+                    return this.context.fp3d.buy(_price, this.referer);
                 })
                 .then(tx => {
                     this.$refs.myModal.hide();
@@ -489,28 +508,28 @@ export default {
         },
         reload() {
             this.$refs.myModal.show();
-            return this.context.fp3d.totalProfit(this.context.address)
+            return this.context.fp3d
+                .totalProfit(this.context.address)
                 .then(_profit => {
-                    return this.cal_buy()
-                        .then(_cost => {
-                            if (_cost.gt(_profit)) {
-                                return Promise.reject(`不够`)
-                            } else {
-                                return _cost
-                            }
-                        })
+                    return this.cal_buy().then(_cost => {
+                        if (_cost.gt(_profit)) {
+                            return Promise.reject(`不够`);
+                        } else {
+                            return _cost;
+                        }
+                    });
                 })
                 .then(_cost => {
-                    return this.context.fp3d.reloadKeys(_cost, this.referer)
+                    return this.context.fp3d.reloadKeys(_cost, this.referer);
                 })
                 .then(tx => {
-                    console.log(`reload tx hash ${tx}`)
-                    this.$refs.myModal.hide()
+                    console.log(`reload tx hash ${tx}`);
+                    this.$refs.myModal.hide();
                 })
                 .catch(err => {
-                    console.log(`reload fail`, err)
-                    this.$refs.myModal.hide()
-                })
+                    console.log(`reload fail`, err);
+                    this.$refs.myModal.hide();
+                });
         },
         withdrawal() {
             this.$refs.myModal.show();
@@ -540,15 +559,15 @@ export default {
             this.cal_buy();
         },
         priceForKeys(keysCount) {
-            return this.context.fp3d.priceForKeys(
-                keysCount,
-                0
-            )
+            return this.context.fp3d.priceForKeys(keysCount, 0);
         },
-        navClick(type){
+        navClick(type) {
             // if(type=='invite'){
             //     this.refere='-1'?alert('弹出提示他注册邀请链接'):alert('显示他当前的链接');
             // }
+        },
+        showOrHide(){
+            return this.show=!this.show;
         }
     },
     created() {
@@ -556,10 +575,10 @@ export default {
             .Init(window.web3)
             .then(cxt => {
                 this.context = cxt;
-                return fp3d.getFp222(this.context.web3)
+                return fp3d.getFp222(this.context.web3);
             })
             .then(fomo222 => {
-                this.context.fp3d = fomo222
+                this.context.fp3d = fomo222;
                 this.context.fp3d.remainSeconds().then(_timestamp => {
                     this.diff = _timestamp;
                     this.diffToTime();
@@ -600,13 +619,11 @@ export default {
                     'withdrawFee',
                     'minimumWithdraw',
                     'roundTime',
-                    'timeIncrease'
-                ].forEach(
-                    prop => {
-                        this.params[prop] =
-                            this.context.fp3d.params[prop].toNumber() / 10;
-                    },
-                );
+                    'timeIncrease',
+                ].forEach(prop => {
+                    this.params[prop] =
+                        this.context.fp3d.params[prop].toNumber() / 10;
+                });
                 return this.fp3dStat(this.context.address);
             })
             .then(() => {
@@ -616,8 +633,8 @@ export default {
                 }, 10 * 1000);
             })
             .then(() => {
-                this.buy_keys = 1
-                return this.cal_buy()
+                this.buy_keys = 1;
+                return this.cal_buy();
             })
             .then(() => {
                 /*
@@ -658,8 +675,11 @@ export default {
 .buy-item {
     margin-bottom: 2rem;
 }
-.buy-keys {
-    //  padding: 0.688rem 0.75rem;
+// .buy-keys {
+//       padding: 0.688rem 0.75rem;
+// }
+.icon-show{
+    margin: 6px 0 0;
 }
 .unit-price {
     margin-bottom: 0;
@@ -829,7 +849,7 @@ button.buyOneTicket {
     border-radius: 5px;
 }
 table.table {
-    td{
+    td {
         padding-left: 0;
         padding-right: 0;
     }
