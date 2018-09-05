@@ -9,8 +9,7 @@
                 <b-col class="no-mobile" cols="0" sm="2" xl="2">
                     <b-nav vertical>
                         <b-nav-item :active="active==1" @click="changeTab(1)">邀请好友</b-nav-item>
-                        <b-nav-item :active="active==2" @click="changeTab(2)">钱包管理</b-nav-item>
-                        <b-nav-item :active="active==3" @click="changeTab(3)">资金历史</b-nav-item>
+                        <b-nav-item :active="active==3" @click="changeTab(3)">钱包详情</b-nav-item>
                         <b-nav-item :active="active==4" @click="changeTab(4)">社群</b-nav-item>
                     </b-nav>
                 </b-col>
@@ -31,10 +30,6 @@
                                 {{$t('index.createPromotionLink')}}
                             </b-button>
                         </div>
-                    </div>
-                    <div v-if="active==2" class="jumbotron jumbotron-adjust teamscore">
-                        钱包管理
-
                     </div>
                     <div v-if="active==3" class="jumbotron jumbotron-adjust teamscore">
                         <div class="row nomarginb">
