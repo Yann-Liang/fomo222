@@ -162,6 +162,7 @@ export default {
                 round_eth: 0,
                 round_keys: 0,
                 lucky: 0,                
+                profit: 0,
                 mask: 0,
                 winner: null,
                 winner_link: null,

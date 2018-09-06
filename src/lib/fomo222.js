@@ -166,12 +166,12 @@ Fomo222.prototype.stat = function(address) {
             // stat.wallet = _player[1].dividedBy(Math.pow(10, 18)).toNumber()
             stat.affiliate = _player[3].dividedBy(Math.pow(10, 18)).toNumber()
             stat.win = _player[5].dividedBy(Math.pow(10, 18)).toNumber()
-            stat.lucky = _player[7].dividedBy(Math.pow(10, 18)).toNumber()
             return self.c.playerRoundData(address, stat.currentRound)
           })
           .then(_playerRound => {
             stat.player_eth = _playerRound[0].dividedBy(Math.pow(10, 18)).toNumber()
             stat.player_keys = _playerRound[1].dividedBy(stat.decimals).toNumber()
+            stat.lucky = _player[7].dividedBy(Math.pow(10, 18)).toNumber()
             return self.c.profit(address)
           })
           .then(_profit => {

@@ -39,6 +39,9 @@ FOMO222
   NETWORK=3 node server/scripts/event_logger.js   // 测试网络NETWORK 3, 正式网络 NETWORK 1，
 ```
 
+5. 配置server api
+
+* 请参照 config/prod.env.js 修改线上server的地址
 ------------------------------------
 
 # 数据库相关

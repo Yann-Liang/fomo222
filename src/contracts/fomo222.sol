@@ -106,10 +106,6 @@ contract F3d is F3Devents {
     uint256 walletTotal;        //get from spread won't be reset
     uint256 affiliate;          //get from reference
     uint256 affilicateTotal;    //statistic about affilicate, won't be reset
-    uint256 win;                //get from winning
-    uint256 winTotal;           //get from winning total
-    uint256 lucky;              //eth get from lucky
-    uint256 luckyTotal;         //get from lucky
     uint256 referer;            //who introduced this player
   }
   
@@ -238,7 +234,7 @@ contract F3d is F3Devents {
         uint256 referer;       //who introduced this player
         uint256 lucky;   
         */
-      return masked.add(player.wallet).add(player.affiliate).add(player.win).add(player.lucky);
+      return masked.add(player.wallet).add(player.affiliate);
   }
 
   function profit(address _pAddr) public view returns (uint256) {
@@ -293,7 +289,7 @@ contract F3d is F3Devents {
       gameRound.finalized = true;
       uint256 pool2Next = 0;
       if(gameRound.winner != address(0)) {
-        players[gameRound.winner].win = gameRound.pool.add(players[gameRound.winner].win);
+        // players[gameRound.winner].win = gameRound.pool.add(players[gameRound.winner].win);
         playerRoundData[gameRound.winner][_round].win = gameRound.pool.add(playerRoundData[gameRound.winner][_round].win);
 
         emit Winner(gameRound.winner, _round, gameRound.pool);
@@ -363,7 +359,7 @@ contract F3d is F3Devents {
               // if one has bought more than 10 keys
               current.luckyCounter = current.luckyCounter.add(1);
               if(current.luckyCounter >= current.nextLucky) {
-                  players[_pAddr].lucky = current.luckyPool.add(players[_pAddr].lucky);
+                  // players[_pAddr].lucky = current.luckyPool.add(players[_pAddr].lucky);
                   playerRoundData[_pAddr][_round].lucky = current.luckyPool.add(playerRoundData[_pAddr][_round].lucky);
                   
                   emit Lucky(_pAddr, _round, current.nextLucky, current.luckyPool);
@@ -463,9 +459,7 @@ contract F3d is F3Devents {
       PlayerStatus storage player = players[_pAddr];
       
       uint256 earnings = player.wallet
-        .add(player.affiliate)
-        .add(player.win)
-        .add(player.lucky);
+        .add(player.affiliate);
        /*
           address addr;          //player addr
 
@@ -479,8 +473,6 @@ contract F3d is F3Devents {
         */
       player.wallet = 0;
       player.affiliate = 0;
-      player.win = 0;
-      player.lucky = 0;
       for(uint256 i = 0; i <= 0; i ++) {
           uint256 roundEarnings = reloadRound(_pAddr, i);
           earnings = earnings.add(roundEarnings);
