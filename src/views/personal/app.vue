@@ -82,6 +82,17 @@
                                 </p>
                             </div>
                         </div>
+                        <div class="row nomarginb">
+                            <div class="col-auto">
+                                <!-- 游戏余额 -->
+                                <p class="h4">游戏余额</p>
+                            </div>
+                            <div class="col">
+                                <p class="h2 text-right"> {{ stat.wallet.toFixed(8) }}
+                                    <eth-icon :svg-class="'l-tag-svg ethglow'"></eth-icon>
+                                </p>
+                            </div>
+                        </div>
                         <!-- 一键提现 -->
                         <b-button size="lg" class="btn-purp btn-block btn-lg ticketProcess" @click="withdrawal">
                             {{$t('index.oneClickCash')}}&nbsp;{{ this.stat.profit.toFixed(8) }}
@@ -161,7 +172,7 @@ export default {
                 dicimals: 1000000,
                 round_eth: 0,
                 round_keys: 0,
-                lucky: 0,                
+                lucky: 0,
                 mask: 0,
                 winner: null,
                 winner_link: null,
