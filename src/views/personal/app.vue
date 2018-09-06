@@ -84,6 +84,17 @@
                         </div>
                         <div class="row nomarginb">
                             <div class="col-auto">
+                                <!-- 25大彩 -->
+                                <p class="h4">25大彩</p>
+                            </div>
+                            <div class="col">
+                                <p class="h2 text-right"> {{ stat.wallet.toFixed(8) }}
+                                    <eth-icon :svg-class="'l-tag-svg ethglow'"></eth-icon>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row nomarginb">
+                            <div class="col-auto">
                                 <!-- 游戏余额 -->
                                 <p class="h4">游戏余额</p>
                             </div>
