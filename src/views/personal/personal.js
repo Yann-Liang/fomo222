@@ -18,7 +18,6 @@ import apiService from '@/services/API-service';
 import BootstrapVue from 'bootstrap-vue';
 import BlockUI from 'vue-blockui';
 
-
 Vue.use(BlockUI)
 Vue.use(VueI18n);
 // Vue.use(ElementUI);

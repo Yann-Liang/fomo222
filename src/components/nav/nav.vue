@@ -13,7 +13,8 @@
                 </b-navbar-nav>
                 <b-navbar-nav class="ml-auto">
                     <b-nav-item class="nav-link-purp-on nav-link-purp" href="javascript:void(0);" @click="navClick('invite')">邀请链接</b-nav-item>
-                    <b-nav-item class="nav-link-purp-on nav-link-purp" href="javascript:void(0);" @click="navClick('community')">社群</b-nav-item>
+                    <!-- <b-nav-item class="nav-link-purp-on nav-link-purp" href="javascript:void(0);" @click="navClick('community')">社群</b-nav-item> -->
+                    <b-nav-item class="nav-link-purp-on nav-link-purp" :href="'./community.html?r='+refId">社群</b-nav-item>
                     <b-nav-item class="nav-link-purp-on nav-link-purp no-mobile" :href="'./personal.html?r='+refId">个人中心</b-nav-item>
                     <b-nav-item-dropdown class="nav-link-purp-on nav-link-purp only-mobile" text="个人中心" extra-toggle-classes="nav-link-custom">
                         <b-dropdown-item @click="changeTab(1)">邀请好友</b-dropdown-item>
