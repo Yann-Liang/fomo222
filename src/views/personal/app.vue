@@ -95,7 +95,7 @@
                             </div>
                             <div class="col">
                                 <p class="h2 text-right"> {{ stat.g_players.toFixed(8) }}
-                                    <i class="iconfont icon-renqun" style="font-size:1.6rem;"></i>
+                                    <i class="iconfont icon-renqun ethglow" style="font-size:1.6rem;"></i>
                                 </p>
                             </div>
                         </div>
