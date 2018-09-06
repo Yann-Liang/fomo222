@@ -8,7 +8,7 @@
             <b-collapse is-nav id="nav_collapse">
                 <b-navbar-nav>
                     <b-nav-item class="nav-link-purp-on nav-link-purp" :href="'./index.html?r='+refId">首页</b-nav-item>
-                    <b-nav-item class="nav-link-purp-on nav-link-purp" href="#" disabled>公告</b-nav-item>
+                    <b-nav-item class="nav-link-purp-on nav-link-purp" :href="'./notice.html?r='+refId">公告</b-nav-item>
                     <b-nav-item class="nav-link-purp-on nav-link-purp" :href="contract" target="_blank">智能合约</b-nav-item>
                 </b-navbar-nav>
                 <b-navbar-nav class="ml-auto">
