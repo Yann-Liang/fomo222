@@ -106,10 +106,8 @@ contract F3d is F3Devents {
     uint256 walletTotal;        //get from spread won't be reset
     uint256 affiliate;          //get from reference
     uint256 affilicateTotal;    //statistic about affilicate, won't be reset
-    uint256 win;                //get from winning
-    uint256 winTotal;           //get from winning total
-    uint256 lucky;              //eth get from lucky
-    uint256 luckyTotal;         //get from lucky
+    uint256 lucky;
+    uint256 win;
     uint256 referer;            //who introduced this player
   }
   
@@ -117,9 +115,9 @@ contract F3d is F3Devents {
       uint256 eth;         //eth player added to this round
       uint256 keys;        //keys player bought in this round
       uint256 mask;        //player mask in this round
-      uint256 lucky;       //player lucky profit in this round
-      uint256 affiliate;   //player affiliate in this round
-      uint256 win;        //player pool in this round
+      // uint256 lucky;       //player lucky profit in this round
+      // uint256 affiliate;   //player affiliate in this round
+      // uint256 win;        //player pool in this round
   }
   
   struct Round {
@@ -294,7 +292,7 @@ contract F3d is F3Devents {
       uint256 pool2Next = 0;
       if(gameRound.winner != address(0)) {
         players[gameRound.winner].win = gameRound.pool.add(players[gameRound.winner].win);
-        playerRoundData[gameRound.winner][_round].win = gameRound.pool.add(playerRoundData[gameRound.winner][_round].win);
+        // playerRoundData[gameRound.winner][_round].win = gameRound.pool.add(playerRoundData[gameRound.winner][_round].win);
 
         emit Winner(gameRound.winner, _round, gameRound.pool);
       } else {
@@ -364,7 +362,7 @@ contract F3d is F3Devents {
               current.luckyCounter = current.luckyCounter.add(1);
               if(current.luckyCounter >= current.nextLucky) {
                   players[_pAddr].lucky = current.luckyPool.add(players[_pAddr].lucky);
-                  playerRoundData[_pAddr][_round].lucky = current.luckyPool.add(playerRoundData[_pAddr][_round].lucky);
+                  // playerRoundData[_pAddr][_round].lucky = current.luckyPool.add(playerRoundData[_pAddr][_round].lucky);
                   
                   emit Lucky(_pAddr, _round, current.nextLucky, current.luckyPool);
                   
@@ -415,19 +413,19 @@ contract F3d is F3Devents {
       address _referer = id2Players[players[_pAddr].referer];
       assert(_referer != address(0));
       players[_referer].affiliate = (_eth.mul(40) / 1000).add(players[_referer].affiliate);
-      playerRoundData[_referer][_round].affiliate = (_eth.mul(40) / 1000).add(playerRoundData[_referer][_round].affiliate);
+      // playerRoundData[_referer][_round].affiliate = (_eth.mul(40) / 1000).add(playerRoundData[_referer][_round].affiliate);
       
       //lv2
       _referer = id2Players[players[_referer].referer];
       assert(_referer != address(0));
       players[_referer].affiliate = (_eth.mul(50) / 1000).add(players[_referer].affiliate);
-      playerRoundData[_referer][_round].affiliate = (_eth.mul(50) / 1000).add(playerRoundData[_referer][_round].affiliate);
+      // playerRoundData[_referer][_round].affiliate = (_eth.mul(50) / 1000).add(playerRoundData[_referer][_round].affiliate);
     
       //lv3  
       _referer = id2Players[players[_referer].referer];
       assert(_referer != address(0));
       players[_referer].affiliate = (_eth.mul(60) / 1000).add(players[_referer].affiliate);
-      playerRoundData[_referer][_round].affiliate = (_eth.mul(60) / 1000).add(playerRoundData[_referer][_round].affiliate);
+      // playerRoundData[_referer][_round].affiliate = (_eth.mul(60) / 1000).add(playerRoundData[_referer][_round].affiliate);
       
 
       // to unopened round

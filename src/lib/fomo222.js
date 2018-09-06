@@ -163,19 +163,24 @@ Fomo222.prototype.stat = function(address) {
         stat.id = _id.toNumber()
         return self.c.players(address)
           .then(_player => {
-            // stat.wallet = _player[1].dividedBy(Math.pow(10, 18)).toNumber()
+            stat.wallet = _player[1].dividedBy(Math.pow(10, 18)).toNumber()
             stat.affiliate = _player[3].dividedBy(Math.pow(10, 18)).toNumber()
-            stat.win = _player[5].dividedBy(Math.pow(10, 18)).toNumber()
+            stat.lucky = _player[5].dividedBy(Math.pow(10, 18)).toNumber()
+            stat.win = _player[6].dividedBy(Math.pow(10, 18)).toNumber()
+            // stat.wallet = _player[1].dividedBy(Math.pow(10, 18)).toNumber()
+            // stat.win = _player[5].dividedBy(Math.pow(10, 18)).toNumber()
             return self.c.playerRoundData(address, stat.currentRound)
           })
           .then(_playerRound => {
             stat.player_eth = _playerRound[0].dividedBy(Math.pow(10, 18)).toNumber()
             stat.player_keys = _playerRound[1].dividedBy(stat.decimals).toNumber()
-            return self.c.profit(address)
+            // stat.lucky = _playerRound[3].dividedBy(Math.pow(10, 18)).toNumber()
+            // stat.win = _playerRound[5].dividedBy(Math.pow(10, 18)).toNumber()
+            return self.c.totalProfit(address)
           })
           .then(_profit => {
             stat.profit = _profit.dividedBy(Math.pow(10, 18)).toNumber()
-            stat.wallet = stat.profit - stat.affiliate - stat.win
+            stat.spread = stat.profit - stat.lucky - stat.win - stat.wallet - stat.affiliate
           })
       }
     })

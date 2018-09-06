@@ -18,6 +18,8 @@ import apiService from '@/services/API-service';
 import BootstrapVue from 'bootstrap-vue';
 import BlockUI from 'vue-blockui'
 
+// window.Web3=require('@/lib/web3.min.js');
+
 Vue.use(BlockUI)
 Vue.use(VueI18n);
 // Vue.use(ElementUI);
