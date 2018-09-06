@@ -166,6 +166,7 @@ Fomo222.prototype.stat = function(address) {
             // stat.wallet = _player[1].dividedBy(Math.pow(10, 18)).toNumber()
             stat.affiliate = _player[3].dividedBy(Math.pow(10, 18)).toNumber()
             stat.win = _player[5].dividedBy(Math.pow(10, 18)).toNumber()
+            stat.lucky = _player[7].dividedBy(Math.pow(10, 18)).toNumber()
             return self.c.playerRoundData(address, stat.currentRound)
           })
           .then(_playerRound => {
