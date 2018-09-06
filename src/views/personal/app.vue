@@ -46,10 +46,10 @@
                         <div class="row nomarginb">
                             <div class="col-auto">
                                 <!-- 幸运大奖 -->
-                                <p class="h4">{{$t('index.currentPrizePool')}}</p>
+                                <p class="h4">{{$t('index.pWin')}}</p>
                             </div>
                             <div class="col">
-                                <p class="h2 text-right"> {{ stat.lucky.toFixed(8) }}
+                                <p class="h2 text-right"> {{ stat.win.toFixed(8) }}
                                     <eth-icon :svg-class="'l-tag-svg ethglow'"></eth-icon>
                                 </p>
                             </div>
@@ -77,7 +77,7 @@
                                 <p class="h4">{{$t('index.currentIncome')}}</p>
                             </div>
                             <div class="col">
-                                <p class="h2 text-right"> {{ stat.wallet.toFixed(8) }}
+                                <p class="h2 text-right"> {{ stat.spread.toFixed(8) }}
                                     <eth-icon :svg-class="'l-tag-svg ethglow'"></eth-icon>
                                 </p>
                             </div>
@@ -161,19 +161,22 @@ export default {
                 dicimals: 1000000,
                 round_eth: 0,
                 round_keys: 0,
+
                 lucky: 0,                
                 profit: 0,
+                win: 0,
+                wallet: 0,
+                spread: 0,
+                affiliate: 0,
+
                 mask: 0,
                 winner: null,
                 winner_link: null,
                 pool: 0,
                 id: -1,
+
                 player_eth: 0,
                 player_keys: 0,
-                profit: 0,
-                win: 0,
-                wallet: 0,
-                affiliate: 0,
                 g_players: 0,
                 g_buy: 0,
                 g_withdrawal: 0

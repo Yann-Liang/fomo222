@@ -181,7 +181,7 @@
                                 <p class="h4">{{$t('index.currentIncome')}}</p>
                             </div>
                             <div class="col">
-                                <p class="h2 text-right"> {{ this.stat.profit.toFixed(8) }}
+                                <p class="h2 text-right"> {{ this.stat.spread.toFixed(8) }}
                                     <eth-icon :svg-class="'l-tag-svg ethglow'"></eth-icon>
                                 </p>
                             </div>
@@ -330,6 +330,7 @@ export default {
                 win: 0,
                 wallet: 0,
                 affiliate: 0,
+                spread: 0,
             },
             params: {
                 ta: 37.5,

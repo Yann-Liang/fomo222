@@ -24,6 +24,7 @@ export default {
         promotionIncentive: `推广奖励`,
         oneClickCash: `一键提现`,
         currentPrizePool: `幸运大奖`,
+        pWin: `幸运大奖`,
         total: `一共`,
         currentIncome:`分红收益`,
         rankingList: `排行榜`,
