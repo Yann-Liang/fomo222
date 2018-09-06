@@ -48,9 +48,9 @@ exports.fp3dM_deploy = {
 }
 
 exports.fomo222 = {
-  '3': '0xf7232016a474385ad94b8e55f444896ef5726b74'
+  '3': '0x5f027712fe2da6ebf6a68f602ac5e0d8b34ce0a3'
 }
 
 exports.fomo222_deploy = {
-  '3': 3971055
+  '3': 3983542
 }
