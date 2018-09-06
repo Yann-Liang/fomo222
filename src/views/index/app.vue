@@ -216,7 +216,7 @@
             </b-row> -->
         </b-container>
 
-        <b-modal ref="myModal" hide-footer>
+        <b-modal ref="myModal" hide-footer title="交易进行中" style="color:#000;">
             <div class="d-block text-center">
                 <!-- 请在metamask中完成交易 -->
                 <h3>{{$t('index.pleaceFinishTrade')}}</h3>

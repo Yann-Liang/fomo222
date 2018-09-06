@@ -119,9 +119,9 @@ async function initBuyEvents(fp3d, latest) {
 }
 
 async function initWithdrawalEvents(fp3d, latest) {
-  let fromBlock = await Store.curBlock(EVENTS.BUY, NETWORK)
+  let fromBlock = await Store.curBlock(EVENTS.WITHDRAWAL, NETWORK)
   if (fromBlock === 0) {
-    fromBlock = await Store.startBlock(EVENTS.BUY, NETWORK)
+    fromBlock = await Store.startBlock(EVENTS.WITHDRAWAL, NETWORK)
   }
 
   return fp3d.getPastEvents('Withdrawal', { fromBlock, toBlock:latest})

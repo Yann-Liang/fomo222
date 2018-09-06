@@ -19,7 +19,7 @@ export default {
         eggHatching: `彩蛋孵化`,
         eggWillHatching:`彩蛋即将孵化`,
         myEarnings:`我的收益`,
-        pleaceFinishTrade: `请在metamask中完成交易`,
+        pleaceFinishTrade: `请完成以太坊交易`,
         bonus: `分红`,
         promotionIncentive: `推广奖励`,
         oneClickCash: `一键提现`,

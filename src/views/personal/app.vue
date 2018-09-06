@@ -82,6 +82,28 @@
                                 </p>
                             </div>
                         </div>
+                        <div class="row nomarginb">
+                            <div class="col-auto">
+                                <!-- 25大彩 -->
+                                <p class="h4">25大彩</p>
+                            </div>
+                            <div class="col">
+                                <p class="h2 text-right"> {{ stat.lucky.toFixed(8) }}
+                                    <eth-icon :svg-class="'l-tag-svg ethglow'"></eth-icon>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row nomarginb">
+                            <div class="col-auto">
+                                <!-- 游戏余额 -->
+                                <p class="h4">游戏余额</p>
+                            </div>
+                            <div class="col">
+                                <p class="h2 text-right"> {{ stat.wallet.toFixed(8) }}
+                                    <eth-icon :svg-class="'l-tag-svg ethglow'"></eth-icon>
+                                </p>
+                            </div>
+                        </div>
                         <!-- 一键提现 -->
                         <b-button size="lg" class="btn-purp btn-block btn-lg ticketProcess" @click="withdrawal">
                             {{$t('index.oneClickCash')}}&nbsp;{{ this.stat.profit.toFixed(8) }}
@@ -94,7 +116,7 @@
                                 <p class="h4">团员统计</p>
                             </div>
                             <div class="col">
-                                <p class="h2 text-right"> {{ stat.g_players.toFixed(8) }}
+                                <p class="h2 text-right"> {{ stat.g_players }}
                                     <i class="iconfont icon-renqun ethglow" style="font-size:1.6rem;"></i>
                                 </p>
                             </div>
@@ -243,7 +265,7 @@ export default {
             return this.context.fp3d.register(this.referer)
         },
         withdrawal(){
-
+            return this.context.fp3d.withdrawal(this.context.address)
         }
     },
     //生命周期函数 请求写在created中
