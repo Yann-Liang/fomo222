@@ -3,10 +3,7 @@
         <div class="container">
             <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
             <b-navbar-brand class="navbar-brand text-center" :href="'./index.html?r='+refId">
-                <!-- FOMO<br/>222 -->
-<object data="./images/logo.svg" width="300" height="100"
-type="image/svg+xml"
-codebase="http://www.adobe.com/svg/viewer/install/" />
+                <img src="./images/logo.png" alt="" srcset="" width="42" height="42">
             </b-navbar-brand>
             <b-collapse is-nav id="nav_collapse">
                 <b-navbar-nav>
