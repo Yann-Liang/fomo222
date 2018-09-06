@@ -49,7 +49,7 @@
             <b-row>
                 <b-col class="text-center" cols="12" sm="6" align-self="center">
                     <div class="jumbotron jumbotron-adjust teamscore">
-                        <p>总彩池</p>
+                        <h4>总彩池</h4>
                         <hr/>
                         <p class="h2 glow ethglitch">
                             <span class="no-mobile">
@@ -65,7 +65,7 @@
                 </b-col>
                 <b-col class="text-center" cols="12" sm="6" align-self="center">
                     <div class="jumbotron jumbotron-adjust teamscore">
-                        <p>总投入</p>
+                        <h4>总投入</h4>
                         <hr/>
                         <p class="h2 glow ethglitch">
                             <span class="no-mobile">
@@ -122,7 +122,7 @@
                             </span>
                         </p>
                         <p class="h5">次数倒数：{{stat.luckCounter}}/{{stat.nextLucky}}</p>
-                        <p class="h4 clearfix" @click="showOrHide">
+                        <p class="h5 clearfix" @click="showOrHide" style="margin:1.2rem 0 0;">
                             <i class="iconfont fl icon-show" :class="show?'icon-up':'icon-down'"></i>
                             25彩池榜单</p>
                         <div v-if="show">

@@ -3,7 +3,10 @@
         <div class="container">
             <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
             <b-navbar-brand class="navbar-brand text-center" :href="'./index.html?r='+refId">
-                FOMO<br/>222
+                <!-- FOMO<br/>222 -->
+<object data="./images/logo.svg" width="300" height="100"
+type="image/svg+xml"
+codebase="http://www.adobe.com/svg/viewer/install/" />
             </b-navbar-brand>
             <b-collapse is-nav id="nav_collapse">
                 <b-navbar-nav>
@@ -13,6 +16,7 @@
                 </b-navbar-nav>
                 <b-navbar-nav class="ml-auto">
                     <b-nav-item class="nav-link-purp-on nav-link-purp" href="javascript:void(0);" @click="navClick('invite')">邀请链接</b-nav-item>
+                    <b-nav-item class="nav-link-purp-on nav-link-purp" href="javascript:void(0);" @click="navClick('community')">社群</b-nav-item>
                     <b-nav-item class="nav-link-purp-on nav-link-purp no-mobile" :href="'./personal.html?r='+refId">个人中心</b-nav-item>
                     <b-nav-item-dropdown class="nav-link-purp-on nav-link-purp only-mobile" text="个人中心" extra-toggle-classes="nav-link-custom">
                         <b-dropdown-item @click="changeTab(1)">邀请好友</b-dropdown-item>
@@ -58,7 +62,11 @@ export default {
         },
         navClick(type){
             this.$emit('navClick',type);
-            this.changeTab(1)
+            if(type=='community'){
+                this.changeTab(4)
+            }else if(type=='invite'){
+                this.changeTab(1)
+            }
         }
     },
     //生命周期函数 请求写在created中
