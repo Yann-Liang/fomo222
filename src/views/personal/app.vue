@@ -9,8 +9,8 @@
                 <b-col class="no-mobile" cols="0" sm="2" xl="2">
                     <b-nav vertical>
                         <b-nav-item :active="active==1" @click="changeTab(1)">邀请好友</b-nav-item>
-                        <b-nav-item :active="active==3" @click="changeTab(3)">钱包详情</b-nav-item>
-                        <b-nav-item :active="active==4" @click="changeTab(4)">社群</b-nav-item>
+                        <b-nav-item :active="active==3" @click="changeTab(3)">资金历史</b-nav-item>
+                        <b-nav-item :active="active==4" @click="changeTab(4)">团长统计</b-nav-item>
                     </b-nav>
                 </b-col>
                 <b-col cols="12" sm="10" xl="10">
@@ -49,7 +49,7 @@
                                 <p class="h4">{{$t('index.currentPrizePool')}}</p>
                             </div>
                             <div class="col">
-                                <p class="h2 text-right glow ethglitch"> {{ stat.win.toFixed(8) }}
+                                <p class="h2 text-right"> {{ stat.win.toFixed(8) }}
                                     <eth-icon :svg-class="'l-tag-svg ethglow'"></eth-icon>
                                 </p>
                             </div>
@@ -82,45 +82,45 @@
                                 </p>
                             </div>
                         </div>
-
+                        <!-- 一键提现 -->
+                        <b-button size="lg" class="btn-purp btn-block btn-lg ticketProcess" @click="withdrawal">
+                            {{$t('index.oneClickCash')}}&nbsp;{{ this.stat.profit.toFixed(8) }}
+                            <eth-icon :svg-class="'l-svg-ethbtn'"></eth-icon>
+                        </b-button>
                     </div>
                     <div v-if="active==4" class="jumbotron jumbotron-adjust teamscore">
-                        <p class="h4 text-center">组织图</p>
-                        <hr/>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col" class="borderchange"></th>
-                                    <th scope="col" class="borderchange text-center">第一代</th>
-                                    <th scope="col" class="borderchange tright">购买数额(ETH)</th>
-                                </tr>
-                            </thead>
-                            <tr>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                            </tr>
-                            <tbody>
-
-                            </tbody>
-                        </table>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col" class="borderchange"></th>
-                                    <th scope="col" class="borderchange text-center">第一代</th>
-                                    <th scope="col" class="borderchange tright">购买数额(ETH)</th>
-                                </tr>
-                            </thead>
-                            <tr>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                            </tr>
-                            <tbody>
-
-                            </tbody>
-                        </table>
+                        <div class="row nomarginb">
+                            <div class="col-auto">
+                                <p class="h4">团员统计</p>
+                            </div>
+                            <div class="col">
+                                <p class="h2 text-right"> {{ stat.g_players.toFixed(8) }}
+                                    <i class="iconfont icon-renqun" style="font-size:1.6rem;"></i>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row nomarginb">
+                            <div class="col-auto">
+                                <!-- 社群入金 -->
+                                <p class="h4">团员入金</p>
+                            </div>
+                            <div class="col">
+                                <p class="h2 text-right"> {{ stat.g_buy.toFixed(8) }}
+                                    <eth-icon :svg-class="'l-tag-svg ethglow'"></eth-icon>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row nomarginb">
+                            <div class="col-auto">
+                                <!-- 社群出金 -->
+                                <p class="h4">团员出金</p>
+                            </div>
+                            <div class="col">
+                                <p class="h2 text-right"> {{ stat.g_withdrawal.toFixed(8) }}
+                                    <eth-icon :svg-class="'l-tag-svg ethglow'"></eth-icon>
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </b-col>
             </b-row>
@@ -136,7 +136,7 @@ import ethIcon from '@/components/icon/eth-icon';
 const {getBaseUrl, getUrlParms} = require('@/lib/tools');
 const ethEnv = require('@/lib/etherEnv');
 const fp3d = require('@/lib/fomo222');
-
+const backend = require('@/api/backend')
 export default {
     //组件名
     name: 'personal',
@@ -172,6 +172,9 @@ export default {
                 win: 0,
                 wallet: 0,
                 affiliate: 0,
+                g_players: 0,
+                g_buy: 0,
+                g_withdrawal: 0
             },
             params: {
                 ta: 37.5,
@@ -234,6 +237,9 @@ export default {
         register() {
             return this.context.fp3d.register(this.referer)
         },
+        withdrawal(){
+
+        }
     },
     //生命周期函数 请求写在created中
     created() {
@@ -261,6 +267,16 @@ export default {
                     this.stat.ref_url = `${getBaseUrl()}?r=${this.stat.id}`
                 } else {
                     this.stat.id = -1
+                }
+                if (this.context.address) {
+                    return backend.gStat(this.context.network, this.context.address)
+                }
+            })
+            .then(_gstat => {
+                if(_gstat && _gstat.player) {
+                    this.stat.g_players = _gstat.refPlayers
+                    this.stat.g_buy = _gstat.refBuy / Math.pow(10, 18)
+                    this.stat.g_withdrawal = _gstat.refWithdrawal / Math.pow(10, 18)
                 }
             })
     },

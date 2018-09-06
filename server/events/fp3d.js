@@ -17,7 +17,11 @@ async function Init(fp3d, web3) {
     console.log(`gather data in new round`)
     latestBlock = await web3.eth.getBlockNumber()
     console.log(`init with latest block`, latestBlock)
-
+    await initRegisterEvents(fp3d, latestBlock)
+      .catch(err => {
+        console.log(`fail to load withdrawal events`, err)
+      })
+      
     await initReferEvents(fp3d, latestBlock)
       .catch(err => {
         console.log(`fail to load refer events`, err)
@@ -34,10 +38,7 @@ async function Init(fp3d, web3) {
       .catch(err => {
         console.log(`fail to load withdrawal events`, err)
       })
-    await initRegisterEvents(fp3d, latestBlock)
-      .catch(err => {
-        console.log(`fail to load withdrawal events`, err)
-      })
+
     await new Promise((r, j) => {
       setTimeout(r, 5 * 30 * 1000)
     })
@@ -78,7 +79,7 @@ async function initLuckyEvents(fp3d, latest) {
     .then(async events => {
       try {
           events.forEach(async eve => {
-            console.log(eve)
+            // console.log(eve)
             let block = eve.blockNumber
             let tx = eve.transactionHash
             eve = eve.returnValues
@@ -135,30 +136,6 @@ async function initWithdrawalEvents(fp3d, latest) {
             await Store.storeWithdrawalEvent(eve, block, tx, NETWORK)
           })
           return await Store.updateEventBlock(EVENTS.WITHDRAWAL, NETWORK, latest)
-      } catch (err) {
-        console.error(err)
-      }
-    })
-}
-
-async function initRefererEvents(fp3d, latest) {
-  let fromBlock = await Store.curBlock(EVENTS.REFERER, NETWORK)
-  if (fromBlock === 0) {
-    fromBlock = await Store.startBlock(EVENTS.REFERER, NETWORK)
-  }
-
-  return fp3d.getPastEvents('Referer', { fromBlock, toBlock:latest})
-    .then(async events => {
-      try {
-          events.forEach(async eve => {
-            let block = eve.blockNumber
-            let tx = eve.transactionHash
-            eve = eve.returnValues
-            let { referral, pUser } = eve
-
-            await Store.updateReferer(referral, pUser, NETWORK)
-          })
-          return await Store.updateEventBlock(EVENTS.REGISTER, NETWORK, latest)
       } catch (err) {
         console.error(err)
       }
