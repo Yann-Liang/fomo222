@@ -49,7 +49,7 @@
                                 <p class="h4">{{$t('index.currentPrizePool')}}</p>
                             </div>
                             <div class="col">
-                                <p class="h2 text-right"> {{ stat.win.toFixed(8) }}
+                                <p class="h2 text-right"> {{ stat.lucky.toFixed(8) }}
                                     <eth-icon :svg-class="'l-tag-svg ethglow'"></eth-icon>
                                 </p>
                             </div>
@@ -161,6 +161,7 @@ export default {
                 dicimals: 1000000,
                 round_eth: 0,
                 round_keys: 0,
+                lucky: 0,                
                 mask: 0,
                 winner: null,
                 winner_link: null,
