@@ -4,70 +4,102 @@
         <con-nav></con-nav>
         <!-- 导航栏 end -->
         <div class="blurryboy"> </div>
-
+        <b-container class="jumbotron rounded-0 text-light teaser-cover ">
+            <b-row class="jumbotron jumbotron-adjust teamscore">
+                <b-col v-for="(item, index) in list" :key="index" class="text-center" cols="12" sm="12" align-self="center">
+                    <h5 class="title" @click="show(item)">{{item.title}}
+                        <span class="fr">{{item.updateTime}}</span>
+                    </h5>
+                    <hr/>
+                    <div class="content" v-if="item.show" v-html="item.content"></div>
+                </b-col>
+            </b-row>
+        </b-container>
     </section>
 </template>
 
 <script>
-import apiService from '@/services/API-service';
-import conNav from '@/components/nav/nav.vue';
-import keyIcon from '@/components/icon/key-icon';
-import ethIcon from '@/components/icon/eth-icon';
-const {getBaseUrl, getUrlParms} = require('@/lib/tools');
-const ethEnv = require('@/lib/etherEnv');
-const fp3d = require('@/lib/fomo222');
+import apiService from "@/services/API-service";
+import conNav from "@/components/nav/nav.vue";
+import keyIcon from "@/components/icon/key-icon";
+import ethIcon from "@/components/icon/eth-icon";
+const { getBaseUrl, getUrlParms } = require("@/lib/tools");
+const ethEnv = require("@/lib/etherEnv");
+const fp3d = require("@/lib/fomo222");
 
 export default {
     //组件名
-    name: 'notice',
+    name: "notice",
     //实例的数据对象
     data() {
         return {
-
-        }
+            list: [
+                {
+                    title: `标题`,
+                    content: `<p>公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容</p>`,
+                    show: false,
+                    updateTime:`2018-09-09 09:09:09`,
+                },
+                {
+                    title: `标题`,
+                    content: `<p>公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容</p>`,
+                    show: false,
+                    updateTime:`2018-09-09 09:09:09`,
+                },
+                {
+                    title: `标题`,
+                    content: `<p>公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容</p>`,
+                    show: false,
+                    updateTime:`2018-09-09 09:09:09`,
+                },
+                {
+                    title: `标题`,
+                    content: `<p>公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容</p>`,
+                    show: false,
+                    updateTime:`2018-09-09 09:09:09`,
+                },
+            ],
+        };
     },
     //数组或对象，用于接收来自父组件的数据
-    props: {
-
-    },
+    props: {},
     //计算
-    computed: {
-
-    },
+    computed: {},
     //方法
     methods: {
-
+        show(item) {
+            item.show = !item.show;
+        },
     },
     //生命周期函数 请求写在created中
-    created() {
-
-    },
-    beforeMount() {
-
-    },
-    mounted() {
-
-    },
+    created() {},
+    beforeMount() {},
+    mounted() {},
     //组件
     components: {
         conNav,
     },
     //监视
-    watch: {
-
-    },
+    watch: {},
     //过滤器
-    filters:{
-
-    },
+    filters: {},
     //自定义指令
-    directive:{
-
-    }
-}
-
+    directive: {},
+};
 </script>
 
-<style lang="less">
+<style lang="less" scope>
+.title {
+    // margin: 0 auto;
+    // line-height: 1.75rem;
+    // border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    // border-top: 1px solid rgba(0, 0, 0, 0.1);
+    .fr{
+        font-size: .75rem;
+    }
+}
+.content{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
+}
 </style>
