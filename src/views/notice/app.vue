@@ -8,7 +8,10 @@
             <b-row class="jumbotron jumbotron-adjust teamscore">
                 <b-col v-for="(item, index) in list" :key="index" cols="12" sm="12" align-self="center">
                     <h5 class="title text-center" @click="show(item)">{{item.title}}
-                        <span class="fr">{{item.updateTime}}</span>
+                        <span class="fr">
+                            {{item.updateTime}}&nbsp;
+                            <i class="iconfont  icon-show" :class="item.show?'icon-up':'icon-down'"></i>
+                        </span>
                     </h5>
                     <hr/>
                     <div class="content" v-if="item.show" v-html="item.content"></div>
