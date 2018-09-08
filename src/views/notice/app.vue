@@ -6,8 +6,8 @@
         <div class="blurryboy"> </div>
         <b-container class="jumbotron rounded-0 text-light teaser-cover ">
             <b-row class="jumbotron jumbotron-adjust teamscore">
-                <b-col v-for="(item, index) in list" :key="index" class="text-center" cols="12" sm="12" align-self="center">
-                    <h5 class="title" @click="show(item)">{{item.title}}
+                <b-col v-for="(item, index) in list" :key="index" cols="12" sm="12" align-self="center">
+                    <h5 class="title text-center" @click="show(item)">{{item.title}}
                         <span class="fr">{{item.updateTime}}</span>
                     </h5>
                     <hr/>
@@ -95,11 +95,15 @@ export default {
     // border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     // border-top: 1px solid rgba(0, 0, 0, 0.1);
     .fr{
+        padding: 0.7rem 0 0;
         font-size: .75rem;
     }
 }
 .content{
+    margin: 0 0 1rem;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-
+    p{
+        text-indent: 2em;
+    }
 }
 </style>
