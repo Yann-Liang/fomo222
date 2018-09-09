@@ -4,7 +4,9 @@
         <con-nav></con-nav>
         <!-- 导航栏 end -->
         <div class="blurryboy"> </div>
-
+        <b-container class="jumbotron rounded-0 text-light teaser-cover ">
+            <iframe width="100%" min-height="850px" height="850px" src="http://editor.happy8.io/store/load/2" frameborder="0"></iframe>
+        </b-container>
     </section>
 </template>
 
