@@ -8,12 +8,13 @@
             <b-collapse is-nav id="nav_collapse">
                 <b-navbar-nav>
                     <b-nav-item class="nav-link-purp-on nav-link-purp" :href="'./index.html?r='+refId">首页</b-nav-item>
-                    <b-nav-item class="nav-link-purp-on nav-link-purp" href="#" disabled>公告</b-nav-item>
+                    <b-nav-item class="nav-link-purp-on nav-link-purp" :href="'./notice.html?r='+refId">公告</b-nav-item>
                     <b-nav-item class="nav-link-purp-on nav-link-purp" :href="contract" target="_blank">智能合约</b-nav-item>
                 </b-navbar-nav>
                 <b-navbar-nav class="ml-auto">
                     <b-nav-item class="nav-link-purp-on nav-link-purp" href="javascript:void(0);" @click="navClick('invite')">邀请链接</b-nav-item>
-                    <b-nav-item class="nav-link-purp-on nav-link-purp" href="javascript:void(0);" @click="navClick('community')">社群</b-nav-item>
+                    <!-- <b-nav-item class="nav-link-purp-on nav-link-purp" href="javascript:void(0);" @click="navClick('community')">社群</b-nav-item> -->
+                    <b-nav-item class="nav-link-purp-on nav-link-purp" :href="'./community.html?r='+refId">社群</b-nav-item>
                     <b-nav-item class="nav-link-purp-on nav-link-purp no-mobile" :href="'./personal.html?r='+refId">个人中心</b-nav-item>
                     <b-nav-item-dropdown class="nav-link-purp-on nav-link-purp only-mobile" text="个人中心" extra-toggle-classes="nav-link-custom">
                         <b-dropdown-item @click="changeTab(1)">邀请好友</b-dropdown-item>
