@@ -6,7 +6,7 @@
         <div class="blurryboy"> </div>
         <b-container class="jumbotron rounded-0 text-light teaser-cover ">
             <iframe width="100%" height="850px" src="http://editor.happy8.io/store/load/1" frameborder="0"></iframe>
-            <b-row class="jumbotron jumbotron-adjust teamscore">
+            <!-- <b-row class="jumbotron jumbotron-adjust teamscore">
                 <b-col v-for="(item, index) in list" :key="index" cols="12" sm="12" align-self="center">
                     <h5 class="title text-center" @click="show(item)">{{item.title}}
                         <span class="fr">
@@ -17,7 +17,7 @@
                     <hr/>
                     <div class="content" v-if="item.show" v-html="item.content"></div>
                 </b-col>
-            </b-row>
+            </b-row> -->
         </b-container>
     </section>
 </template>
@@ -37,32 +37,32 @@ export default {
     //实例的数据对象
     data() {
         return {
-            list: [
-                {
-                    title: `标题`,
-                    content: `<p>公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容</p>`,
-                    show: false,
-                    updateTime:`2018-09-09 09:09:09`,
-                },
-                {
-                    title: `标题`,
-                    content: `<p>公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容</p>`,
-                    show: false,
-                    updateTime:`2018-09-09 09:09:09`,
-                },
-                {
-                    title: `标题`,
-                    content: `<p>公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容</p>`,
-                    show: false,
-                    updateTime:`2018-09-09 09:09:09`,
-                },
-                {
-                    title: `标题`,
-                    content: `<p>公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容</p>`,
-                    show: false,
-                    updateTime:`2018-09-09 09:09:09`,
-                },
-            ],
+            // list: [
+            //     {
+            //         title: `标题`,
+            //         content: `<p>公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容</p>`,
+            //         show: false,
+            //         updateTime:`2018-09-09 09:09:09`,
+            //     },
+            //     {
+            //         title: `标题`,
+            //         content: `<p>公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容</p>`,
+            //         show: false,
+            //         updateTime:`2018-09-09 09:09:09`,
+            //     },
+            //     {
+            //         title: `标题`,
+            //         content: `<p>公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容</p>`,
+            //         show: false,
+            //         updateTime:`2018-09-09 09:09:09`,
+            //     },
+            //     {
+            //         title: `标题`,
+            //         content: `<p>公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容</p>`,
+            //         show: false,
+            //         updateTime:`2018-09-09 09:09:09`,
+            //     },
+            // ],
         };
     },
     //数组或对象，用于接收来自父组件的数据
@@ -93,21 +93,21 @@ export default {
 </script>
 
 <style lang="less" scope>
-.title {
-    // margin: 0 auto;
-    // line-height: 1.75rem;
-    // border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    // border-top: 1px solid rgba(0, 0, 0, 0.1);
-    .fr{
-        padding: 0.7rem 0 0;
-        font-size: .75rem;
-    }
-}
-.content{
-    margin: 0 0 1rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    p{
-        text-indent: 2em;
-    }
-}
+// .title {
+//     // margin: 0 auto;
+//     // line-height: 1.75rem;
+//     // border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+//     // border-top: 1px solid rgba(0, 0, 0, 0.1);
+//     .fr{
+//         padding: 0.7rem 0 0;
+//         font-size: .75rem;
+//     }
+// }
+// .content{
+//     margin: 0 0 1rem;
+//     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+//     p{
+//         text-indent: 2em;
+//     }
+// }
 </style>
