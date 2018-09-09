@@ -3,7 +3,8 @@
         <div class="container">
             <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
             <b-navbar-brand class="navbar-brand text-center" :href="'./index.html?r='+refId">
-                <img src="./images/logo.png" alt="" srcset="" width="42" height="42">
+                <!-- <img src="./images/logo.png" alt="" srcset="" width="42" height="42"> -->
+                <iframe src="./images/logo.svg" frameborder="0" width="42" height="42"></iframe>
             </b-navbar-brand>
             <b-collapse is-nav id="nav_collapse">
                 <b-navbar-nav>
@@ -29,19 +30,18 @@
 </template>
 
 <script>
-
-const deployed = require('@/lib/deployed')
-const ethEnv = require('@/lib/etherEnv')
-const {getCurrentUrl, getUrlParms} = require('@/lib/tools');
+const deployed = require("@/lib/deployed");
+const ethEnv = require("@/lib/etherEnv");
+const { getCurrentUrl, getUrlParms } = require("@/lib/tools");
 
 export default {
     //组件名
-    name: 'component-nav',
+    name: "component-nav",
     //实例的数据对象
     data() {
         return {
-            contract:``,//智能合约的跳转地址
-            refId:'',
+            contract: ``, //智能合约的跳转地址
+            refId: "",
         };
     },
     //数组或对象，用于接收来自父组件的数据
@@ -50,33 +50,34 @@ export default {
     computed: {},
     //方法
     methods: {
-        changeTab(index){
-            console.log('nav change',index);
-            if(location.pathname=='personal.html'){
-                this.$emit('changeTab',index);
-            }else{
-                location.href=`personal.html?tab=${index}&r=${this.refId}`
+        changeTab(index) {
+            console.log("nav change", index);
+            if (location.pathname == "personal.html") {
+                this.$emit("changeTab", index);
+            } else {
+                location.href = `personal.html?tab=${index}&r=${this.refId}`;
             }
         },
-        navClick(type){
-            this.$emit('navClick',type);
-            if(type=='community'){
-                this.changeTab(4)
-            }else if(type=='invite'){
-                this.changeTab(1)
+        navClick(type) {
+            this.$emit("navClick", type);
+            if (type == "community") {
+                this.changeTab(4);
+            } else if (type == "invite") {
+                this.changeTab(1);
             }
-        }
+        },
     },
     //生命周期函数 请求写在created中
     created() {
-        let r = getUrlParms('r');
-        r&&(this.refId=r);
-        ethEnv.Init(window.web3)
-            .then(cxt => {
-                if(deployed.fomo222.hasOwnProperty(cxt.network)) {
-                    this.contract = ethEnv.contractOnEtherscan(deployed.fomo222[cxt.network])
-                }
-            })
+        let r = getUrlParms("r");
+        r && (this.refId = r);
+        ethEnv.Init(window.web3).then(cxt => {
+            if (deployed.fomo222.hasOwnProperty(cxt.network)) {
+                this.contract = ethEnv.contractOnEtherscan(
+                    deployed.fomo222[cxt.network],
+                );
+            }
+        });
     },
     beforeMount() {},
     mounted() {},
@@ -95,5 +96,6 @@ export default {
 .navbar-brand {
     font-size: 1.1rem;
     font-weight: bold;
+    padding: 0;
 }
 </style>
