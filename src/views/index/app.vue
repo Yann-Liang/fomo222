@@ -572,7 +572,9 @@ export default {
              this.autoHeight();
         },
         autoHeight(){
-const {leftRef,rightRef}=this.$refs
+        const {leftRef,rightRef}=this.$refs;
+        leftRef.style.height='auto';
+        rightRef.style.height='auto';
         console.log(leftRef.clientHeight,rightRef.clientHeight)
         leftRef.clientHeight-rightRef.clientHeight>0?(rightRef.style.height=leftRef.clientHeight+'px'):(leftRef.style.height=rightRef.clientHeight+'px');
         }
