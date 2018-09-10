@@ -4,7 +4,7 @@
         <con-nav @changeTab="changeTab"></con-nav>
         <!-- 导航栏 end -->
         <div class="blurryboy"> </div>
-
+        <b-container class="jumbotron rounded-0 text-center text-light teaser-cover ">
             <b-row>
                 <b-col class="no-mobile" cols="0" sm="2" xl="2">
                     <b-nav vertical>

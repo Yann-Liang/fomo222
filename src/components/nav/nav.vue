@@ -4,7 +4,7 @@
             <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
             <b-navbar-brand class="navbar-brand text-center" :href="'./index.html?r='+refId">
                 <!-- <img src="./images/logo.png" alt="" srcset="" width="42" height="42"> -->
-                <iframe src="./images/logo.svg" frameborder="0" width="42" height="42"></iframe>
+                <iframe src="./images/logo.svg" frameborder="0" width="46" height="54" style="padding:.5rem 0 0;"></iframe>
             </b-navbar-brand>
             <b-collapse is-nav id="nav_collapse">
                 <b-navbar-nav>
@@ -97,5 +97,9 @@ export default {
     font-size: 1.1rem;
     font-weight: bold;
     padding: 0;
+}
+//覆盖
+.navbar{
+ padding: 0;
 }
 </style>
