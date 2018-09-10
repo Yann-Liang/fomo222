@@ -568,7 +568,8 @@ export default {
             // }
         },
         showOrHide(){
-            return this.show=!this.show;
+             this.show=!this.show;
+             this.autoHeight();
         },
         autoHeight(){
 const {leftRef,rightRef}=this.$refs
