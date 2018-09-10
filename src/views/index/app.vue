@@ -110,7 +110,7 @@
             </b-row>
             <b-row>
                 <b-col class="text-center" cols="12" sm="6" xl="6" align-self="center">
-                    <div class="jumbotron jumbotron-adjust teamscore">
+                    <div class="jumbotron jumbotron-adjust teamscore" ref="leftRef">
                         <p class="h4">25彩池</p>
                         <hr/>
                         <p class="h2 glow ethglitch">
@@ -147,7 +147,7 @@
                     </div>
                 </b-col>
                 <b-col class="text-center" cols="12" sm="6" xl="6" align-self="top">
-                    <div class="jumbotron jumbotron-adjust teamscore">
+                    <div class="jumbotron jumbotron-adjust teamscore" ref="rightRef">
                         <div class="row nomarginb">
                             <div class="col-auto">
                                 <!-- 幸运大奖 -->
@@ -569,6 +569,11 @@ export default {
         },
         showOrHide(){
             return this.show=!this.show;
+        },
+        autoHeight(){
+const {leftRef,rightRef}=this.$refs
+        console.log(leftRef.clientHeight,rightRef.clientHeight)
+        leftRef.clientHeight-rightRef.clientHeight>0?(rightRef.style.height=leftRef.clientHeight+'px'):(leftRef.style.height=rightRef.clientHeight+'px');
         }
     },
     created() {
@@ -661,6 +666,12 @@ export default {
                 console.log(err);
             });
     },
+    mounted(){
+        this.autoHeight();
+    },
+    beforeUpdate(){
+        this.autoHeight();
+    },
     components: {
         ethIcon,
         keyIcon,
@@ -679,7 +690,7 @@ export default {
 // .buy-keys {
 //       padding: 0.688rem 0.75rem;
 // }
-.icon-show{
+.icon-show {
     margin: 6px 0 0;
 }
 .unit-price {
