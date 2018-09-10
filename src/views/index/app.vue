@@ -544,15 +544,22 @@ export default {
         },
         showOrHide(){
              this.show=!this.show;
-             this.autoHeight();
+             const {leftRef,rightRef}=this.$refs;
+             if(this.show){
+
+             }else{
+                rightRef.style.height='auto';
+                leftRef.style.height='auto';
+             }
+            //  this.autoHeight();
         },
         autoHeight(){
             const {leftRef,rightRef}=this.$refs;
-            console.log(leftRef.clientHeight,rightRef.clientHeight,leftRef);
-            if(leftRef.clientHeight-rightRef.clientHeight>0){
-                rightRef.style.height=leftRef.clientHeight+'px'
+            console.log(leftRef.scrollHeight,rightRef.scrollHeight);
+            if(leftRef.scrollHeight-rightRef.scrollHeight>0){
+                rightRef.style.height=leftRef.scrollHeight+'px'
             }else if(leftRef.clientHeight-rightRef.clientHeight<0){
-                leftRef.style.height=rightRef.clientHeight+'px';
+                leftRef.style.height=rightRef.scrollHeight+'px';
             }else{
                 return false;
             }
