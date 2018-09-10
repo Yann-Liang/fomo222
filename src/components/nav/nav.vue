@@ -4,7 +4,7 @@
             <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
             <b-navbar-brand class="navbar-brand text-center" :href="'./index.html?r='+refId">
                 <!-- <img src="./images/logo.png" alt="" srcset="" width="42" height="42"> -->
-                <iframe src="./images/logo.svg" frameborder="0" width="48" height="58" style="padding:.5rem 0 0;"></iframe>
+                <iframe src="./images/logo.svg" frameborder="0" width="48" height="74" style="padding:.5rem 0 0;"></iframe>
             </b-navbar-brand>
             <b-collapse is-nav id="nav_collapse">
                 <b-navbar-nav>

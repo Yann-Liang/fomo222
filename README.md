@@ -1,5 +1,5 @@
-# FOMO222
-FOMO222
+# 幸运彩蛋
+幸运彩蛋
 
 演示地址:[https://yann-liang.github.io/fomo222/dist/index.html](https://yann-liang.github.io/fomo222/dist/index.html)
 
@@ -203,7 +203,7 @@ SET max_sp_recursion_depth=255;
 SET @done = 0;
 
 SET player_addr := (select player from referer where refId=id);
-if player_addr is null 
+if player_addr is null
 then
   set @done = 1;
 else
@@ -226,7 +226,7 @@ DECLARE t_pid CURSOR FOR select referer from referer  where player=addr;
 OPEN t_pid;
 FETCH t_pid INTO b;
 if b is not null AND b > 0
-then 
+then
  CALL updateGroup(b, players, amount, withdrawal, category);
 end if;
 END//
@@ -242,7 +242,7 @@ DELIMITER ;
 
     http://localhost:4357/fp3d/luckies
 
-  
+
     ```
     {
       "code": 0,
@@ -256,7 +256,7 @@ DELIMITER ;
             "category": "3",
             "block": 3774751,                             //中奖 block
             "tx": "0x9e4c654c78633b829665f7ec3ee41253fe0104415b29c1a426f6a148da1f308f"                                        //中奖交易
-          },  
+          },
           {
             "id": 12,
             "buyer": "0x3bB110A6e5Df7873775Cde1A2D08805c2539Ee69",
@@ -274,13 +274,13 @@ DELIMITER ;
 2. 团长数据
 
     GET /fp3d/g_stat?player={player address}
-    
+
     http://localhost:4357/fp3d/g_stat?player=0x92694d5c7e2655e3f358130ebd0e7Db3FbD3e455
 
 
     返回结果:
 
-    
+
     ```
     {
       "code": 0,
