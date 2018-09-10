@@ -189,31 +189,6 @@
                     </div>
                 </b-col>
             </b-row>
-            <!-- <b-row>
-                <b-col class="text-center" cols="1" sm="1" xl="1" align-self="top">
-                    <i>图标</i>
-                </b-col>
-                <b-col class="text-center jumbotron jumbotron-adjust teamscore" cols="11" sm="5" xl="5" align-self="center">
-                    <p class="h4">25彩池榜单</p>
-                    <hr/>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col" class="borderchange">{{$t('index.round')}}</th>
-                                <th scope="col" class="borderchange text-center">{{$t('index.winner')}}</th>
-                                <th scope="col" class="borderchange tright">{{$t('index.prizePool')}}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="(data,index) in luckies" :key="index">
-                                <td scope="row" class="playername truncate"> {{ data.lucky }}</td>
-                                <td class="text-center">{{ data.player.substr(0, 15) + '...' }}</td>
-                                <td class="tright">{{ data.value.toFixed(8) }} ETH</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </b-col>
-            </b-row> -->
         </b-container>
 
         <b-modal ref="myModal" hide-footer title="交易进行中" style="color:#000;">
@@ -572,11 +547,15 @@ export default {
              this.autoHeight();
         },
         autoHeight(){
-        const {leftRef,rightRef}=this.$refs;
-        leftRef.style.height='auto';
-        rightRef.style.height='auto';
-        console.log(leftRef.clientHeight,rightRef.clientHeight)
-        leftRef.clientHeight-rightRef.clientHeight>0?(rightRef.style.height=leftRef.clientHeight+'px'):(leftRef.style.height=rightRef.clientHeight+'px');
+            const {leftRef,rightRef}=this.$refs;
+            console.log(leftRef.clientHeight,rightRef.clientHeight,leftRef);
+            if(leftRef.clientHeight-rightRef.clientHeight>0){
+                rightRef.style.height=leftRef.clientHeight+'px'
+            }else if(leftRef.clientHeight-rightRef.clientHeight<0){
+                leftRef.style.height=rightRef.clientHeight+'px';
+            }else{
+                return false;
+            }
         }
     },
     created() {
@@ -672,7 +651,7 @@ export default {
     mounted(){
         this.autoHeight();
     },
-    beforeUpdate(){
+    updated(){
         this.autoHeight();
     },
     components: {
