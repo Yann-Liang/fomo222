@@ -656,7 +656,13 @@ export default {
             });
     },
     mounted(){
-        this.autoHeight();
+        // this.autoHeight();
+        window.onresize=()=>{
+            const {leftRef,rightRef}=this.$refs;
+            rightRef.style.height='auto';
+            leftRef.style.height='auto';
+            this.autoHeight();
+        }
     },
     updated(){
         this.autoHeight();
