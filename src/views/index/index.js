@@ -30,7 +30,7 @@ const browserLanguage = (navigator.language || navigator.browserLanguage)
   i18n = new VueI18n ({
     //定义默认语言
     // locale: browserLanguage,
-    locale:'zh-cn',
+    locale:localStorage.lang||'zh-cn',
     messages,
   });
 

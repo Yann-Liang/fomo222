@@ -5,7 +5,7 @@
         <!-- 导航栏 end -->
         <div class="blurryboy"> </div>
         <b-container class="jumbotron rounded-0 text-light teaser-cover ">
-            <iframe width="100%" height="850px" src="https://editor.happy8.io/store/load/1" frameborder="0"></iframe>
+            <iframe width="100%" height="850px" :src="url" frameborder="0"></iframe>
             <!-- <b-row class="jumbotron jumbotron-adjust teamscore">
                 <b-col v-for="(item, index) in list" :key="index" cols="12" sm="12" align-self="center">
                     <h5 class="title text-center" @click="show(item)">{{item.title}}
@@ -37,6 +37,7 @@ export default {
     //实例的数据对象
     data() {
         return {
+            url: `https://editor.happy8.io/store/load/1_cn`,
             // list: [
             //     {
             //         title: `标题`,
@@ -74,9 +75,27 @@ export default {
         show(item) {
             item.show = !item.show;
         },
+        changeUrl(lang) {
+            switch (lang) {
+                case "en":
+                    this.url = "https://editor.happy8.io/store/load/1_en";
+                    break;
+                case "zh_cn":
+                    this.url = "https://editor.happy8.io/store/load/1_cn";
+                    break;
+                default:
+                    this.url = "https://editor.happy8.io/store/load/1_cn";
+                    break;
+            }
+        },
     },
     //生命周期函数 请求写在created中
-    created() {},
+    created() {
+        const { lang } = localStorage;
+        if (lang) {
+            this.changeUrl(lang);
+        }
+    },
     beforeMount() {},
     mounted() {},
     //组件
@@ -84,7 +103,11 @@ export default {
         conNav,
     },
     //监视
-    watch: {},
+    watch: {
+        "$i18n.locale": function(now, old) {
+            this.changeUrl(now);
+        },
+    },
     //过滤器
     filters: {},
     //自定义指令

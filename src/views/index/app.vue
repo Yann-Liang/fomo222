@@ -9,7 +9,7 @@
                 <br/>
                 <br/>
                 <h3 class="display-3 scammed no-mobile">
-                    一个独享！超级大奖等你赢取！
+                    {{$t('index.title')}}
                 </h3>
                 <h2 class="display-3">
                     <span class="ethglitch titleglow l-info">
@@ -49,7 +49,7 @@
             <b-row>
                 <b-col class="text-center" cols="12" sm="6" align-self="center">
                     <div class="jumbotron jumbotron-adjust teamscore">
-                        <h4>总彩池</h4>
+                        <h4>{{$t('index.title1')}}</h4>
                         <hr/>
                         <p class="h2 glow ethglitch">
                             <span class="no-mobile">
@@ -65,7 +65,7 @@
                 </b-col>
                 <b-col class="text-center" cols="12" sm="6" align-self="center">
                     <div class="jumbotron jumbotron-adjust teamscore">
-                        <h4>总投入</h4>
+                        <h4>{{$t('index.title2')}}</h4>
                         <hr/>
                         <p class="h2 glow ethglitch">
                             <span class="no-mobile">
@@ -88,7 +88,7 @@
                 </b-col>
                 <b-col class="text-center buy-item" cols="6" sm="4" xl="4" align-self="center">
                     <div class="jumbotron teamscore unit-price">
-                        <span>花费: {{buy_cost}}</span>
+                        <span>{{$t('index.cost')}}{{buy_cost}}</span>
                         <eth-icon :svg-class="'l-svg-eth1'"></eth-icon>
                     </div>
                 </b-col>
@@ -111,7 +111,7 @@
             <b-row>
                 <b-col class="text-center" cols="12" sm="6" xl="6" align-self="center">
                     <div class="jumbotron jumbotron-adjust teamscore" ref="leftRef">
-                        <p class="h4">25彩池</p>
+                        <p class="h4">{{$t('index.title3')}}</p>
                         <hr/>
                         <p class="h2 glow ethglitch">
                             <span class="no-mobile">
@@ -121,10 +121,11 @@
                                 {{stat.luckPool|numFormat(8)}}
                             </span>
                         </p>
-                        <p class="h5">次数倒数：{{stat.luckyCounter}}/{{stat.nextLucky}}</p>
+                        <p class="h5">{{$t('index.tiems')}}{{stat.luckyCounter}}/{{stat.nextLucky}}</p>
                         <p class="h5 clearfix" @click="showOrHide" style="margin:1.2rem 0 0;">
                             <i class="iconfont fl icon-show" :class="show?'icon-up':'icon-down'"></i>
-                            25彩池榜单</p>
+                            {{$t('index.rankingList')}}
+                        </p>
                         <div v-if="show">
                             <hr/>
                             <table class="table">
@@ -191,7 +192,7 @@
             </b-row>
         </b-container>
 
-        <b-modal ref="myModal" hide-footer title="交易进行中" style="color:#000;">
+        <b-modal ref="myModal" hide-footer :title="$t('index.modelTitle')" style="color:#000;">
             <div class="d-block text-center">
                 <!-- 请在metamask中完成交易 -->
                 <h3>{{$t('index.pleaceFinishTrade')}}</h3>
@@ -255,32 +256,32 @@
 </template>
 
 <script>
-const ethEnv = require('@/lib/etherEnv');
-const utils = require('@/lib/utils');
+const ethEnv = require("@/lib/etherEnv");
+const utils = require("@/lib/utils");
 // const deployed = require('@/lib/deployed')
 // const errors = require('@/lib/errors')
-const fp3d = require('@/lib/fomo222');
-const api = require('@/api/backend');
-const backend = require('@/api/backend');
-const {getCurrentUrl, getUrlParms} = require('@/lib/tools');
+const fp3d = require("@/lib/fomo222");
+const api = require("@/api/backend");
+const backend = require("@/api/backend");
+const { getCurrentUrl, getUrlParms } = require("@/lib/tools");
 
-import ethIcon from '@/components/icon/eth-icon';
-import keyIcon from '@/components/icon/key-icon';
-import piggyIcon from '@/components/icon/piggy-icon';
-import tabHeader from '@/components/tab-header/index.vue';
-import operationModal from '@/components/modal/operation-modal.vue';
-import conNav from '@/components/nav/nav.vue';
-import {error} from 'util';
+import ethIcon from "@/components/icon/eth-icon";
+import keyIcon from "@/components/icon/key-icon";
+import piggyIcon from "@/components/icon/piggy-icon";
+import tabHeader from "@/components/tab-header/index.vue";
+import operationModal from "@/components/modal/operation-modal.vue";
+import conNav from "@/components/nav/nav.vue";
+import { error } from "util";
 
 export default {
     //组件名
-    name: 'fp3d',
+    name: "fp3d",
     data() {
         return {
             html: '<i class="iconfont icon-caidan l-icon-loading"></i>',
             loadingFlag: true,
             show: true,
-            timer: '00:00:00',
+            timer: "00:00:00",
             diff: -1,
             soldKeys: 0,
             buy_keys: 1,
@@ -323,69 +324,71 @@ export default {
                 maxTimeRemain: 4,
                 timeGap: 30,
             },
-            slogan: '看个蛋，赶紧买个蛋',
+            slogan: "看个蛋，赶紧买个蛋",
             addKeyList: [
                 {
                     value: 1,
-                    label: '+ 1 egg',
-                    class: 'w-100',
+                    label: "+ 1 egg",
+                    class: "w-100",
                 },
                 {
                     value: 2,
-                    label: '+ 2 eggs',
-                    class: 'w-40',
+                    label: "+ 2 eggs",
+                    class: "w-40",
                 },
                 {
                     value: 5,
-                    label: '+ 5',
-                    class: 'w-30',
+                    label: "+ 5",
+                    class: "w-30",
                 },
                 {
                     value: 10,
-                    label: '+ 10',
-                    class: 'w-30',
+                    label: "+ 10",
+                    class: "w-30",
                 },
                 {
                     value: 100,
-                    label: '+ 100',
-                    class: 'w-30',
+                    label: "+ 100",
+                    class: "w-30",
                 },
             ],
-            winners: [{round: 0, winner: '0x11111111111', amount: 0.777777777}],
+            winners: [
+                { round: 0, winner: "0x11111111111", amount: 0.777777777 },
+            ],
             luckies: [],
             disabled: false,
-            loadingMsg: '加载中...',
+            loadingMsg: "加载中...",
             contract_url:
-                'https://etherscan.io/address/0x46990b06EB818C33c776FAf3bB6a85Dd7C38a161',
-                show:false,
+                "https://etherscan.io/address/0x46990b06EB818C33c776FAf3bB6a85Dd7C38a161",
+            show: false,
         };
     },
     computed: {
         eggsSrc: function() {
             //    return process.env.NODE_ENV === 'production'?'./images/egg2.svg':'../../../static/images/egg2.svg'
-            return 'http://dnf.sdcslog.com/img/egg2.svg';
+            return "http://dnf.sdcslog.com/img/egg2.svg";
         },
     },
     methods: {
         diffToTime() {
             if (this.diff < 0) {
                 this.timer = `--:--:--`;
-                this.slogan = `正在读取数据，请耐心等待...`;
+                this.slogan = this.$t('index.loading')//`正在读取数据，请耐心等待...`;
                 this.disabled = true;
             } else if (this.diff === 0) {
                 this.disabled = false;
                 this.timer = `00:00:00`;
-                this.slogan = '结束本局';
+                this.slogan = this.$t('index.end');//结束本局
             } else {
                 this.disabled = false;
-                const seconds = ('' + this.diff % 60).padStart(2, '0');
-                const minutes = ('' + Math.floor(this.diff / 60) % 60).padStart(
+                const seconds = ("" + this.diff % 60).padStart(2, "0");
+                const minutes = ("" + Math.floor(this.diff / 60) % 60).padStart(
                     2,
-                    '0',
+                    "0",
                 );
-                const hours = ('' + Math.floor(this.diff / 3600)).padStart(
+                const hours = ("" + Math.floor(this.diff / 3600)).padStart(
                     2,
-                    '0',
+                    "0",
                 );
                 this.timer = `${hours}:${minutes}:${seconds}`;
                 // this.slogan = '争夺奖金！！！';
@@ -396,7 +399,7 @@ export default {
                 if (this.diff > 0) {
                     this.slogan = this.$t(
                         `slogans[${Math.floor(
-                            Math.random() * this.$t('slogans').length,
+                            Math.random() * this.$t("slogans").length,
                         )}]`,
                     );
                 }
@@ -433,8 +436,10 @@ export default {
                 .stat(address)
                 .then(_stat => {
                     this.stat = Object.assign(this.stat, _stat);
-                    this.stat.luckyCounter = this.params.luckyNumber - _stat.luckyCounter % this.params.luckyNumber
-                    this.stat.nextLucky = this.params.luckyNumber
+                    this.stat.luckyCounter =
+                        this.params.luckyNumber -
+                        _stat.luckyCounter % this.params.luckyNumber;
+                    this.stat.nextLucky = this.params.luckyNumber;
                     this.stat.ref_url = `${getCurrentUrl()}?r=${this.stat.id}`;
                     this.stat.winner_link = ethEnv.contractOnEtherscan(
                         this.stat.winner,
@@ -456,9 +461,10 @@ export default {
         cal_buy() {
             let keys = this.buy_keys;
             if (keys <= 0) {
-                alert(`购买数量错误`);
+                //购买数量错误
+                alert(this.$t("message.buyNumError"));
                 // this.$alert(`购买数量错误`);
-                return Promise.reject(`购买数量错误`);
+                return Promise.reject(this.$t("message.buyNumError"));
             } else {
                 return this.priceForKeys(keys).then(_price => {
                     this.buy_cost = _price.dividedBy(10 ** 18).toNumber();
@@ -546,28 +552,27 @@ export default {
             //     this.refere='-1'?alert('弹出提示他注册邀请链接'):alert('显示他当前的链接');
             // }
         },
-        showOrHide(){
-             this.show=!this.show;
-             const {leftRef,rightRef}=this.$refs;
-             if(this.show){
-
-             }else{
-                rightRef.style.height='auto';
-                leftRef.style.height='auto';
-             }
+        showOrHide() {
+            this.show = !this.show;
+            const { leftRef, rightRef } = this.$refs;
+            if (this.show) {
+            } else {
+                rightRef.style.height = "auto";
+                leftRef.style.height = "auto";
+            }
             //  this.autoHeight();
         },
-        autoHeight(){
-            const {leftRef,rightRef}=this.$refs;
-            console.log(leftRef.scrollHeight,rightRef.scrollHeight);
-            if(leftRef.scrollHeight-rightRef.scrollHeight>0){
-                rightRef.style.height=leftRef.scrollHeight+'px'
-            }else if(leftRef.clientHeight-rightRef.clientHeight<0){
-                leftRef.style.height=rightRef.scrollHeight+'px';
-            }else{
+        autoHeight() {
+            const { leftRef, rightRef } = this.$refs;
+            console.log(leftRef.scrollHeight, rightRef.scrollHeight);
+            if (leftRef.scrollHeight - rightRef.scrollHeight > 0) {
+                rightRef.style.height = leftRef.scrollHeight + "px";
+            } else if (leftRef.clientHeight - rightRef.clientHeight < 0) {
+                leftRef.style.height = rightRef.scrollHeight + "px";
+            } else {
                 return false;
             }
-        }
+        },
     },
     created() {
         ethEnv
@@ -603,25 +608,26 @@ export default {
                 this.contract_url = ethEnv.contractOnEtherscan(
                     this.context.fp3d.c.instance.address,
                 );
-                let r = getUrlParms('r');
+                let r = getUrlParms("r");
                 r && (this.referer = Number(r));
 
                 [
-                    'luckyNumber',
-                    'toSpread',
-                    'toOwner',
-                    'toRefer',
-                    'toPool',
-                    'toLucky',
-                    'timeIncrease',
-                    'registerFee',
-                    'withdrawFee',
-                    'minimumWithdraw',
-                    'roundTime',
-                    'timeIncrease',
+                    "luckyNumber",
+                    "toSpread",
+                    "toOwner",
+                    "toRefer",
+                    "toPool",
+                    "toLucky",
+                    "timeIncrease",
+                    "registerFee",
+                    "withdrawFee",
+                    "minimumWithdraw",
+                    "roundTime",
+                    "timeIncrease",
                 ].forEach(prop => {
-                    this.params[prop] =
-                        this.context.fp3d.params[prop].toNumber();
+                    this.params[prop] = this.context.fp3d.params[
+                        prop
+                    ].toNumber();
                 });
                 return this.fp3dStat(this.context.address);
             })
@@ -659,16 +665,16 @@ export default {
                 console.log(err);
             });
     },
-    mounted(){
+    mounted() {
         // this.autoHeight();
-        window.onresize=()=>{
-            const {leftRef,rightRef}=this.$refs;
-            rightRef.style.height='auto';
-            leftRef.style.height='auto';
+        window.onresize = () => {
+            const { leftRef, rightRef } = this.$refs;
+            rightRef.style.height = "auto";
+            leftRef.style.height = "auto";
             this.autoHeight();
-        }
+        };
     },
-    updated(){
+    updated() {
         this.autoHeight();
     },
     components: {
@@ -776,11 +782,11 @@ button.buyOneTicket {
     &:hover {
         .l-icon-caidan {
             &::before {
-                content: '\e606';
+                content: "\e606";
             }
         }
     }
-    cursor: url('./images/zajindan.png'), auto !important;
+    cursor: url("./images/zajindan.png"), auto !important;
 }
 
 // .svg-inline--fa {

@@ -8,9 +8,9 @@
             <b-row>
                 <b-col class="no-mobile" cols="0" sm="2" xl="2">
                     <b-nav vertical>
-                        <b-nav-item :active="active==1" @click="changeTab(1)">邀请好友</b-nav-item>
-                        <b-nav-item :active="active==3" @click="changeTab(3)">资金历史</b-nav-item>
-                        <b-nav-item :active="active==4" @click="changeTab(4)">团长统计</b-nav-item>
+                        <b-nav-item :active="active==1" @click="changeTab(1)">{{$t('nav.inviteFriends')}}</b-nav-item>
+                        <b-nav-item :active="active==3" @click="changeTab(3)">{{$t('nav.capitalHistory')}}</b-nav-item>
+                        <b-nav-item :active="active==4" @click="changeTab(4)">{{$t('personal.statistics')}}</b-nav-item>
                     </b-nav>
                 </b-col>
                 <b-col cols="12" sm="10" xl="10">
@@ -63,7 +63,7 @@
                         <div class="row nomarginb">
                             <div class="col-auto">
                                 <!-- 推广奖励 -->
-                                <p class="h4">推广奖励</p>
+                                <p class="h4">{{$t('index.promotionIncentive')}}</p>
                             </div>
                             <div class="col">
                                 <p class="h2 text-right"> {{ stat.affiliate.toFixed(8) }}
@@ -85,7 +85,7 @@
                         <div class="row nomarginb">
                             <div class="col-auto">
                                 <!-- 25大彩 -->
-                                <p class="h4">25大彩</p>
+                                <p class="h4">{{$t('personal.title')}}</p>
                             </div>
                             <div class="col">
                                 <p class="h2 text-right"> {{ stat.lucky.toFixed(8) }}
@@ -96,7 +96,7 @@
                         <div class="row nomarginb">
                             <div class="col-auto">
                                 <!-- 游戏余额 -->
-                                <p class="h4">游戏余额</p>
+                                <p class="h4">{{$t('personal.gameBalance')}}</p>
                             </div>
                             <div class="col">
                                 <p class="h2 text-right"> {{ stat.wallet.toFixed(8) }}
@@ -113,7 +113,7 @@
                     <div v-if="active==4" class="jumbotron jumbotron-adjust teamscore">
                         <div class="row nomarginb">
                             <div class="col-auto">
-                                <p class="h4">团员统计</p>
+                                <p class="h4">{{$t('personal.membersStatistics')}}团员统计</p>
                             </div>
                             <div class="col">
                                 <p class="h2 text-right"> {{ stat.g_players }}
@@ -123,8 +123,8 @@
                         </div>
                         <div class="row nomarginb">
                             <div class="col-auto">
-                                <!-- 社群入金 -->
-                                <p class="h4">团员入金</p>
+                                <!-- 团员入金 -->
+                                <p class="h4">{{$t('personal.membersIncome')}}</p>
                             </div>
                             <div class="col">
                                 <p class="h2 text-right"> {{ stat.g_buy.toFixed(8) }}
@@ -134,8 +134,8 @@
                         </div>
                         <div class="row nomarginb">
                             <div class="col-auto">
-                                <!-- 社群出金 -->
-                                <p class="h4">团员出金</p>
+                                <!-- 团员出金 -->
+                                <p class="h4">{{$t('personal.membersExpenditure')}}</p>
                             </div>
                             <div class="col">
                                 <p class="h2 text-right"> {{ stat.g_withdrawal.toFixed(8) }}
@@ -217,7 +217,7 @@ export default {
                 maxTimeRemain: 4,
                 timeGap: 30,
             },
-            slogan: '看个蛋，赶紧买个蛋',
+            // slogan: '看个蛋，赶紧买个蛋',
             /*addKeyList: [
                 {
                     value: 1,

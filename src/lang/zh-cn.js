@@ -1,24 +1,27 @@
 export default {
     index: {
-        round:`幸运数`,//轮次
+        title: `一个独享！超级大奖等你赢取！`,
+        title1: `总彩池`,
+        title2: `总投入`,
+        title3: `25彩池`,
+        title4:``,
+        round: `幸运数`,
         rounds: `第 {n} 轮`,
         sellNEgg: `已售出 {n} 个egg`,
-        haveEgg:`拥有Key数`,
+        haveEgg: `拥有Key数`,
         haveEggNum: `本轮拥有egg数量`,
-        aboutChanceEgg: `关于CHANCE-EG`,
         gameRule: `游戏规则`,
         lookContract: `查看合约`,
         and: `的`,
-        willGo:`就要孵化啦！`,
+        willGo: `就要孵化啦！`,
         doIt: `ETH购买`,
         buy1: `盈利复购`,
         promotionReturn: `推广返利`,
         promotionLink: `你的推广链接是`,
         buyPromotionLinkInfo: `购买egg后也会自动生成推广链接，一个账户固定一个链接`,
         createPromotionLink: `生成推广链接`,
-        eggHatching: `彩蛋孵化`,
-        eggWillHatching:`彩蛋即将孵化`,
-        myEarnings:`我的收益`,
+        myEarnings: `我的收益`,
+        modelTitle:`交易进行中`,
         pleaceFinishTrade: `请完成以太坊交易`,
         bonus: `分红`,
         promotionIncentive: `推广奖励`,
@@ -26,33 +29,53 @@ export default {
         currentPrizePool: `幸运大奖`,
         pWin: `幸运大奖`,
         total: `一共`,
-        currentIncome:`分红收益`,
-        rankingList: `排行榜`,
+        currentIncome: `分红收益`,
+        rankingList: `25彩池榜单`,
         winRanking: `赢家排行`,
         winner: `赢家`,
-        prizePool:`获胜奖池`
+        prizePool: `获胜奖池`,
+        cost: `花费: `,
+        tiems: `次数倒数：`,
+        end: `结束本局`,
+        loading:`正在读取数据，请耐心等待...`,
     },
     nav: {
-
+        home: `首页`,
+        notice: `公告`,
+        contract: `智能合约`,
+        promotionLink: `邀请链接`,
+        personal: `个人中心`,
+        inviteFriends: `邀请好友`,
+        walletManager: `钱包管理`,
+        capitalHistory: `资金历史`,
+        community: `社群`,
+    },
+    personal: {
+        statistics: `团长统计`,
+        title: `25大彩`,
+        gameBalance: `游戏余额`,
+        membersStatistics: `团员统计`,
+        membersExpenditure: `团员出金`,
+        membersIncome:`团员入金`
     },
     gameRule: {
-        title:`游戏规则`,
+        title: `游戏规则`,
         rule1: `每轮游戏结束时，最后一个参与的玩家成为孵化幸运蛋的人，获得该轮奖池的`,
         rule2: `所有该轮的参与者，根据持有该轮egg的数量瓜分奖池的`,
         rule3: `游戏结束时，任意玩家可以通过购买egg，或者揭标来发起清算并开始下一轮游戏，同时获得该轮奖池的`,
-        rule4:`每轮奖池的
+        rule4: `每轮奖池的
         <b class="popoverglow">{val}</b>&nbsp;会进入下一轮奖池`,
         rule5: `玩家可以注册获得推广链接，其它玩家通过该链接参与游戏时，推广人会获得对应的奖励。`,
-        rule6:`每个玩家购买egg时，
+        rule6: `每个玩家购买egg时，
         <b class="popoverglow">{val1}%</b>会进入奖池，
         <b class="popoverglow">{val2}%</b>分给该轮的egg持有人。`,
-        rule7:`<b class="popoverglow">{val1}%</b>会分给上级推荐人，
+        rule7: `<b class="popoverglow">{val1}%</b>会分给上级推荐人，
         <b class="popoverglow">{val2}%</b>分给上上级推荐人。`,
-        rule8:`每轮游戏开始时默认最长持续时间
+        rule8: `每轮游戏开始时默认最长持续时间
         <b class="popoverglow"> {hours}小时 </b>, 每当用户购买egg时，该轮剩余持续时间如果没超过最长持续时间，则剩余持续时间增加
         <b class="popoverglow">{s}秒</b>。`,
     },
-    slogans:[
+    slogans: [
         '看个蛋，赶紧买个蛋',
         '你能孵出凤凰吗',
         '我艹！上一轮孵出来个鲲',
@@ -222,6 +245,6 @@ export default {
         '这是你能搭上的最后一班车。',
     ],
     message: {
-        buyNumError:``,
+        buyNumError: `购买数量错误`,
     }
 }

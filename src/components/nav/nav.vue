@@ -8,20 +8,23 @@
             </b-navbar-brand>
             <b-collapse is-nav id="nav_collapse">
                 <b-navbar-nav>
-                    <b-nav-item class="nav-link-purp-on nav-link-purp" :href="'./index.html?r='+refId">首页</b-nav-item>
-                    <b-nav-item class="nav-link-purp-on nav-link-purp" :href="'./notice.html?r='+refId">公告</b-nav-item>
-                    <b-nav-item class="nav-link-purp-on nav-link-purp" :href="contract" target="_blank">智能合约</b-nav-item>
+                    <b-nav-item class="nav-link-purp-on nav-link-purp" :href="'./index.html?r='+refId">{{$t('nav.home')}}</b-nav-item>
+                    <b-nav-item class="nav-link-purp-on nav-link-purp" :href="'./notice.html?r='+refId">{{$t('nav.notice')}}</b-nav-item>
+                    <b-nav-item class="nav-link-purp-on nav-link-purp" :href="contract" target="_blank">{{$t('nav.contract')}}</b-nav-item>
                 </b-navbar-nav>
                 <b-navbar-nav class="ml-auto">
-                    <b-nav-item class="nav-link-purp-on nav-link-purp" href="javascript:void(0);" @click="navClick('invite')">邀请链接</b-nav-item>
-                    <!-- <b-nav-item class="nav-link-purp-on nav-link-purp" href="javascript:void(0);" @click="navClick('community')">社群</b-nav-item> -->
-                    <b-nav-item class="nav-link-purp-on nav-link-purp" :href="'./community.html?r='+refId">社群</b-nav-item>
-                    <b-nav-item class="nav-link-purp-on nav-link-purp no-mobile" :href="'./personal.html?r='+refId">个人中心</b-nav-item>
-                    <b-nav-item-dropdown class="nav-link-purp-on nav-link-purp only-mobile" text="个人中心" extra-toggle-classes="nav-link-custom">
-                        <b-dropdown-item @click="changeTab(1)">邀请好友</b-dropdown-item>
-                        <b-dropdown-item @click="changeTab(2)">钱包管理</b-dropdown-item>
-                        <b-dropdown-item @click="changeTab(3)">资金历史</b-dropdown-item>
-                        <b-dropdown-item @click="changeTab(4)">社群</b-dropdown-item>
+                    <b-nav-item class="nav-link-purp-on nav-link-purp" href="javascript:void(0);" @click="navClick('invite')">{{$t('nav.home')}}</b-nav-item>
+                    <b-nav-item class="nav-link-purp-on nav-link-purp" :href="'./community.html?r='+refId">{{$t('nav.community')}}</b-nav-item>
+                    <!-- 个人中心 -->
+                    <b-nav-item class="nav-link-purp-on nav-link-purp no-mobile" :href="'./personal.html?r='+refId">{{$t('nav.personal')}}</b-nav-item>
+                    <b-nav-item-dropdown class="nav-link-purp-on nav-link-purp only-mobile" :text="$t('nav.personal')" extra-toggle-classes="nav-link-custom">
+                        <b-dropdown-item @click="changeTab(1)">{{$t('nav.inviteFriends')}}</b-dropdown-item>
+                        <b-dropdown-item @click="changeTab(2)">{{$t('nav.walletManager')}}</b-dropdown-item>
+                        <b-dropdown-item @click="changeTab(3)">{{$t('nav.capitalHistory')}}</b-dropdown-item>
+                        <b-dropdown-item @click="changeTab(4)">{{$t('nav.community')}}</b-dropdown-item>
+                    </b-nav-item-dropdown>
+                    <b-nav-item-dropdown class="nav-link-purp-on nav-link-purp" :text="lang" extra-toggle-classes="nav-link-custom">
+                        <b-dropdown-item v-for="(item, index) in langList" :key="index" @click="changeLang(item)">{{item.label}}</b-dropdown-item>
                     </b-nav-item-dropdown>
                 </b-navbar-nav>
             </b-collapse>
@@ -42,6 +45,15 @@ export default {
         return {
             contract: ``, //智能合约的跳转地址
             refId: "",
+            lang:'简体中文',
+            langList:[{
+                value:'en',
+                label:'English'
+            },
+            {
+                value:'zh-cn',
+                label:'简体中文'
+            }]
         };
     },
     //数组或对象，用于接收来自父组件的数据
@@ -66,6 +78,11 @@ export default {
                 this.changeTab(1);
             }
         },
+        changeLang(item){
+            this.lang=item.label;
+            this.$i18n.locale =item.value;
+            localStorage.lang=item.value;
+        }
     },
     //生命周期函数 请求写在created中
     created() {
