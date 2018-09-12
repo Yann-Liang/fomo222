@@ -141,7 +141,7 @@ Fomo222.prototype.stat = function(address) {
       stat.winner = _round[3]
       stat.pool = _round[4].dividedBy(Math.pow(10, 18)).toNumber()
       stat.nextLucky = _round[6].toNumber()
-      stat.luckCounter = _round[7].toNumber()
+      stat.luckyCounter = _round[7].toNumber()
       stat.luckPool = _round[8].dividedBy(Math.pow(10, 18)).toNumber()
       if (address) {
         return self.c.playerIds(address)

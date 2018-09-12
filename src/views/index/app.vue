@@ -121,7 +121,7 @@
                                 {{stat.luckPool|numFormat(8)}}
                             </span>
                         </p>
-                        <p class="h5">次数倒数：{{stat.luckCounter}}/{{stat.nextLucky}}</p>
+                        <p class="h5">次数倒数：{{stat.luckyCounter}}/{{stat.nextLucky}}</p>
                         <p class="h5 clearfix" @click="showOrHide" style="margin:1.2rem 0 0;">
                             <i class="iconfont fl icon-show" :class="show?'icon-up':'icon-down'"></i>
                             25彩池榜单</p>
@@ -294,6 +294,8 @@ export default {
                 dicimals: 1000000,
                 round_eth: 0,
                 round_keys: 0,
+                nextLucky: 0,
+                luckyCounter: 0,
                 mask: 0,
                 winner: null,
                 winner_link: null,
@@ -431,6 +433,8 @@ export default {
                 .stat(address)
                 .then(_stat => {
                     this.stat = Object.assign(this.stat, _stat);
+                    this.stat.luckyCounter = this.params.luckyNumber - _stat.luckyCounter % this.params.luckyNumber
+                    this.stat.nextLucky = this.params.luckyNumber
                     this.stat.ref_url = `${getCurrentUrl()}?r=${this.stat.id}`;
                     this.stat.winner_link = ethEnv.contractOnEtherscan(
                         this.stat.winner,
@@ -617,7 +621,7 @@ export default {
                     'timeIncrease',
                 ].forEach(prop => {
                     this.params[prop] =
-                        this.context.fp3d.params[prop].toNumber() / 10;
+                        this.context.fp3d.params[prop].toNumber();
                 });
                 return this.fp3dStat(this.context.address);
             })
